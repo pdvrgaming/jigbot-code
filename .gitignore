@@ -1,0 +1,11 @@
+# OS & Editor files
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.log
+*.tmp
+.vscode/
+.idea/
+
+# Never allow MQ5 source files in public release builds
+*.mq5.bak

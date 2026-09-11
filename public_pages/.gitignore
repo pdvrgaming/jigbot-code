@@ -1,0 +1,7 @@
+﻿# ZERO-LEAK SECURITY: Strict block on all MQL5 source code files
+*.mq5
+*.mq4
+*.mqh
+*.cpp
+*.h
+*.log
