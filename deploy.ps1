@@ -48,6 +48,11 @@ Copy-Item (Join-Path $WorkspaceRoot "index.html") -Destination (Join-Path $Publi
 if (Test-Path $BotEx5) {
     Copy-Item $BotEx5 -Destination (Join-Path $PublicDir "Jigurujingania_Bot_PDVR.ex5") -Force
 }
+$PublicJigBot = Join-Path $PublicDir "jig bot"
+if (Test-Path (Join-Path $WorkspaceRoot "jig bot")) {
+    if (!(Test-Path $PublicJigBot)) { New-Item -ItemType Directory -Path $PublicJigBot | Out-Null }
+    Copy-Item (Join-Path $WorkspaceRoot "jig bot\*.wav") -Destination $PublicJigBot -Force
+}
 
 # Create .gitignore in public_pages that permanently blocks any mq5 files
 $PublicGitIgnore = @"

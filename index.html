@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jigurujingania Bot by PDVR | Powered by Razel Tech — XAUUSD M1 Adapter Engine</title>
-    <meta name="description" content="Official website for Jigurujingania Bot by PDVR, powered by Razel Tech. High-frequency XAUUSD adaptive scalper and dynamic recovery grid engine for MetaTrader 5.">
+    <title>Jigurujingania Bot | Powered by Razel Tech — XAUUSD M1 Adapter Engine</title>
+    <meta name="description" content="Official website for Jigurujingania Bot, powered by Razel Tech. High-frequency XAUUSD adaptive scalper and dynamic recovery grid engine for MetaTrader 5.">
 
     <!-- Fonts: Outfit (Fintech Display), Inter (Clean Body), JetBrains Mono (MT5 Terminal) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -123,9 +123,9 @@
     <!-- ================================================================= -->
     <script>
         const CONFIG = {
-            BOT_NAME: "Jigurujingania Bot by PDVR",
+            BOT_NAME: "Jigurujingania Bot",
             POWERED_BY: "Razel Tech",
-            VERSION: "v3.10 Beta",
+            VERSION: "v1",
             // REPLACE THIS WITH YOUR EXACT GOOGLE DRIVE LINK TO Jigurujingania_Bot_PDVR.ex5:
             DRIVE_DOWNLOAD_URL: "https://drive.google.com/drive/folders/YOUR_DRIVE_FOLDER_ID_HERE",
             DIRECT_EX5_FILENAME: "Jigurujingania_Bot_PDVR.ex5",
@@ -145,11 +145,11 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-mt5-green animate-ping mr-1.5 inline-block"></span>
                     Testing Phase Live
                 </span>
-                <span class="text-gray-300 font-medium hidden sm:inline">Public Beta Testing Phase Active • 7-Day Free Trial Available for Traders</span>
+                <span class="text-gray-300 font-medium hidden sm:inline">Public Beta Testing Phase Active • 7-Day Free Trial Available • Live Charts Only (Backtesting Disabled)</span>
             </div>
             <div class="flex items-center gap-4 text-gray-400 font-mono text-[11px]">
-                <span>Engine: <strong class="text-gold">M1 Adapter v3.10</strong></span>
-                <span class="hidden md:inline">Protected by <strong class="text-white">Razel Tech</strong></span>
+                <span>Engine: <strong class="text-gold">v1 Adapter</strong></span>
+                <span class="hidden md:inline">Powered by <strong class="text-white">Razel Tech</strong></span>
             </div>
         </div>
     </div>
@@ -170,9 +170,12 @@
                             <span class="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-gold text-obsidian uppercase tracking-wider">Bot</span>
                         </div>
                         <div class="text-[11px] font-mono text-gray-400 flex items-center gap-1">
-                            <span>by <strong class="text-gray-200">PDVR</strong></span>
+                            <span class="text-gold/90 font-medium">Powered by Razel Tech</span>
                             <span>•</span>
-                            <span class="text-gold/90">Powered by Razel Tech</span>
+                            <span class="text-gray-300">v1 Engine</span>
+                        </div>
+                    </div>
+                </div>
                         </div>
                     </div>
                 </div>
@@ -541,79 +544,141 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-gold font-mono text-xs uppercase tracking-widest font-semibold">Terminal Audio Feedback</span>
+                <span class="text-gold font-mono text-xs uppercase tracking-widest font-semibold">Custom Audio Engine</span>
                 <h2 class="text-3xl sm:text-5xl font-display font-black text-white mt-2 mb-4">
                     In-Bot Sound Alert Notifications
                 </h2>
                 <p class="text-gray-400 text-base leading-relaxed">
-                    Never miss a critical market transition. Jigurujingania Bot integrates native MetaTrader 5 sound alerts for trade entry, recovery clusters, and profit basket closures.
+                    Never miss a critical market transition. Jigurujingania Bot features dedicated audio voice alerts from the <code class="text-gold">jig bot</code> sound suite for every trade event, profit exit, emergency drawdown, and all 10 recovery grid levels.
                 </p>
             </div>
 
-            <!-- 4 Sound Sample Trigger Boxes (Synthetic Web Audio API Built-in) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <!-- Primary 3 Action Alerts -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
                 
                 <!-- Sound 1: Initial Entry -->
-                <div class="p-6 rounded-xl bg-terminal-card border border-terminal-border flex flex-col justify-between">
+                <div class="p-6 rounded-xl bg-terminal-card border border-terminal-border flex flex-col justify-between hover:border-gold/50 transition-colors">
                     <div>
                         <div class="w-10 h-10 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-4">
                             <i data-lucide="play" class="w-5 h-5"></i>
                         </div>
-                        <h4 class="font-display font-bold text-white text-base">1. Initial Trade Entry</h4>
-                        <p class="text-xs text-gray-400 mt-1 font-mono">Sound: "expert.wav"</p>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Fires when the initial 0.01 lot position triggers on M1 candle confirmation.</p>
+                        <h4 class="font-display font-bold text-white text-base">1. Initial Trade Placed</h4>
+                        <p class="text-xs text-gray-400 mt-1 font-mono text-gold">"entry placed.wav"</p>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Fires instantly when the bot detects M1 momentum exhaustion and enters the market with 0.01 lots.</p>
                     </div>
-                    <button onclick="playDemoTone('entry')" class="mt-5 w-full py-2.5 px-4 rounded-lg bg-terminal-slate hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono font-semibold text-white transition-all flex items-center justify-center gap-2">
+                    <button onclick="playJigAudio('entry placed.wav', 'entry')" class="mt-5 w-full py-2.5 px-4 rounded-lg bg-terminal-slate hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono font-semibold text-white transition-all flex items-center justify-center gap-2">
                         <i data-lucide="volume-2" class="w-4 h-4"></i>
-                        <span>Test Entry Sound</span>
+                        <span>Play "Entry Placed"</span>
                     </button>
                 </div>
 
-                <!-- Sound 2: Recovery Cluster -->
-                <div class="p-6 rounded-xl bg-terminal-card border border-terminal-border flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 rounded-lg bg-mt5-cyan/10 border border-mt5-cyan/30 flex items-center justify-center text-mt5-cyan mb-4">
-                            <i data-lucide="layers" class="w-5 h-5"></i>
-                        </div>
-                        <h4 class="font-display font-bold text-white text-base">2. Cluster Recovery</h4>
-                        <p class="text-xs text-gray-400 mt-1 font-mono">Sound: "alert2.wav"</p>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Fires when adverse movement activates an institutional 3-order recovery cluster.</p>
-                    </div>
-                    <button onclick="playDemoTone('recovery')" class="mt-5 w-full py-2.5 px-4 rounded-lg bg-terminal-slate hover:bg-mt5-cyan hover:text-obsidian border border-terminal-border text-xs font-mono font-semibold text-white transition-all flex items-center justify-center gap-2">
-                        <i data-lucide="volume-2" class="w-4 h-4"></i>
-                        <span>Test Recovery Sound</span>
-                    </button>
-                </div>
-
-                <!-- Sound 3: Basket Exit in Profit -->
-                <div class="p-6 rounded-xl bg-terminal-card border border-terminal-border flex flex-col justify-between">
+                <!-- Sound 2: TP Hit -->
+                <div class="p-6 rounded-xl bg-terminal-card border border-terminal-border flex flex-col justify-between hover:border-mt5-green/50 transition-colors">
                     <div>
                         <div class="w-10 h-10 rounded-lg bg-mt5-green/10 border border-mt5-green/30 flex items-center justify-center text-mt5-green mb-4">
                             <i data-lucide="check-circle-2" class="w-5 h-5"></i>
                         </div>
-                        <h4 class="font-display font-bold text-white text-base">3. Basket Profit Exit</h4>
-                        <p class="text-xs text-gray-400 mt-1 font-mono">Sound: "ok.wav"</p>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Fires when market crosses the dynamic VWAP line and closes the whole basket.</p>
+                        <h4 class="font-display font-bold text-white text-base">2. Take Profit Reached</h4>
+                        <p class="text-xs text-gray-400 mt-1 font-mono text-mt5-green">"tp hit.wav"</p>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Fires when market reaches the dynamic Volume-Weighted Average Price (VWAP) line and closes all positions.</p>
                     </div>
-                    <button onclick="playDemoTone('exit')" class="mt-5 w-full py-2.5 px-4 rounded-lg bg-terminal-slate hover:bg-mt5-green hover:text-obsidian border border-terminal-border text-xs font-mono font-semibold text-white transition-all flex items-center justify-center gap-2">
+                    <button onclick="playJigAudio('tp hit.wav', 'exit')" class="mt-5 w-full py-2.5 px-4 rounded-lg bg-terminal-slate hover:bg-mt5-green hover:text-obsidian border border-terminal-border text-xs font-mono font-semibold text-white transition-all flex items-center justify-center gap-2">
                         <i data-lucide="volume-2" class="w-4 h-4"></i>
-                        <span>Test Profit Sound</span>
+                        <span>Play "TP Hit"</span>
                     </button>
                 </div>
 
-                <!-- Sound 4: Risk / Expiry Warning -->
-                <div class="p-6 rounded-xl bg-terminal-card border border-terminal-border flex flex-col justify-between">
+                <!-- Sound 3: Timeout Alert (Loss > $1500) -->
+                <div class="p-6 rounded-xl bg-terminal-card border border-terminal-border flex flex-col justify-between hover:border-mt5-red/50 transition-colors">
                     <div>
                         <div class="w-10 h-10 rounded-lg bg-mt5-red/10 border border-mt5-red/30 flex items-center justify-center text-mt5-red mb-4">
-                            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                            <i data-lucide="alert-octagon" class="w-5 h-5"></i>
                         </div>
-                        <h4 class="font-display font-bold text-white text-base">4. Safety & Expiry Alert</h4>
-                        <p class="text-xs text-gray-400 mt-1 font-mono">Sound: "timeout.wav"</p>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Warns if broker spread exceeds threshold or when trial testing window ends.</p>
+                        <h4 class="font-display font-bold text-white text-base">3. Loss &gt; $1500 Alert</h4>
+                        <p class="text-xs text-gray-400 mt-1 font-mono text-mt5-red">"Timeout.wav"</p>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Safety monitor triggers when floating drawdown exceeds -$1500, alerting you immediately to review risk.</p>
                     </div>
-                    <button onclick="playDemoTone('alert')" class="mt-5 w-full py-2.5 px-4 rounded-lg bg-terminal-slate hover:bg-mt5-red hover:text-white border border-terminal-border text-xs font-mono font-semibold text-white transition-all flex items-center justify-center gap-2">
+                    <button onclick="playJigAudio('Timeout.wav', 'alert')" class="mt-5 w-full py-2.5 px-4 rounded-lg bg-terminal-slate hover:bg-mt5-red hover:text-white border border-terminal-border text-xs font-mono font-semibold text-white transition-all flex items-center justify-center gap-2">
                         <i data-lucide="volume-2" class="w-4 h-4"></i>
-                        <span>Test Alert Sound</span>
+                        <span>Play "Timeout Alert"</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Recovery Grid Levels 1 to 10 Audio Selector -->
+            <div class="max-w-5xl mx-auto p-6 sm:p-8 rounded-2xl bg-terminal-card border border-terminal-border">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-terminal-border mb-6">
+                    <div>
+                        <h4 class="text-lg font-display font-bold text-white">4. Cluster Recovery Levels (Levels 1 to 10)</h4>
+                        <p class="text-xs text-gray-400 mt-1">Dedicated voice notifications play as the bot scales into each recovery tier.</p>
+                    </div>
+                    <span class="inline-flex items-center px-3 py-1 rounded text-xs font-mono text-gold bg-gold/10 border border-gold/30">
+                        10 Dedicated Level Tracks
+                    </span>
+                </div>
+
+                <!-- 10 Level Buttons Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                    <button onclick="playJigAudio('level 1.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 1</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 1
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 2.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 2</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 2
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 3.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 3</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 3
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 4.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 4</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 4
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 5.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 5</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 5
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 6.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 6</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 6
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 7.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 7</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 7
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 8.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 8</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 8
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 9.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-gold hover:text-obsidian border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-obsidian">Grid Step 9</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 9
+                        </div>
+                    </button>
+                    <button onclick="playJigAudio('level 10.wav', 'recovery')" class="p-3 rounded-lg bg-obsidian hover:bg-mt5-red hover:text-white border border-terminal-border text-xs font-mono text-white transition-all text-center group">
+                        <div class="text-[10px] text-gray-400 group-hover:text-white">Max Tier 10</div>
+                        <div class="font-bold mt-1 flex items-center justify-center gap-1.5">
+                            <i data-lucide="volume-1" class="w-3.5 h-3.5"></i> Level 10
+                        </div>
                     </button>
                 </div>
             </div>
@@ -676,11 +741,11 @@
             <!-- Terminal Requirements Banner -->
             <div class="mt-12 p-6 rounded-xl bg-terminal-slate/80 border border-terminal-border max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
-                    <i data-lucide="info" class="w-6 h-6 text-gold shrink-0"></i>
-                    <span class="text-xs text-gray-300 font-mono">Requires MetaTrader 5 Build 4000+ • Recommended Brokers with low XAUUSD spreads</span>
+                    <i data-lucide="shield-alert" class="w-6 h-6 text-gold shrink-0"></i>
+                    <span class="text-xs text-gray-300 font-mono">Requires MetaTrader 5 • <strong class="text-mt5-red">Backtesting is disabled in Strategy Tester</strong> • Attach directly to live or demo chart to run</span>
                 </div>
                 <span class="text-xs font-mono font-bold text-mt5-green uppercase bg-mt5-greenDim px-3 py-1.5 rounded border border-mt5-green/30 shrink-0">
-                    Test on Demo First
+                    Live / Demo Chart Only
                 </span>
             </div>
 
@@ -707,7 +772,7 @@
             </h2>
 
             <p class="text-gray-300 text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-                Experience the precision of the <strong>Jigurujingania Bot by PDVR</strong> on your own demo account for 7 days. Once the trial concludes, reach out to <strong>Razel Tech</strong> for extended licensing and live updates.
+                Experience the precision of the <strong>Jigurujingania Bot</strong> on your own demo account for 7 days. Once the trial concludes, reach out to <strong>Razel Tech</strong> for extended licensing and live updates.
             </p>
 
             <!-- Download Button Linked to Google Drive -->
@@ -737,7 +802,7 @@
                     <div class="w-9 h-9 rounded-lg bg-gold/15 border border-gold/40 flex items-center justify-center">
                         <i data-lucide="cpu" class="w-5 h-5 text-gold"></i>
                     </div>
-                    <span class="font-display font-black text-xl text-white">Jigurujingania Bot <span class="text-gold">by PDVR</span></span>
+                    <span class="font-display font-black text-xl text-white">Jigurujingania Bot</span>
                 </div>
                 
                 <p class="text-xs text-gray-400 font-mono">
@@ -746,11 +811,11 @@
 
                 <!-- Disclaimer -->
                 <div class="max-w-4xl p-6 rounded-xl bg-terminal-slate/50 border border-terminal-border/60 text-[11px] text-gray-400 leading-relaxed text-justify">
-                    <strong>REGULATORY & RISK DISCLAIMER:</strong> Trading foreign exchange, precious metals (such as XAUUSD), and contracts for difference (CFDs) on margin carries a high level of risk and may not be suitable for all investors. The high degree of leverage can work against you as well as for you. Past backtest results and simulation performance are not indicative of future market execution. The Jigurujingania Bot software is provided strictly for educational, analytical, and testing phase demonstration on demo accounts. Razel Tech and PDVR accept no responsibility for direct or indirect losses incurred through automated algorithmic trading. Always implement responsible risk management.
+                    <strong>REGULATORY & RISK DISCLAIMER:</strong> Trading foreign exchange, precious metals (such as XAUUSD), and contracts for difference (CFDs) on margin carries a high level of risk and may not be suitable for all investors. The high degree of leverage can work against you as well as for you. Past backtest results and simulation performance are not indicative of future market execution. The Jigurujingania Bot software is provided strictly for educational, analytical, and testing phase demonstration on demo accounts. Razel Tech accepts no responsibility for direct or indirect losses incurred through automated algorithmic trading. Always implement responsible risk management.
                 </div>
 
                 <div class="text-[11px] text-gray-500 pt-4">
-                    &copy; <span id="current-year">2026</span> Jigurujingania Bot by PDVR. Powered by Razel Tech. All Rights Reserved. Not affiliated with MetaQuotes Ltd.
+                    &copy; <span id="current-year">2026</span> Jigurujingania Bot. Powered by Razel Tech. All Rights Reserved. Not affiliated with MetaQuotes Ltd.
                 </div>
 
             </div>
@@ -869,7 +934,23 @@
             document.getElementById('btn-sim-reset')?.addEventListener('click', resetSim);
         });
 
-        // 6. Web Audio API Synthetic Sound Generator for Demo Preview
+        // 6. Play Real Audio Track with Web Audio API Fallback
+        function playJigAudio(filename, fallbackType) {
+            try {
+                const audio = new Audio('jig bot/' + encodeURIComponent(filename));
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Direct audio playback failed, using synthetic tone fallback:", error);
+                        playDemoTone(fallbackType);
+                    });
+                }
+            } catch (e) {
+                playDemoTone(fallbackType);
+            }
+        }
+
+        // 7. Web Audio API Synthetic Sound Generator for Demo Preview
         function playDemoTone(type) {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;

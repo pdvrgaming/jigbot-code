@@ -13,14 +13,14 @@ set "MT5_EXPERTS=%APPDATA%\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\
 if not exist "%METAEDITOR%" (
     echo [ERROR] MetaEditor64 not found at "%METAEDITOR%"
     echo Please verify your MT5 installation directory.
-    pause
+    if not "%~1"=="--nopause" pause
     exit /b 1
 )
 
 echo Compiling %BOT_FILE%...
 "%METAEDITOR%" /compile:"%BOT_FILE%"
 
-timeout /t 2 /nobreak >nul
+timeout /t 2 /nobreak >nul 2>&1
 
 if exist "%OUTPUT_EX5%" (
     echo.
@@ -29,6 +29,12 @@ if exist "%OUTPUT_EX5%" (
         copy /y "%OUTPUT_EX5%" "%MT5_EXPERTS%\" >nul
         echo [SYNCED] Copied to your active MT5 Experts folder.
     )
+    set "MT5_SOUNDS=%APPDATA%\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\Sounds"
+    if exist "%~dp0jig bot" (
+        if not exist "%MT5_SOUNDS%" mkdir "%MT5_SOUNDS%" >nul 2>&1
+        copy /y "%~dp0jig bot\*.wav" "%MT5_SOUNDS%\" >nul 2>&1
+        echo [AUDIO] Synced jig bot audio files to MT5 Sounds folder.
+    )
     echo [READY] You can now refresh Navigator in MT5 and run the bot!
 ) else (
     echo.
@@ -36,4 +42,4 @@ if exist "%OUTPUT_EX5%" (
 )
 
 echo.
-pause
+if not "%~1"=="--nopause" pause

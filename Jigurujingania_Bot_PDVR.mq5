@@ -1,14 +1,16 @@
 //+------------------------------------------------------------------+
 //|                                    Jigurujingania_Bot_PDVR.mq5   |
-//|                          Jigurujingania bot by PDVR              |
+//|                                      Jigurujingania Bot          |
 //|                             Powered by Razel Tech                |
 //|                                      https://jugurujingania.bot  |
 //+------------------------------------------------------------------+
-#property copyright   "PDVR - Powered by Razel Tech"
+#property copyright   "Powered by Razel Tech"
 #property link        "https://jugurujingania.bot"
-#property version     "3.10"
-#property description "Jigurujingania Bot by PDVR - XAUUSD M1 Adaptive Recovery Engine [Powered by Razel Tech]"
+#property version     "1.00"
+#property description "Jigurujingania Bot - XAUUSD M1 Adaptive Recovery Engine [Powered by Razel Tech]"
 #property strict
+
+
 
 // Include standard trade libraries
 #include <Trade\Trade.mqh>
@@ -23,17 +25,14 @@ input bool     InpDemoOnly              = true;                     // Enforce D
 
 input group "=== 1. SOUND & AUDIO NOTIFICATIONS ==="
 input bool     InpEnableSounds          = true;                     // Enable Sound Alerts
-input string   InpSoundEntry            = "expert.wav";             // Initial Entry Sound
-input string   InpSoundRecovery         = "alert2.wav";             // Cluster Recovery Sound
-input string   InpSoundExit             = "ok.wav";                 // Basket TakeProfit Exit Sound
-input string   InpSoundAlert            = "timeout.wav";            // Warning / Expiration Sound
+input double   InpTimeoutLossThreshold  = 1500.00;                  // Loss Threshold for Timeout Audio ($)
 
 input group "=== 2. INITIAL TRADE PARAMETERS ==="
 input double   InpInitialLot            = 0.01;                     // Initial Lot Size
 input double   InpTakeProfitPoints      = 4.20;                     // Initial TP in Points (42 pips in Gold)
 input double   InpStopLossPoints        = 0.00;                     // Initial SL in Points (0 = Disabled, relies on recovery grid)
 input ulong    InpMagicNumber           = 1223335;                  // Magic Number (Unique ID)
-input string   InpTradeComment          = "JJ Bot PDVR";            // Order Comment
+input string   InpTradeComment          = "JJ Bot";                 // Order Comment
 
 input group "=== 3. 3-ORDER CLUSTER RECOVERY GRID ==="
 input bool     InpEnableRecovery        = true;                     // Enable Grid Recovery
@@ -70,19 +69,89 @@ int                m_cluster_success_count = 0;
 datetime           m_next_order_time       = 0;
 bool               m_had_positions_previous_tick = false;
 
-//--- Trial Protection Variables
-datetime           m_first_run_time        = 0;
-bool               m_trial_expired         = false;
-const string       TRIAL_GV_KEY            = "JJ_PDVR_FIRST_RUN";
+//--- Trial Protection & Loss Alert Variables
+datetime           m_first_run_time              = 0;
+bool               m_trial_expired               = false;
+datetime           m_last_timeout_audio_time     = 0;
+const string       TRIAL_GV_KEY                  = "JJ_BOT_FIRST_RUN";
 
 //+------------------------------------------------------------------+
-//| Play sound notification helper                                   |
+//| Custom Audio Notification Helper with triple-layer fallback      |
 //+------------------------------------------------------------------+
-void PlayAudioAlert(const string sound_file)
+void PlayCustomAudio(const string file_name)
 {
-   if(InpEnableSounds && StringLen(sound_file) > 0)
+   if(!InpEnableSounds || StringLen(file_name) == 0)
+      return;
+
+   // 1. Play embedded resource
+   string resource_path = "::jig bot\\" + file_name;
+   if(PlaySound(resource_path))
+      return;
+
+   // 2. Play from Sounds\jig bot\ subfolder
+   string subfolder_path = "jig bot\\" + file_name;
+   if(PlaySound(subfolder_path))
+      return;
+
+   // 3. Play from Sounds\ directly
+   PlaySound(file_name);
+}
+
+//+------------------------------------------------------------------+
+//| Play Level Audio for Levels 1 to 10                              |
+//+------------------------------------------------------------------+
+void PlayLevelAudio(int level)
+{
+   if(level >= 1 && level <= 10)
    {
-      PlaySound(sound_file);
+      string sound_file = StringFormat("level %d.wav", level);
+      PlayCustomAudio(sound_file);
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Calculate Total Floating Basket Profit / Loss in Account Currency|
+//+------------------------------------------------------------------+
+double GetBasketFloatingProfit()
+{
+   double total_profit = 0.0;
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
+   {
+      if(m_position.SelectByIndex(i))
+      {
+         if(m_position.Symbol() == _Symbol && m_position.Magic() == InpMagicNumber)
+         {
+            total_profit += (m_position.Profit() + m_position.Swap());
+         }
+      }
+   }
+   return total_profit;
+}
+
+//+------------------------------------------------------------------+
+//| Check Floating Loss Threshold and Play Timeout Audio             |
+//+------------------------------------------------------------------+
+void CheckLossTimeoutAlert()
+{
+   if(InpTimeoutLossThreshold <= 0.0)
+      return;
+
+   double floating_profit = GetBasketFloatingProfit();
+
+   // If floating loss exceeds threshold (e.g. loss > 1500$)
+   if(floating_profit <= -InpTimeoutLossThreshold)
+   {
+      datetime now = TimeCurrent();
+      // Avoid spamming audio on every microsecond tick; cooldown 30 seconds
+      if(now - m_last_timeout_audio_time >= 30)
+      {
+         m_last_timeout_audio_time = now;
+         PrintFormat(">> Jigurujingania Bot ALERT: Floating loss -$%.2f exceeds -$%.2f threshold! Playing Timeout audio...",
+                     MathAbs(floating_profit), InpTimeoutLossThreshold);
+         PlayCustomAudio("Timeout.wav");
+         Alert(StringFormat("Jigurujingania Bot Warning: Floating loss -$%.2f exceeds -$%.2f!", 
+                            MathAbs(floating_profit), InpTimeoutLossThreshold));
+      }
    }
 }
 
@@ -135,10 +204,10 @@ bool ValidateTrialSecurity()
       long account_type = AccountInfoInteger(ACCOUNT_TRADE_MODE);
       if(account_type != ACCOUNT_TRADE_MODE_DEMO)
       {
-         string msg = "Jigurujingania Bot [Trial Error]: Beta version is restricted to DEMO accounts only for safety!";
+         string msg = "Jigurujingania Bot [Trial Guard]: Beta trial is restricted to DEMO accounts only for safety!";
          Print(msg);
          Alert(msg);
-         PlayAudioAlert(InpSoundAlert);
+         PlayCustomAudio("Timeout.wav");
          return false;
       }
    }
@@ -146,10 +215,10 @@ bool ValidateTrialSecurity()
    // Check fixed expiry date
    if(InpTrialFixedExpiryDate > 0 && current_server_time >= InpTrialFixedExpiryDate)
    {
-      string msg = "Jigurujingania Bot by PDVR: Testing trial period has expired! Contact PDVR / Razel Tech.";
+      string msg = "Jigurujingania Bot: Testing trial period has expired! Contact Razel Tech.";
       Print(msg);
       Alert(msg);
-      PlayAudioAlert(InpSoundAlert);
+      PlayCustomAudio("Timeout.wav");
       return false;
    }
 
@@ -169,10 +238,10 @@ bool ValidateTrialSecurity()
       datetime trial_expiry = m_first_run_time + (InpTrialDays * 86400);
       if(current_server_time >= trial_expiry)
       {
-         string msg = StringFormat("Jigurujingania Bot by PDVR: %d-Day Trial has expired! Powered by Razel Tech.", InpTrialDays);
+         string msg = StringFormat("Jigurujingania Bot: %d-Day Trial has expired! Powered by Razel Tech.", InpTrialDays);
          Print(msg);
          Alert(msg);
-         PlayAudioAlert(InpSoundAlert);
+         PlayCustomAudio("Timeout.wav");
          return false;
       }
    }
@@ -181,7 +250,7 @@ bool ValidateTrialSecurity()
 }
 
 //+------------------------------------------------------------------+
-//| Update On-Chart HUD Dashboard                                    |
+//| Update On-Chart Live HUD Dashboard (Displays version v1)         |
 //+------------------------------------------------------------------+
 void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_POSITION_TYPE basket_type)
 {
@@ -189,7 +258,14 @@ void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_PO
    string status_str = m_trial_expired ? "EXPIRED (Trading Halted)" : StringFormat("ACTIVE (%d Days Trial Left)", days_left);
    string account_mode = (AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO) ? "DEMO (Beta Safe)" : "REAL";
 
-   string basket_info = "No Active Basket (Scanning M1)";
+   long current_spread = SymbolInfoInteger(_Symbol, SYMBOL_SPREAD);
+   string spread_status = StringFormat("%I64d / Max %d pts (%s)", 
+                                       current_spread, InpMaxSpreadPoints, 
+                                       (current_spread <= InpMaxSpreadPoints ? "OK" : "HIGH SPREAD"));
+
+   double floating_pnl = GetBasketFloatingProfit();
+
+   string basket_info = "No Active Basket (Scanning M1 Candlesticks)";
    if(open_count > 0)
    {
       double current_bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
@@ -197,29 +273,38 @@ void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_PO
       double target_price = (basket_type == POSITION_TYPE_BUY) ? (vwap + InpBasketTpPoints) : (vwap - InpBasketTpPoints);
       
       basket_info = StringFormat("%s Basket | Orders: %d | Lots: %.2f | Level: %d\n"
-                                 "  VWAP: %.2f | Target: %.2f | Current: %.2f",
+                                 "  VWAP: %.2f | Target: %.2f | Current: %.2f\n"
+                                 "  Floating PnL: %s$%.2f",
                                  (basket_type == POSITION_TYPE_BUY ? "BUY" : "SELL"),
                                  open_count, total_vol, m_current_grid_level,
-                                 vwap, target_price, (basket_type == POSITION_TYPE_BUY ? current_bid : current_ask));
+                                 vwap, target_price, (basket_type == POSITION_TYPE_BUY ? current_bid : current_ask),
+                                 (floating_pnl >= 0 ? "+" : "-"), MathAbs(floating_pnl));
+   }
+
+   string timeout_warning = "";
+   if(floating_pnl <= -InpTimeoutLossThreshold)
+   {
+      timeout_warning = StringFormat("\n  *** WARNING: LOSS EXCEEDS $%.2f (Timeout Alert Active) ***", InpTimeoutLossThreshold);
    }
 
    string hud = StringFormat(
       "=====================================================\n"
-      "  JIGURUJINGANIA BOT by PDVR  v3.10\n"
+      "  JIGURUJINGANIA BOT  v1\n"
       "  Powered by Razel Tech\n"
       "=====================================================\n"
       "  Status:         %s\n"
       "  Account:        #%I64d (%s)\n"
-      "  Spread:         %I64d / Max %d pts\n"
+      "  Spread Status:  %s\n"
       "  Audio Alerts:   %s\n"
       "-----------------------------------------------------\n"
-      "  %s\n"
+      "  %s%s\n"
       "=====================================================",
       status_str,
       AccountInfoInteger(ACCOUNT_LOGIN), account_mode,
-      SymbolInfoInteger(_Symbol, SYMBOL_SPREAD), InpMaxSpreadPoints,
+      spread_status,
       (InpEnableSounds ? "ENABLED" : "MUTED"),
-      basket_info
+      basket_info,
+      timeout_warning
    );
 
    Comment(hud);
@@ -230,14 +315,23 @@ void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_PO
 //+------------------------------------------------------------------+
 int OnInit()
 {
-   // Configure CTrade object
+   // 1. STRICT BACKTESTING RESTRICTION (Disabled in Strategy Tester)
+   if(MQLInfoInteger(MQL_TESTER) || MQLInfoInteger(MQL_OPTIMIZATION) || MQLInfoInteger(MQL_VISUAL_MODE))
+   {
+      string block_msg = "Jigurujingania Bot: Backtesting is strictly disabled in Strategy Tester for this version! Run on Live Chart only.";
+      Print(block_msg);
+      Alert(block_msg);
+      return(INIT_FAILED);
+   }
+
+   // 2. Configure CTrade object
    m_trade.SetExpertMagicNumber(InpMagicNumber);
    m_trade.SetMarginMode();
    m_trade.SetTypeFillingBySymbol(_Symbol);
    m_trade.SetDeviationInPoints(20);
    MathSrand((uint)(GetTickCount() ^ (uint)TimeLocal()));
 
-   // Perform trial security validation
+   // 3. Perform trial security validation
    if(!ValidateTrialSecurity())
    {
       m_trial_expired = true;
@@ -247,12 +341,11 @@ int OnInit()
 
    m_trial_expired = false;
 
-   PrintFormat("Jigurujingania Bot by PDVR [Powered by Razel Tech] initialized on %s %s. Magic: %I64u", 
+   PrintFormat("Jigurujingania Bot v1 [Powered by Razel Tech] initialized on %s %s. Magic: %I64u", 
                _Symbol, EnumToString(InpTimeframe), InpMagicNumber);
    PrintFormat("Trial Status: Valid for %d days. Demo Only: %s. Audio Alerts: %s.",
                GetRemainingTrialDays(), (InpDemoOnly ? "YES" : "NO"), (InpEnableSounds ? "YES" : "NO"));
    
-   PlayAudioAlert(InpSoundEntry);
    UpdateChartDashboard(0, 0, 0, POSITION_TYPE_BUY);
 
    return(INIT_SUCCEEDED);
@@ -264,7 +357,7 @@ int OnInit()
 void OnDeinit(const int reason)
 {
    Comment(""); // Clear on-chart HUD
-   PrintFormat("Jigurujingania Bot by PDVR deinitialized. Reason: %d", reason);
+   PrintFormat("Jigurujingania Bot v1 deinitialized. Reason: %d", reason);
 }
 
 //+------------------------------------------------------------------+
@@ -379,8 +472,8 @@ void CloseAllBasketPositions()
       }
    }
    
-   // Play exit sound
-   PlayAudioAlert(InpSoundExit);
+   // Play TP HIT sound
+   PlayCustomAudio("tp hit.wav");
 
    m_current_grid_level = 0;
    m_initial_price = 0.0;
@@ -540,8 +633,11 @@ void ProcessPendingRecoveryCluster()
                   lots[order_index],
                   requested_price);
       
-      // Play recovery alert sound
-      PlayAudioAlert(InpSoundRecovery);
+      // When first order of the cluster is placed, play the Level audio (level 1 to 10)
+      if(order_index == 0)
+      {
+         PlayLevelAudio(m_cluster_level);
+      }
    }
    else
    {
@@ -551,7 +647,7 @@ void ProcessPendingRecoveryCluster()
                   m_trade.ResultRetcode(),
                   m_trade.ResultRetcodeDescription(),
                   GetLastError());
-      PlayAudioAlert(InpSoundAlert);
+      PlayCustomAudio("Timeout.wav");
    }
 
    m_cluster_next_order++;
@@ -649,7 +745,7 @@ void CheckInitialEntry()
       {
          m_initial_price = ask;
          m_current_grid_level = 0;
-         PlayAudioAlert(InpSoundEntry);
+         PlayCustomAudio("entry placed.wav");
       }
       return;
    }
@@ -669,7 +765,7 @@ void CheckInitialEntry()
       {
          m_initial_price = bid;
          m_current_grid_level = 0;
-         PlayAudioAlert(InpSoundEntry);
+         PlayCustomAudio("entry placed.wav");
       }
       return;
    }
@@ -734,7 +830,10 @@ void OnTick()
       return;
    }
 
-   // Process at most one pending recovery order when its delay has elapsed.
+   // Check if loss exceeds $1500 threshold and play Timeout audio
+   CheckLossTimeoutAlert();
+
+   // Process at most one pending recovery order when its delay has elapsed
    ProcessPendingRecoveryCluster();
 
    ENUM_POSITION_TYPE basket_type;
@@ -746,7 +845,7 @@ void OnTick()
    bool has_positions = GetBasketStats(basket_type, vwap, total_vol,
                                        open_count, initial_price);
 
-   // Update chart dashboard HUD every tick
+   // Update chart dashboard HUD every tick (showing version v1, spread status, trial days, basket stats)
    UpdateChartDashboard(open_count, total_vol, vwap, basket_type);
 
    if(!has_positions)
