@@ -17,11 +17,9 @@
 #include <Trade\PositionInfo.mqh>
 
 //--- Input Parameters ---
-input group "=== 0. BETA TESTING & TRIAL PROTECTION ==="
-input bool     InpEnableTrialGuard      = true;                     // Enable Trial Guard
-input int      InpTrialDays             = 7;                        // Trial Duration in Days (e.g. 3 or 7)
-input datetime InpTrialFixedExpiryDate  = D'2026.09.25 23:59:59';   // Fixed Hard Expiry Date (Fallback)
-input bool     InpDemoOnly              = true;                     // Enforce Demo Account Only (Beta Safety)
+input group "=== 0. LICENSE ACTIVATION ==="
+input string   InpLicenseKey            = "";                       // License Key (e.g. JJ-DEMO-12345678-20260918-XXXX or JJ-LIVE-...)
+input bool     InpEnableLicenseGuard    = true;                     // Enable License Guard
 
 input group "=== 1. SOUND & AUDIO NOTIFICATIONS ==="
 input bool     InpEnableSounds          = true;                     // Enable Sound Alerts
@@ -69,12 +67,16 @@ int                m_cluster_success_count = 0;
 datetime           m_next_order_time       = 0;
 bool               m_had_positions_previous_tick = false;
 
-//--- Trial Protection & Loss Alert Variables
-datetime           m_first_run_time              = 0;
-bool               m_trial_expired               = false;
+//--- License Key & Protection Variables
+const string       DEVELOPER_SECRET_SALT         = "RAZEL_JJ_BOT_SEC_2026_x9K!";
+bool               m_license_active              = false;
+string             m_license_tier                = "NONE";      // "DEMO" or "LIVE"
+int                m_license_days_left           = 0;
+string             m_license_status_msg          = "UNLICENSED";
+string             m_license_error_details       = "Enter your activation key in EA Inputs.";
+datetime           m_license_expiry_time         = 0;
 datetime           m_last_timeout_audio_time     = 0;
 datetime           m_last_tphit_audio_time       = 0;
-const string       TRIAL_GV_KEY                  = "JJ_BOT_FIRST_RUN";
 
 //+------------------------------------------------------------------+
 //| Custom Audio Notification Helper with triple-layer fallback      |
@@ -157,95 +159,170 @@ void CheckLossTimeoutAlert()
 }
 
 //+------------------------------------------------------------------+
-//| Get remaining trial days (uses Broker Server Time)               |
+//| Calculate 8-character SHA-256 signature for license key validation|
 //+------------------------------------------------------------------+
-int GetRemainingTrialDays()
+string CalculateLicenseSignature(const string tier, const long account_id, const string expiry_str)
 {
-   datetime current_server_time = TimeTradeServer();
-   if(current_server_time == 0)
-      current_server_time = TimeCurrent();
+   string raw = StringFormat("%s:%I64d:%s:%s", tier, account_id, expiry_str, DEVELOPER_SECRET_SALT);
+   int len = StringLen(raw);
+   uchar data[];
+   ArrayResize(data, len);
+   for(int i = 0; i < len; i++)
+      data[i] = (uchar)StringGetCharacter(raw, i);
 
-   // 1. Check fixed expiry date
-   if(InpTrialFixedExpiryDate > 0)
-   {
-      if(current_server_time >= InpTrialFixedExpiryDate)
-         return 0;
-      int days_left = (int)((InpTrialFixedExpiryDate - current_server_time) / 86400);
-      return MathMax(0, days_left);
-   }
+   uchar key[];
+   uchar result[];
+   int res = CryptEncode(CRYPT_HASH_SHA256, data, key, result);
+   if(res <= 0)
+      return "";
 
-   // 2. Check dynamic first-run expiry
-   if(m_first_run_time > 0 && InpTrialDays > 0)
-   {
-      datetime expiry_time = m_first_run_time + (InpTrialDays * 86400);
-      if(current_server_time >= expiry_time)
-         return 0;
-      int days_left = (int)((expiry_time - current_server_time) / 86400);
-      return MathMax(0, days_left);
-   }
+   string sig = "";
+   for(int i = 0; i < 4; i++) // 4 bytes = 8 hex chars
+      sig += StringFormat("%02X", result[i]);
 
-   return InpTrialDays;
+   return sig;
 }
 
 //+------------------------------------------------------------------+
-//| Check trial validity (Broker Server Time verified)               |
+//| Validate Account-Bound Dual-Tier License Key                     |
 //+------------------------------------------------------------------+
-bool ValidateTrialSecurity()
+bool ValidateLicenseKey(const string key_str)
 {
-   if(!InpEnableTrialGuard)
+   if(!InpEnableLicenseGuard)
+   {
+      m_license_active = true;
+      m_license_tier = "BYPASS";
+      m_license_days_left = 999;
+      m_license_status_msg = "ACTIVE (Guard Disabled)";
+      m_license_error_details = "";
       return true;
+   }
+
+   string trimmed_key = key_str;
+   StringTrimLeft(trimmed_key);
+   StringTrimRight(trimmed_key);
+
+   if(StringLen(trimmed_key) == 0)
+   {
+      m_license_active = false;
+      m_license_tier = "NONE";
+      m_license_days_left = 0;
+      m_license_status_msg = "UNLICENSED (No Key Entered)";
+      m_license_error_details = "Enter your activation key in EA Inputs (F7).";
+      return false;
+   }
+
+   // Expected format: JJ-<TIER>-<ACCOUNT>-<YYYYMMDD>-<SIG>
+   string parts[];
+   int count = StringSplit(trimmed_key, '-', parts);
+   if(count != 5)
+   {
+      m_license_active = false;
+      m_license_tier = "INVALID";
+      m_license_days_left = 0;
+      m_license_status_msg = "INVALID KEY FORMAT";
+      m_license_error_details = "Key must be: JJ-TIER-ACCOUNT-YYYYMMDD-XXXXXXXX";
+      return false;
+   }
+
+   if(parts[0] != "JJ")
+   {
+      m_license_active = false;
+      m_license_status_msg = "INVALID KEY PREFIX";
+      m_license_error_details = "Key must start with 'JJ-'.";
+      return false;
+   }
+
+   string tier = parts[1];
+   StringToUpper(tier);
+   if(tier != "DEMO" && tier != "LIVE")
+   {
+      m_license_active = false;
+      m_license_status_msg = "INVALID LICENSE TIER";
+      m_license_error_details = "Tier must be DEMO or LIVE.";
+      return false;
+   }
+
+   long key_account = StringToInteger(parts[2]);
+   long active_account = AccountInfoInteger(ACCOUNT_LOGIN);
+   if(key_account != active_account)
+   {
+      m_license_active = false;
+      m_license_status_msg = StringFormat("ACCOUNT MISMATCH (Key for #%I64d)", key_account);
+      m_license_error_details = StringFormat("Key is for account #%I64d, but active account is #%I64d.", key_account, active_account);
+      return false;
+   }
+
+   string expiry_str = parts[3];
+   if(StringLen(expiry_str) != 8)
+   {
+      m_license_active = false;
+      m_license_status_msg = "INVALID EXPIRY FORMAT";
+      m_license_error_details = "Expiry date must be 8 digits (YYYYMMDD).";
+      return false;
+   }
+
+   string provided_sig = parts[4];
+   StringToUpper(provided_sig);
+   string expected_sig = CalculateLicenseSignature(tier, active_account, expiry_str);
+
+   if(provided_sig != expected_sig)
+   {
+      m_license_active = false;
+      m_license_status_msg = "INVALID SIGNATURE / TAMPERED KEY";
+      m_license_error_details = "Cryptographic signature mismatch! Key is invalid or modified.";
+      return false;
+   }
+
+   // Strict Demo Account Enforcement
+   long trade_mode = AccountInfoInteger(ACCOUNT_TRADE_MODE);
+   if(tier == "DEMO" && trade_mode != ACCOUNT_TRADE_MODE_DEMO)
+   {
+      m_license_active = false;
+      m_license_tier = "DEMO";
+      m_license_status_msg = "DEMO KEY ON LIVE ACCOUNT (BLOCKED)";
+      m_license_error_details = "Demo trial keys cannot be used on Real/Live accounts! Contact Razel Tech for Live Access.";
+      return false;
+   }
+
+   // Parse expiry date (YYYYMMDD)
+   int year  = (int)StringToInteger(StringSubstr(expiry_str, 0, 4));
+   int month = (int)StringToInteger(StringSubstr(expiry_str, 4, 2));
+   int day   = (int)StringToInteger(StringSubstr(expiry_str, 6, 2));
+
+   MqlDateTime mdt;
+   mdt.year = year;
+   mdt.mon  = month;
+   mdt.day  = day;
+   mdt.hour = 23;
+   mdt.min  = 59;
+   mdt.sec  = 59;
+
+   datetime expiry_datetime = StructToTime(mdt);
+   m_license_expiry_time = expiry_datetime;
 
    datetime current_server_time = TimeTradeServer();
    if(current_server_time == 0)
       current_server_time = TimeCurrent();
 
-   // Enforce demo account check if enabled
-   if(InpDemoOnly)
+   if(current_server_time >= expiry_datetime)
    {
-      long account_type = AccountInfoInteger(ACCOUNT_TRADE_MODE);
-      if(account_type != ACCOUNT_TRADE_MODE_DEMO)
-      {
-         string msg = "Jigurujingania Bot [Trial Guard]: Beta trial is restricted to DEMO accounts only for safety!";
-         Print(msg);
-         Alert(msg);
-         PlayCustomAudio("Timeout.wav");
-         return false;
-      }
-   }
-
-   // Check fixed expiry date
-   if(InpTrialFixedExpiryDate > 0 && current_server_time >= InpTrialFixedExpiryDate)
-   {
-      string msg = "Jigurujingania Bot: Testing trial period has expired! Contact Razel Tech.";
-      Print(msg);
-      Alert(msg);
-      PlayCustomAudio("Timeout.wav");
+      m_license_active = false;
+      m_license_tier = tier;
+      m_license_days_left = 0;
+      m_license_status_msg = StringFormat("%s LICENSE EXPIRED on %04d.%02d.%02d", tier, year, month, day);
+      m_license_error_details = "Access period has ended. Contact Razel Tech to renew your license.";
       return false;
    }
 
-   // Check first-run dynamic timestamp
-   if(GlobalVariableCheck(TRIAL_GV_KEY))
-   {
-      m_first_run_time = (datetime)GlobalVariableGet(TRIAL_GV_KEY);
-   }
-   else
-   {
-      m_first_run_time = current_server_time;
-      GlobalVariableSet(TRIAL_GV_KEY, (double)m_first_run_time);
-   }
+   long remaining_sec = (long)(expiry_datetime - current_server_time);
+   int days_left = (int)(remaining_sec / 86400) + 1;
 
-   if(InpTrialDays > 0)
-   {
-      datetime trial_expiry = m_first_run_time + (InpTrialDays * 86400);
-      if(current_server_time >= trial_expiry)
-      {
-         string msg = StringFormat("Jigurujingania Bot: %d-Day Trial has expired! Powered by Razel Tech.", InpTrialDays);
-         Print(msg);
-         Alert(msg);
-         PlayCustomAudio("Timeout.wav");
-         return false;
-      }
-   }
+   m_license_active = true;
+   m_license_tier = tier;
+   m_license_days_left = days_left;
+   m_license_status_msg = StringFormat("ACTIVE (%d Days Left)", days_left);
+   m_license_error_details = "";
 
    return true;
 }
@@ -255,10 +332,38 @@ bool ValidateTrialSecurity()
 //+------------------------------------------------------------------+
 void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_POSITION_TYPE basket_type)
 {
-   int days_left = GetRemainingTrialDays();
-   string status_str = m_trial_expired ? "EXPIRED (Trading Halted)" : StringFormat("ACTIVE (%d Days Trial Left)", days_left);
-   string account_mode = (AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO) ? "DEMO (Beta Safe)" : "REAL";
+   string account_mode_str = (AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO) ? "DEMO" : "REAL";
+   long login_id = AccountInfoInteger(ACCOUNT_LOGIN);
 
+   if(!m_license_active)
+   {
+      string locked_hud = StringFormat(
+         "=====================================================\n"
+         "  JIGURUJINGANIA BOT  v1  [LOCKED]\n"
+         "  Powered by Razel Tech\n"
+         "=====================================================\n"
+         "  License Status: %s\n"
+         "  Active Account: #%I64d (%s)\n"
+         "  Issue Details:  %s\n"
+         "-----------------------------------------------------\n"
+         "  ACTIVATION INSTRUCTIONS:\n"
+         "  1. Copy your MT5 Account ID: %I64d\n"
+         "  2. Request your Activation Key from Razel Tech:\n"
+         "     - Demo Trial: 3, 5, or 7-Day Access\n"
+         "     - Live Account: 1-Month Pro Access\n"
+         "     - Contact: support@jigurujingania.bot\n"
+         "  3. Open Bot Inputs (F7) -> Paste into InpLicenseKey\n"
+         "=====================================================",
+         m_license_status_msg,
+         login_id, account_mode_str,
+         m_license_error_details,
+         login_id
+      );
+      Comment(locked_hud);
+      return;
+   }
+
+   // ACTIVE LICENSED DASHBOARD
    long current_spread = SymbolInfoInteger(_Symbol, SYMBOL_SPREAD);
    string spread_status = StringFormat("%I64d / Max %d pts (%s)", 
                                        current_spread, InpMaxSpreadPoints, 
@@ -290,18 +395,18 @@ void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_PO
 
    string hud = StringFormat(
       "=====================================================\n"
-      "  JIGURUJINGANIA BOT  v1\n"
+      "  JIGURUJINGANIA BOT  v1  [ACTIVE]\n"
       "  Powered by Razel Tech\n"
       "=====================================================\n"
-      "  Status:         %s\n"
-      "  Account:        #%I64d (%s)\n"
+      "  License Tier:   %s PRO (%d Days Left)\n"
+      "  Account:        #%I64d (%s - LICENSED)\n"
       "  Spread Status:  %s\n"
       "  Audio Alerts:   %s\n"
       "-----------------------------------------------------\n"
       "  %s%s\n"
       "=====================================================",
-      status_str,
-      AccountInfoInteger(ACCOUNT_LOGIN), account_mode,
+      m_license_tier, m_license_days_left,
+      login_id, account_mode_str,
       spread_status,
       (InpEnableSounds ? "ENABLED" : "MUTED"),
       basket_info,
@@ -332,23 +437,21 @@ int OnInit()
    m_trade.SetDeviationInPoints(20);
    MathSrand((uint)(GetTickCount() ^ (uint)TimeLocal()));
 
-   // 3. Perform trial security validation
-   if(!ValidateTrialSecurity())
+   // 3. Perform cryptographic license validation
+   if(!ValidateLicenseKey(InpLicenseKey))
    {
-      m_trial_expired = true;
+      PrintFormat(">> Jigurujingania Bot License Check: %s. %s", m_license_status_msg, m_license_error_details);
+      PlayCustomAudio("Timeout.wav");
       UpdateChartDashboard(0, 0, 0, POSITION_TYPE_BUY);
-      return(INIT_FAILED);
+      // Return INIT_SUCCEEDED so HUD remains on chart to display Account ID and activation instructions.
+      // All trading is locked in OnTick() while !m_license_active.
+      return(INIT_SUCCEEDED);
    }
 
-   m_trial_expired = false;
-
-   PrintFormat("Jigurujingania Bot v1 [Powered by Razel Tech] initialized on %s %s. Magic: %I64u", 
-               _Symbol, EnumToString(InpTimeframe), InpMagicNumber);
-   PrintFormat("Trial Status: Valid for %d days. Demo Only: %s. Audio Alerts: %s.",
-               GetRemainingTrialDays(), (InpDemoOnly ? "YES" : "NO"), (InpEnableSounds ? "YES" : "NO"));
+   PrintFormat("Jigurujingania Bot v1 [Powered by Razel Tech] ACTIVATED for %s Account #%I64d (%d Days Remaining).",
+               m_license_tier, AccountInfoInteger(ACCOUNT_LOGIN), m_license_days_left);
    
    UpdateChartDashboard(0, 0, 0, POSITION_TYPE_BUY);
-
    return(INIT_SUCCEEDED);
 }
 
@@ -709,7 +812,7 @@ bool OpenRecoveryCluster(int level, ENUM_POSITION_TYPE type)
 //+------------------------------------------------------------------+
 void CheckInitialEntry()
 {
-   if(m_cluster_pending || m_trial_expired)
+   if(m_cluster_pending || !m_license_active)
       return;
 
    // Check spread filter
@@ -782,7 +885,7 @@ void CheckInitialEntry()
 //+------------------------------------------------------------------+
 void ManageRecoveryGrid(ENUM_POSITION_TYPE basket_type, double vwap, double total_vol, int count, double initial_price)
 {
-   if(!InpEnableRecovery || m_cluster_pending || m_trial_expired)
+   if(!InpEnableRecovery || m_cluster_pending || !m_license_active)
       return;
 
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
@@ -828,10 +931,10 @@ void ManageRecoveryGrid(ENUM_POSITION_TYPE basket_type, double vwap, double tota
 //+------------------------------------------------------------------+
 void OnTick()
 {
-   // Periodically re-verify trial validity
-   if(!ValidateTrialSecurity())
+   // Periodically re-verify license validity every tick
+   if(!ValidateLicenseKey(InpLicenseKey))
    {
-      m_trial_expired = true;
+      m_license_active = false;
       UpdateChartDashboard(0, 0, 0, POSITION_TYPE_BUY);
       return;
    }

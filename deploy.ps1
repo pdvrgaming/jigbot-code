@@ -54,15 +54,16 @@ if (Test-Path (Join-Path $WorkspaceRoot "jig bot")) {
     Copy-Item (Join-Path $WorkspaceRoot "jig bot\*.wav") -Destination $PublicJigBot -Force
 }
 
-# Create .gitignore in public_pages that permanently blocks any mq5 files
+# Create .gitignore in public_pages that permanently blocks any mq5 files & private tools
 $PublicGitIgnore = @"
-# ZERO-LEAK SECURITY: Strict block on all MQL5 source code files
+# ZERO-LEAK SECURITY: Strict block on all MQL5 source code files & private tools
 *.mq5
 *.mq4
 *.mqh
 *.cpp
 *.h
 *.log
+license_generator.html
 "@
 Set-Content -Path (Join-Path $PublicDir ".gitignore") -Value $PublicGitIgnore -Encoding UTF8
 Write-Host "  [OK] Public pages synced. Protected by zero-leak .gitignore." -ForegroundColor Green

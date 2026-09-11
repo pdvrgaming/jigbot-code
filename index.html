@@ -702,44 +702,64 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
                 
                 <!-- Step 1 -->
-                <div class="p-8 rounded-2xl bg-terminal-card border border-terminal-border relative">
-                    <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-bold text-lg flex items-center justify-center mb-6">
-                        1
+                <div class="p-6 rounded-2xl bg-terminal-card border border-terminal-border flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-bold text-lg flex items-center justify-center mb-5">
+                            1
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-white mb-2">Download Binary</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Download <code class="text-gold text-[11px] bg-obsidian px-1.5 py-0.5 rounded">Jigurujingania_Bot_PDVR.ex5</code> via Google Drive. Pure compiled binary with zero code leaks.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-display font-bold text-white mb-2">Download the EX5</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        Download <code class="text-gold text-xs bg-obsidian px-1.5 py-0.5 rounded">Jigurujingania_Bot_PDVR.ex5</code> via the Google Drive link. You only receive the compiled binary — no complex setup needed.
-                    </p>
                 </div>
 
                 <!-- Step 2 -->
-                <div class="p-8 rounded-2xl bg-terminal-card border border-terminal-border relative">
-                    <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-bold text-lg flex items-center justify-center mb-6">
-                        2
+                <div class="p-6 rounded-2xl bg-terminal-card border border-terminal-border flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-bold text-lg flex items-center justify-center mb-5">
+                            2
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-white mb-2">Place in MT5 Folder</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            In MT5, go to <strong class="text-white">File &rarr; Open Data Folder</strong>. Paste <code class="text-gold text-[11px] bg-obsidian px-1.5 py-0.5 rounded">.ex5</code> into <code class="text-gray-300 text-[11px]">MQL5 \ Experts</code>, and the audio files into <code class="text-gray-300 text-[11px]">Sounds</code>.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-display font-bold text-white mb-2">Place in Experts Folder</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        In MT5, click <strong class="text-white">File &rarr; Open Data Folder</strong>. Navigate to <code class="text-gold text-xs bg-obsidian px-1.5 py-0.5 rounded">MQL5 \ Experts</code> and paste the .ex5 file there.
-                    </p>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="p-8 rounded-2xl bg-terminal-card border border-terminal-border relative">
-                    <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-bold text-lg flex items-center justify-center mb-6">
-                        3
+                <div class="p-6 rounded-2xl bg-terminal-card border border-terminal-border flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-bold text-lg flex items-center justify-center mb-5">
+                            3
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-white mb-2">Attach to XAUUSD M1</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Open an <strong class="text-white">XAUUSD M1</strong> chart. Refresh Navigator, drag the bot to chart, enable <strong class="text-mt5-green">"Allow Algo Trading"</strong>. Note your Account ID on the HUD.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-display font-bold text-white mb-2">Attach to XAUUSD M1</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">
-                        Open an <strong class="text-white">XAUUSD M1 chart</strong>. Refresh your Navigator, drag the EA onto the chart, check <strong class="text-mt5-green">"Allow Algo Trading"</strong>, and click OK.
-                    </p>
                 </div>
+
+                <!-- Step 4 -->
+                <div class="p-6 rounded-2xl bg-terminal-card border border-gold/40 flex flex-col justify-between relative shadow-gold-glow">
+                    <div>
+                        <div class="w-10 h-10 rounded-full bg-mt5-green text-obsidian font-display font-bold text-lg flex items-center justify-center mb-5">
+                            4
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-white mb-2">Enter License Key</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Request your key from Razel Tech. Press <strong class="text-gold">F7</strong> on your chart, paste into <code class="text-gold text-[11px] bg-obsidian px-1.5 py-0.5 rounded">InpLicenseKey</code>, and hit OK to activate!
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Terminal Requirements Banner -->
-            <div class="mt-12 p-6 rounded-xl bg-terminal-slate/80 border border-terminal-border max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="mt-12 p-6 rounded-xl bg-terminal-slate/80 border border-terminal-border max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
                     <i data-lucide="shield-alert" class="w-6 h-6 text-gold shrink-0"></i>
                     <span class="text-xs text-gray-300 font-mono">Requires MetaTrader 5 • <strong class="text-mt5-red">Backtesting is disabled in Strategy Tester</strong> • Attach directly to live or demo chart to run</span>
@@ -753,38 +773,119 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- 7-DAY TRIAL CALLOUT & DOWNLOAD TRIGGER MODAL                     -->
+    <!-- DUAL-TIER LICENSING & DOWNLOAD SECTION                           -->
     <!-- ================================================================= -->
     <section id="trial" class="py-24 bg-gradient-to-b from-obsidian via-terminal-slate to-obsidian relative overflow-hidden border-t border-terminal-border">
         
         <!-- Ambient background glow -->
         <div class="absolute inset-0 bg-gold/5 pointer-events-none"></div>
 
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             
             <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center shadow-gold-glow mb-6">
-                <i data-lucide="shield-check" class="w-8 h-8 text-obsidian"></i>
+                <i data-lucide="key" class="w-8 h-8 text-obsidian"></i>
             </div>
 
-            <span class="text-gold font-mono text-xs uppercase tracking-widest font-semibold">Testing Access</span>
+            <span class="text-gold font-mono text-xs uppercase tracking-widest font-semibold">Authorized Licensing</span>
             <h2 class="text-3xl sm:text-5xl font-display font-black text-white mt-2 mb-4">
-                Get Your 7-Day Testing Trial
+                Choose Your Access Tier
             </h2>
 
-            <p class="text-gray-300 text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-                Experience the precision of the <strong>Jigurujingania Bot</strong> on your own demo account for 7 days. Once the trial concludes, reach out to <strong>Razel Tech</strong> for extended licensing and live updates.
+            <p class="text-gray-300 text-base max-w-2xl mx-auto mb-12 leading-relaxed">
+                Jigurujingania Bot features cryptographic account-bound activation. Select between a free demo trial or full live production access:
             </p>
+
+            <!-- Dual Tier Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mb-12">
+                
+                <!-- Demo Trial Card -->
+                <div class="p-8 rounded-2xl bg-terminal-card border border-blue-400/30 relative flex flex-col justify-between hover:border-blue-400/60 transition-all">
+                    <div>
+                        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-blue-500/15 text-blue-400 border border-blue-400/30 mb-4">
+                            Demo Testing Access
+                        </div>
+                        <h3 class="text-2xl font-display font-black text-white">3, 5, or 7-Day Demo Trial</h3>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                            Test the high-frequency M1 recovery algorithms on your demo account completely risk-free.
+                        </p>
+                        <ul class="mt-6 space-y-3 text-xs text-gray-300 font-mono">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-blue-400"></i>
+                                <span>Choice of 3, 5, or 7-Day Duration</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-blue-400"></i>
+                                <span>Full 10-Level Recovery Grid Access</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-blue-400"></i>
+                                <span>Complete 13-Track Audio Voice Alerts</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="lock" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-gray-400">Demo Account Only (Live Disabled)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-terminal-border">
+                        <a href="https://t.me/your_telegram_username" target="_blank" class="w-full py-3.5 px-6 rounded-xl bg-blue-500/20 hover:bg-blue-500 text-blue-300 hover:text-obsidian font-display font-bold text-sm border border-blue-400/40 transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            <span>Request Free Demo Trial Key</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Live Pro Card -->
+                <div class="p-8 rounded-2xl bg-terminal-card border border-gold/40 relative flex flex-col justify-between shadow-gold-glow hover:border-gold transition-all">
+                    <div>
+                        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-gold/15 text-gold border border-gold/30 mb-4">
+                            Live Production
+                        </div>
+                        <h3 class="text-2xl font-display font-black text-white">1-Month Live Account Access</h3>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                            Full authorized deployment on your live broker account with complete execution privileges.
+                        </p>
+                        <ul class="mt-6 space-y-3 text-xs text-gray-300 font-mono">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                <span>30 Days Full Live Account Trading</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                <span>Authorized for Real Money Capital</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                <span>Real-Time Spread & Drawdown Protectors</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                <span>Dedicated Priority Support from Razel Tech</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-terminal-border">
+                        <a href="mailto:support@razeltech.com" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian font-display font-black text-sm shadow-gold-glow hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            <span>Request 1-Month Live Key</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
 
             <!-- Download Button Linked to Google Drive -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#" class="drive-download-trigger inline-flex items-center justify-center px-10 py-4.5 rounded-xl font-display font-black text-lg bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian shadow-gold-glow hover:brightness-110 hover:scale-105 transition-all gap-3">
+                <a href="#" class="drive-download-trigger inline-flex items-center justify-center px-10 py-4.5 rounded-xl font-display font-black text-lg bg-terminal-slate hover:bg-gold hover:text-obsidian border border-terminal-border hover:border-gold text-white shadow-xl transition-all gap-3">
                     <i data-lucide="download" class="w-6 h-6"></i>
                     <span>Download EX5 File (Google Drive)</span>
                 </a>
             </div>
 
             <p class="mt-6 text-xs text-gray-400 font-mono">
-                File format: <strong class="text-white">Jigurujingania_Bot_PDVR.ex5</strong> • Pure compiled binary • Safe from source leaks
+                File: <strong class="text-white">Jigurujingania_Bot_PDVR.ex5</strong> • Pure compiled binary • Requires activation key for trading
             </p>
         </div>
     </section>

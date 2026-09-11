@@ -19,23 +19,56 @@ Double-click [`compile_bot.bat`](file:///d:/webapps/jiguruginganiabot_website/co
 
 ---
 
-## 2. Branding & Live HUD Specifications
-- **Official Name**: `Jigurujingania Bot`
-- **Attribution**: `Powered by Razel Tech`
-- **Version**: `v1`
-- **On-Chart Live HUD**: Displays:
-  - Header: `JIGURUJINGANIA BOT v1 - Powered by Razel Tech`
-  - Status: Active (e.g. `7 Days Trial Left`) or Expired
-  - Account info: Account login number & account mode (`DEMO` or `REAL`)
-  - Spread status: Current live spread vs max allowed spread (with `OK` or `HIGH SPREAD` indicator)
-  - Audio status: `ENABLED` or `MUTED`
-  - Floating P/L: Real-time net profit/loss in dollars (`+$12.50` or `-$4.20`)
-  - Real-time Basket stats: Direction, open order count, volume in lots, current recovery level, Volume-Weighted Average Price (VWAP), and dynamic TP target price
-  - Emergency loss warning if loss exceeds -$1500.
+---
+
+## 2. Dual-Tier Cryptographic License Key System & Offline Generator
+
+Jigurujingania Bot uses an **offline, account-bound cryptographic license key system** that prevents unauthorized usage and account sharing without requiring any online web server or MT5 WebRequest configurations.
+
+### Key Format:
+```
+JJ-<TIER>-<ACCOUNT_ID>-<EXPIRY_YYYYMMDD>-<SIGNATURE>
+```
+
+| Tier | Key Prefix | Permissions & Enforcements |
+| :--- | :--- | :--- |
+| **Demo Trial** | `JJ-DEMO-...` | Valid for **3, 5, or 7 Days** (or custom). **Strictly blocked on Live accounts** (`AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_REAL`). If a user attempts to run a Demo key on a real account, the bot immediately halts. |
+| **Live Account** | `JJ-LIVE-...` | Valid for **1 Month (30 Days)**, 3 Months, or Lifetime. Authorized for real money capital trading on MT5. |
+
+### Anti-Piracy & Anti-Tamper Protection:
+- **Bound to MT5 Account ID**: The MT5 terminal hardware checks `AccountInfoInteger(ACCOUNT_LOGIN)`. A key generated for account `12345678` **cannot be shared** or run on account `87654321`.
+- **Cryptographic Signature**: Signature is computed using `SHA-256(TIER + ":" + ACCOUNT + ":" + EXPIRY + ":" + SECRET_SALT)`. If a user attempts to modify `DEMO` to `LIVE` or alter the expiry date, the signature check fails immediately and trading is locked.
+
+### How to Generate Keys (Private Developer Tool):
+Open [`license_generator.html`](file:///d:/webapps/jiguruginganiabot_website/license_generator.html) in your browser:
+1. Enter the trader's **MT5 Account Number** (e.g. `12345678`).
+2. Select **Demo Trial** or **Live Account**.
+3. Choose the duration (`3 Days`, `5 Days`, `7 Days` for Demo; `1 Month` for Live).
+4. Click **Generate License Key**.
+5. Click **"Copy Message for Trader"** to send them a ready-to-use instruction template.
+
+*Note: `license_generator.html` is kept strictly private in your local workspace and is never published to GitHub Pages.*
 
 ---
 
-## 3. Strict Backtesting Restriction
+## 3. Branding & Live HUD Specifications
+- **Official Name**: `Jigurujingania Bot`
+- **Attribution**: `Powered by Razel Tech`
+- **Version**: `v1`
+- **On-Chart Live HUD**:
+  - **When Unlicensed / Locked**: Displays a red warning screen with the active Account ID and instructions to contact Razel Tech for a key.
+  - **When Active**: Displays green `ACTIVE` status with:
+    - License Tier: `DEMO TRIAL` or `LIVE PRO`
+    - Remaining Trial / Access Days countdown
+    - Account ID & Mode: `#12345678 (DEMO / REAL - LICENSED)`
+    - Spread status: Current live spread vs max allowed spread (`OK` or `HIGH SPREAD`)
+    - Audio status: `ENABLED` or `MUTED`
+    - Live Basket stats: Direction, open orders count, volume in lots, recovery level (`0` to `10`), VWAP price, unified TP target, and net floating P/L.
+    - Emergency loss warning if loss exceeds -$1,500.
+
+---
+
+## 4. Strict Backtesting Restriction
 - **Strategy Tester Disabled**: The bot is programmed to **NOT run in backtesting** on either live or demo accounts.
 - If attached to the Strategy Tester, `OnInit()` immediately returns `INIT_FAILED` with the alert:
   *"Jigurujingania Bot: Backtesting is strictly disabled in Strategy Tester for this version! Run on Live Chart only."*
@@ -43,7 +76,7 @@ Double-click [`compile_bot.bat`](file:///d:/webapps/jiguruginganiabot_website/co
 
 ---
 
-## 4. Custom Audio Suite (`jig bot` folder)
+## 5. Custom Audio Suite (`jig bot` folder)
 The bot includes custom voice alerts located in [`jig bot/`](file:///d:/webapps/jiguruginganiabot_website/jig%20bot):
 
 | Trigger Event | Audio File | Description |

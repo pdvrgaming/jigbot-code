@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jigurujingania Bot - Private License Key Generator | Razel Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #05070D;
+      --bg-card: #0A0F1D;
+      --bg-input: #10172A;
+      --bg-hover: #162038;
+      --border-color: rgba(229, 184, 66, 0.2);
+      --border-focus: #E5B842;
+      --gold-primary: #E5B842;
+      --gold-light: #F7D478;
+      --green-accent: #00E676;
+      --blue-accent: #38BDF8;
+      --red-accent: #FF385C;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 820px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .badge-owner {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(229, 184, 66, 0.12);
+      color: var(--gold-primary);
+      border: 1px solid rgba(229, 184, 66, 0.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .title span {
+      color: var(--gold-primary);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Card */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 1.05rem;
+      color: #fff;
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus {
+      outline: none;
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(229, 184, 66, 0.15);
+    }
+
+    .help-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Tier Selector Pills */
+    .tier-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .tier-btn {
+      background: var(--bg-input);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      color: var(--text-main);
+    }
+
+    .tier-btn:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: var(--bg-hover);
+    }
+
+    .tier-btn.active.tier-demo {
+      border-color: var(--blue-accent);
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    .tier-btn.active.tier-live {
+      border-color: var(--gold-primary);
+      background: rgba(229, 184, 66, 0.1);
+    }
+
+    .tier-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .tier-demo .tier-badge {
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--blue-accent);
+    }
+
+    .tier-live .tier-badge {
+      background: rgba(229, 184, 66, 0.2);
+      color: var(--gold-primary);
+    }
+
+    .tier-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .tier-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Duration Presets */
+    .preset-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .preset-btn {
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-btn:hover {
+      background: var(--bg-hover);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+
+    .preset-btn.active {
+      background: var(--gold-primary);
+      color: #000;
+      border-color: var(--gold-primary);
+    }
+
+    /* Action Button */
+    .generate-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #F5D061, #E5B842);
+      color: #05070D;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 8px 25px rgba(229, 184, 66, 0.3);
+      margin-top: 10px;
+    }
+
+    .generate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(229, 184, 66, 0.4);
+    }
+
+    .generate-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Result Box */
+    .result-card {
+      background: #0D1424;
+      border: 2px solid var(--gold-primary);
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 28px;
+      display: none;
+    }
+
+    .result-card.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .result-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .key-display {
+      background: #05070D;
+      border: 1px solid rgba(229, 184, 66, 0.4);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #00E676;
+      word-break: break-all;
+      text-align: center;
+      margin-bottom: 18px;
+      user-select: all;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .btn-copy {
+      background: var(--bg-input);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-copy:hover {
+      background: var(--gold-primary);
+      color: #000;
+    }
+
+    .btn-copy.copied {
+      background: var(--green-accent);
+      color: #000;
+      border-color: var(--green-accent);
+    }
+
+    /* Key breakdown details */
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 14px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .breakdown-item {
+      text-align: center;
+    }
+
+    .breakdown-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .breakdown-value {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Terminal HUD Preview */
+    .hud-preview {
+      background: #020408;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #A3E635;
+      white-space: pre-wrap;
+      line-height: 1.4;
+      overflow-x: auto;
+    }
+
+    /* Salt Details Collapsible */
+    .collapsible {
+      margin-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 16px;
+    }
+
+    .collapsible-header {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+
+    .collapsible-header:hover {
+      color: var(--gold-light);
+    }
+
+    .collapsible-content {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .collapsible-content.open {
+      display: block;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 640px) {
+      .tier-selector { grid-template-columns: 1fr; }
+      .action-row { grid-template-columns: 1fr; }
+      .breakdown-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <div class="badge-owner">🔒 Private Developer Tool • Offline Only</div>
+      <h1 class="title">Jigurujingania <span>Key Generator</span></h1>
+      <p class="subtitle">Cryptographically sign account-bound trial & live activation keys for Jigurujingania Bot (Powered by Razel Tech)</p>
+    </header>
+
+    <div class="card">
+      <div class="section-title">
+        <span>1.</span> Trader's MT5 Account Information
+      </div>
+
+      <div class="form-group">
+        <label for="accountId">MetaTrader 5 Account Number (Login ID)</label>
+        <input type="text" id="accountId" placeholder="e.g. 12345678" maxlength="15" autocomplete="off">
+        <div class="help-text">Ask the trader to check their MT5 chart HUD or Navigator panel for their login ID.</div>
+      </div>
+
+      <div class="section-title" style="margin-top: 28px;">
+        <span>2.</span> License Tier & Permissions
+      </div>
+
+      <div class="tier-selector">
+        <div class="tier-btn active tier-demo" id="tierDemoBtn" onclick="selectTier('DEMO')">
+          <span class="tier-badge">Demo Only</span>
+          <span class="tier-name">Demo Trial Key</span>
+          <span class="tier-desc">Restricted to Demo accounts. Automatically blocked if pasted on Live accounts.</span>
+        </div>
+        <div class="tier-btn tier-live" id="tierLiveBtn" onclick="selectTier('LIVE')">
+          <span class="tier-badge">Live Pro</span>
+          <span class="tier-name">Live Account Key</span>
+          <span class="tier-desc">Authorized for full Real/Live account trading on MT5.</span>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top: 28px;">
+        <span>3.</span> Duration & Expiry Date
+      </div>
+
+      <div class="preset-grid" id="presetButtons">
+        <!-- Injected dynamically based on selected tier -->
+      </div>
+
+      <div class="form-group">
+        <label for="expiryDate">Expiry Date (Midnight UTC)</label>
+        <input type="date" id="expiryDate">
+        <div class="help-text">The bot checks broker server time. It will stop trading at 23:59:59 on this date.</div>
+      </div>
+
+      <button class="generate-btn" onclick="generateLicenseKey()">
+        ⚡ Generate Cryptographic License Key
+      </button>
+
+      <div class="collapsible">
+        <div class="collapsible-header" onclick="toggleSecretSalt()">
+          ⚙️ Advanced: Developer Secret Salt (Click to view)
+        </div>
+        <div class="collapsible-content" id="saltContent">
+          <div class="form-group" style="margin-top: 8px;">
+            <label for="secretSalt">Secret Salt (Must match MQL5 code exactly)</label>
+            <input type="text" id="secretSalt" value="RAZEL_JJ_BOT_SEC_2026_x9K!" readonly>
+            <div class="help-text">Baked into Jigurujingania_Bot_PDVR.mq5. Changing this invalidates all previously generated keys.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Card -->
+    <div class="result-card" id="resultCard">
+      <div class="result-header">
+        <div class="result-title">
+          <span>✅</span> Key Generated Successfully
+        </div>
+        <span id="tierPill" class="tier-badge" style="background: rgba(0, 230, 118, 0.2); color: #00E676;"></span>
+      </div>
+
+      <div class="key-display" id="keyDisplay"></div>
+
+      <div class="action-row">
+        <button class="btn-copy" id="btnCopyKey" onclick="copyKeyOnly()">
+          📋 Copy Key Only
+        </button>
+        <button class="btn-copy" id="btnCopyMsg" onclick="copyTraderMessage()">
+          💬 Copy Message for Trader
+        </button>
+      </div>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-item">
+          <div class="breakdown-label">Account ID</div>
+          <div class="breakdown-value" id="bAccount">-</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-label">License Tier</div>
+          <div class="breakdown-value" id="bTier">-</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-label">Expiry Date</div>
+          <div class="breakdown-value" id="bExpiry">-</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-label">Duration</div>
+          <div class="breakdown-value" id="bDays">-</div>
+        </div>
+      </div>
+
+      <div class="help-text" style="margin-bottom: 8px; font-weight: 600;">Chart HUD Preview (What the trader sees on MT5):</div>
+      <div class="hud-preview" id="hudPreview"></div>
+    </div>
+
+    <footer class="footer">
+      Jigurujingania Bot &copy; 2026 • Powered by Razel Tech • Proprietary & Confidential
+    </footer>
+  </div>
+
+  <script>
+    let currentTier = 'DEMO';
+    let currentDays = 7;
+
+    const demoPresets = [
+      { label: '3 Days Trial', days: 3 },
+      { label: '5 Days Trial', days: 5 },
+      { label: '7 Days Trial', days: 7, default: true }
+    ];
+
+    const livePresets = [
+      { label: '1 Month (30 Days)', days: 30, default: true },
+      { label: '3 Months (90 Days)', days: 90 },
+      { label: '1 Year (365 Days)', days: 365 },
+      { label: 'Lifetime (2099)', days: 26700, isLifetime: true }
+    ];
+
+    function init() {
+      renderPresets();
+      setExpiryByDays(currentDays);
+
+      // Account input auto-clean
+      document.getElementById('accountId').addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/\D/g, '');
+      });
+    }
+
+    function selectTier(tier) {
+      currentTier = tier;
+      document.getElementById('tierDemoBtn').classList.toggle('active', tier === 'DEMO');
+      document.getElementById('tierLiveBtn').classList.toggle('active', tier === 'LIVE');
+      
+      currentDays = (tier === 'DEMO') ? 7 : 30;
+      renderPresets();
+      setExpiryByDays(currentDays);
+    }
+
+    function renderPresets() {
+      const container = document.getElementById('presetButtons');
+      container.innerHTML = '';
+      const list = (currentTier === 'DEMO') ? demoPresets : livePresets;
+
+      list.forEach(p => {
+        const btn = document.createElement('button');
+        btn.className = `preset-btn ${p.days === currentDays ? 'active' : ''}`;
+        btn.innerText = p.label;
+        btn.onclick = () => {
+          currentDays = p.days;
+          document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          if (p.isLifetime) {
+            document.getElementById('expiryDate').value = '2099-12-31';
+          } else {
+            setExpiryByDays(p.days);
+          }
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function setExpiryByDays(days) {
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      document.getElementById('expiryDate').value = `${yyyy}-${mm}-${dd}`;
+    }
+
+    function toggleSecretSalt() {
+      const el = document.getElementById('saltContent');
+      el.classList.toggle('open');
+    }
+
+    // Cryptographic SHA-256 Signature Function
+    async function calculateSignature(tier, accountId, expiryStr, salt) {
+      const rawText = `${tier}:${accountId}:${expiryStr}:${salt}`;
+      const encoder = new TextEncoder();
+      const data = encoder.encode(rawText);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      
+      // Take first 4 bytes (8 hex characters)
+      return hashArray.slice(0, 4).map(b => b.toString(16).padStart(2, '0').toUpperCase()).join('');
+    }
+
+    async function generateLicenseKey() {
+      const accountInput = document.getElementById('accountId').value.trim();
+      if (!accountInput || accountInput.length < 4) {
+        alert('Please enter a valid MT5 Account Number (at least 4 digits).');
+        document.getElementById('accountId').focus();
+        return;
+      }
+
+      const expiryInput = document.getElementById('expiryDate').value;
+      if (!expiryInput) {
+        alert('Please select an expiry date.');
+        return;
+      }
+
+      const expiryStr = expiryInput.replace(/-/g, ''); // YYYYMMDD
+      const salt = document.getElementById('secretSalt').value.trim();
+
+      const signature = await calculateSignature(currentTier, accountInput, expiryStr, salt);
+      const fullKey = `JJ-${currentTier}-${accountInput}-${expiryStr}-${signature}`;
+
+      // Calculate days remaining
+      const expiryObj = new Date(expiryInput + 'T23:59:59');
+      const now = new Date();
+      const diffTime = expiryObj - now;
+      const daysLeft = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+
+      // Populate Result Card
+      document.getElementById('keyDisplay').innerText = fullKey;
+      document.getElementById('tierPill').innerText = `${currentTier} ${currentTier === 'DEMO' ? 'TRIAL' : 'PRO'}`;
+      document.getElementById('bAccount').innerText = '#' + accountInput;
+      document.getElementById('bTier').innerText = currentTier;
+      document.getElementById('bExpiry').innerText = `${expiryStr.substr(0,4)}.${expiryStr.substr(4,2)}.${expiryStr.substr(6,2)}`;
+      document.getElementById('bDays').innerText = `${daysLeft} Days`;
+
+      // Live HUD Preview
+      const hudText = 
+`=====================================================
+  JIGURUJINGANIA BOT  v1  [ACTIVE]
+  Powered by Razel Tech
+=====================================================
+  License Tier:   ${currentTier} PRO (${daysLeft} Days Left)
+  Account:        #${accountInput} (${currentTier === 'DEMO' ? 'DEMO' : 'REAL'} - LICENSED)
+  Spread Status:  14 / Max 50 pts (OK)
+  Audio Alerts:   ENABLED
+-----------------------------------------------------
+  No Active Basket (Scanning M1 Candlesticks)
+=====================================================`;
+      document.getElementById('hudPreview').innerText = hudText;
+
+      const card = document.getElementById('resultCard');
+      card.classList.add('show');
+      card.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyKeyOnly() {
+      const key = document.getElementById('keyDisplay').innerText;
+      navigator.clipboard.writeText(key).then(() => {
+        const btn = document.getElementById('btnCopyKey');
+        const orig = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = '✅ Key Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = orig;
+        }, 2000);
+      });
+    }
+
+    function copyTraderMessage() {
+      const key = document.getElementById('keyDisplay').innerText;
+      const account = document.getElementById('bAccount').innerText;
+      const tier = document.getElementById('bTier').innerText;
+      const days = document.getElementById('bDays').innerText;
+
+      const msg = 
+`👋 Hello! Here is your official activation key for **Jigurujingania Bot v1**:
+
+🔑 **License Key**:
+\`${key}\`
+
+📋 **License Details**:
+• Authorized Account: ${account}
+• License Tier: ${tier} (${tier === 'DEMO' ? 'Demo Trial' : 'Live Account'})
+• Access Duration: ${days}
+
+⚙️ **How to Activate in MetaTrader 5**:
+1. Attach **Jigurujingania_Bot_PDVR** to your **XAUUSD M1** chart.
+2. Press **F7** on your keyboard (or right-click chart > Expert List > Properties).
+3. Under **Inputs**, paste your key into **InpLicenseKey**.
+4. Click **OK**. Your on-chart dashboard will turn to [ACTIVE] and start trading!
+
+Need assistance? Contact Razel Tech support.`;
+
+      navigator.clipboard.writeText(msg).then(() => {
+        const btn = document.getElementById('btnCopyMsg');
+        const orig = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = '✅ Message Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = orig;
+        }, 2000);
+      });
+    }
+
+    // Initialize on load
+    window.onload = init;
+  </script>
+</body>
+</html>
