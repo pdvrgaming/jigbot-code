@@ -132,3 +132,25 @@ The bot includes custom voice alerts located in [`jig bot/`](file:///d:/webapps/
 | **Take Profit Reached** | `tp hit.wav` | Plays when dynamic VWAP basket target hits and all orders close in profit |
 | **Loss &gt; $1500 Alert** | `Timeout.wav` | Plays when total floating basket loss exceeds -$1500 |
 | **Levels 1 to 10 Recovery** | `level 1.wav` ... `level 10.wav` | Plays when recovery cluster orders are triggered for each level |
+
+---
+
+## 8. Pin-to-Pin License Distribution Guide & Operations Manual
+
+A complete step-by-step operations manual is documented in [`DISTRIBUTION_AND_OPERATIONS_GUIDE.md`](file:///d:/webapps/jiguruginganiabot_website/DISTRIBUTION_AND_OPERATIONS_GUIDE.md):
+- **Phase 1**: Lead capture & welcome greeting templates for Telegram (`@pdvr_gold_signals_bot`).
+- **Phase 2**: Account collection & MT5 Login ID validation.
+- **Phase 3**: Key generation with [`license_generator.html`](file:///d:/webapps/jiguruginganiabot_website/license_generator.html) (or terminal CLI).
+- **Phase 4**: Automated delivery template with step-by-step MT5 activation guide.
+- **Phase 5**: Verification of the on-chart HUD transition from `[LOCKED]` to `[ACTIVE]`.
+- **Phase 6**: Expiration handling & upgrading from Demo trial to Live 1-Month Pro access.
+- **Phase 7**: Customer CRM database management, CSV/Excel export, and JSON backups.
+
+---
+
+## 9. Official Brand Assets & Bot Icon
+
+- **Bot Avatar / App Icon**: Located at [`app_icon.png`](file:///d:/webapps/jiguruginganiabot_website/app_icon.png) (1024x1024 high-resolution asset).
+  - Used on the official website navigation, hero preview, and footer.
+  - Recommended as the official profile picture for your Telegram bot [`@pdvr_gold_signals_bot`](https://t.me/pdvr_gold_signals_bot) and Telegram channel [`t.me/PDVR_gold_signals`](https://t.me/PDVR_gold_signals).
+- **Website & Interactive FAQ**: [`index.html`](file:///d:/webapps/jiguruginganiabot_website/index.html) includes an interactive trader FAQ covering broker choices (Raw/ECN), minimum deposit capital ($500 recommended for live), why Strategy Tester is disabled for safety, VPS recommendations, and demo vs live key isolation.

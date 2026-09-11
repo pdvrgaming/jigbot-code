@@ -51,6 +51,9 @@ Copy-Item (Join-Path $WorkspaceRoot "index.html") -Destination (Join-Path $Publi
 if (Test-Path $BotEx5) {
     Copy-Item $BotEx5 -Destination (Join-Path $PublicDir "jig_bot.ex5") -Force
 }
+if (Test-Path (Join-Path $WorkspaceRoot "app_icon.png")) {
+    Copy-Item (Join-Path $WorkspaceRoot "app_icon.png") -Destination (Join-Path $PublicDir "app_icon.png") -Force
+}
 $PublicJigBot = Join-Path $PublicDir "jig bot"
 if (Test-Path (Join-Path $WorkspaceRoot "jig bot")) {
     if (!(Test-Path $PublicJigBot)) { New-Item -ItemType Directory -Path $PublicJigBot | Out-Null }

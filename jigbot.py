@@ -115,6 +115,12 @@ def sync_public():
         shutil.copy2(src_ex5, os.path.join(public_dir, BOT_EX5_NAME))
         print(f"  -> Synced {BOT_EX5_NAME}")
 
+    # Copy app_icon.png
+    src_icon = os.path.join(ROOT_DIR, "app_icon.png")
+    if os.path.isfile(src_icon):
+        shutil.copy2(src_icon, os.path.join(public_dir, "app_icon.png"))
+        print("  -> Synced app_icon.png")
+
     # Copy audio
     src_audio = os.path.join(ROOT_DIR, "jig bot")
     pub_audio = os.path.join(public_dir, "jig bot")
