@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jig Bot | Institutional XAUUSD M1 Adaptive Trading Engine</title>
-    <meta name="description" content="Official website for Jig Bot, powered by Razel Tech. Institutional-grade XAUUSD M1 adaptive scalper and dynamic recovery grid engine for MetaTrader 5.">
+    <title>Jig Bot | Quantitative Gold Trading Engine for MetaTrader 5</title>
+    <meta name="description" content="Jig Bot is an institutional-grade automated trading engine engineered for XAUUSD on MetaTrader 5. Experience precision volatility capture and intelligent capital protection.">
 
-    <!-- Fonts: Outfit (Brand Display), Inter (Clean Interface), JetBrains Mono (Terminal Data) -->
+    <!-- Premium Google Fonts: Outfit (Display) & Inter (Interface) & JetBrains Mono (Terminal) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Theme Config -->
+    <!-- Tailwind Theme Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -52,27 +52,16 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Glow Backgrounds */
+        /* Ambient Lighting */
         .ambient-glow {
             position: absolute;
-            width: 500px;
-            height: 500px;
+            width: 550px;
+            height: 550px;
             border-radius: 50%;
-            filter: blur(140px);
+            filter: blur(150px);
             pointer-events: none;
             z-index: 0;
-            opacity: 0.15;
-        }
-
-        /* Glass Elements */
-        .glass-panel {
-            background: rgba(11, 16, 29, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(229, 184, 66, 0.18);
-        }
-
-        .glass-panel:hover {
-            border-color: rgba(229, 184, 66, 0.35);
+            opacity: 0.12;
         }
 
         /* Custom Scrollbar */
@@ -94,12 +83,12 @@
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
             opacity: 0;
         }
 
         .faq-item.active .faq-answer {
-            max-height: 400px;
+            max-height: 350px;
             opacity: 1;
         }
 
@@ -107,102 +96,58 @@
             transform: rotate(180deg);
             color: #E5B842;
         }
+
+        /* Modal Overlay */
+        .modal-backdrop {
+            background: rgba(5, 7, 13, 0.85);
+            backdrop-filter: blur(10px);
+        }
     </style>
 </head>
 <body class="relative">
 
-    <!-- Ambient Lighting -->
-    <div class="ambient-glow bg-gold top-[-100px] left-1/2 -translate-x-1/2"></div>
-    <div class="ambient-glow bg-blue-600 top-[800px] left-[-150px]"></div>
-    <div class="ambient-glow bg-amber-600 top-[2200px] right-[-150px]"></div>
+    <!-- Ambient Lights -->
+    <div class="ambient-glow bg-gold top-[-150px] left-1/2 -translate-x-1/2"></div>
+    <div class="ambient-glow bg-blue-600 top-[900px] left-[-200px]"></div>
+    <div class="ambient-glow bg-amber-600 top-[2400px] right-[-200px]"></div>
 
-    <!-- ================================================================= -->
-    <!-- CONFIGURATION BLOCK                                               -->
-    <!-- ================================================================= -->
-    <script>
-        const CONFIG = {
-            BOT_NAME: "Jig Bot",
-            POWERED_BY: "Razel Tech",
-            VERSION: "v1",
-            DIRECT_EX5_FILENAME: "jig_bot.ex5",
-            DRIVE_DOWNLOAD_URL: "https://drive.google.com/drive/folders/YOUR_DRIVE_FOLDER_ID_HERE",
-            TELEGRAM_CHANNEL_URL: "https://t.me/PDVR_gold_signals",
-            TELEGRAM_BOT_URL: "https://t.me/pdvr_gold_signals_bot",
-            TELEGRAM_BOT_HANDLE: "@pdvr_gold_signals_bot",
-            RECOMMENDED_SYMBOL: "XAUUSD (Gold)",
-            RECOMMENDED_TIMEFRAME: "M1 (1-Minute)",
-            TRIAL_DAYS: "3, 5, or 7-Day Free Demo Trial"
-        };
-    </script>
-
-    <!-- Top Announcement Bar -->
-    <div class="bg-obsidian-subtle/90 border-b border-terminal-border/80 text-xs py-2.5 px-4 sticky top-0 z-50 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-mt5-green/15 text-mt5-green border border-mt5-green/30">
-                    <span class="w-1.5 h-1.5 rounded-full bg-mt5-green animate-ping mr-1.5"></span>
-                    Testing Phase Live
-                </span>
-                <span class="text-gray-300 font-medium text-xs hidden sm:inline">
-                    XAUUSD Gold M1 Adaptive Engine • Forward Testing Active • Strategy Tester Blocked for Safety
-                </span>
-            </div>
-            <div class="flex items-center gap-4 text-xs font-mono">
-                <a href="https://t.me/PDVR_gold_signals" target="_blank" class="text-gold hover:text-white flex items-center gap-1.5 transition-colors font-semibold">
-                    <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                    <span>Telegram Channel</span>
-                </a>
-                <span class="text-gray-600 hidden md:inline">•</span>
-                <span class="text-gray-400 hidden md:inline">Powered by <strong class="text-white">Razel Tech</strong></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Navigation Header -->
-    <header class="border-b border-terminal-border/60 bg-obsidian/90 backdrop-blur-lg sticky top-9 z-40">
+    <!-- Navigation Header -->
+    <header class="border-b border-terminal-border/70 bg-obsidian/90 backdrop-blur-xl sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 
-                <!-- Logo & Brand Identity -->
+                <!-- Brand Logo & Identity -->
                 <a href="#" class="flex items-center gap-3.5 group">
-                    <div class="relative w-12 h-12 rounded-xl overflow-hidden border border-gold/40 shadow-lg shadow-gold/10 group-hover:scale-105 transition-transform bg-obsidian-card flex items-center justify-center">
-                        <img src="app_icon.png" alt="Jig Bot Icon" class="w-full h-full object-cover">
+                    <div class="w-11 h-11 rounded-xl overflow-hidden border border-gold/40 shadow-lg shadow-gold/10 group-hover:scale-105 transition-transform bg-obsidian-card flex items-center justify-center p-0.5">
+                        <img src="app_icon.png" alt="Jig Bot Icon" class="w-full h-full object-cover rounded-lg">
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
                             <span class="font-display font-black text-2xl tracking-tight text-white">Jig <span class="text-gold">Bot</span></span>
-                            <span class="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-gold/20 text-gold border border-gold/30 uppercase">v1</span>
+                            <span class="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-gold/15 text-gold border border-gold/30">v1.0</span>
                         </div>
-                        <p class="text-[11px] font-mono text-gray-400">Powered by Razel Tech</p>
+                        <p class="text-[11px] font-mono text-gray-400">Quantitative Gold Engine</p>
                     </div>
                 </a>
 
-                <!-- Desktop Menu -->
-                <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
                     <a href="#overview" class="hover:text-gold transition-colors">Overview</a>
-                    <a href="#specs" class="hover:text-gold transition-colors">Specifications</a>
-                    <a href="#setup" class="hover:text-gold transition-colors">MT5 Setup</a>
-                    <a href="#sounds" class="hover:text-gold transition-colors flex items-center gap-1">
-                        <i data-lucide="volume-2" class="w-3.5 h-3.5 text-gold"></i>
-                        Audio Alerts
-                    </a>
-                    <a href="#licensing" class="hover:text-gold transition-colors">Access Tiers</a>
+                    <a href="#technology" class="hover:text-gold transition-colors">Technology</a>
+                    <a href="#telemetry" class="hover:text-gold transition-colors">Audio Alerts</a>
+                    <a href="#access" class="hover:text-gold transition-colors">7-Day Trial</a>
                     <a href="#faq" class="hover:text-gold transition-colors">FAQ</a>
                 </nav>
 
-                <!-- Action CTAs & Mobile Hamburger -->
-                <div class="flex items-center gap-2 sm:gap-3">
-                    <a href="https://t.me/pdvr_gold_signals_bot" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-mono font-bold text-mt5-cyan bg-mt5-cyan/10 border border-mt5-cyan/30 hover:bg-mt5-cyan/20 transition-all">
-                        <i data-lucide="key" class="w-3.5 h-3.5"></i>
-                        <span>Get Free Trial Key</span>
-                    </a>
-                    <a href="jig_bot.ex5" download="jig_bot.ex5" class="drive-download-link inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-2.5 rounded-lg text-xs font-display font-bold text-obsidian bg-gradient-to-r from-gold to-gold-light hover:brightness-110 shadow-md shadow-gold/20 transition-all">
-                        <i data-lucide="download" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-obsidian"></i>
-                        <span>Download EX5</span>
+                <!-- Single Primary CTA & Mobile Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#access" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-display font-bold text-obsidian bg-gradient-to-r from-gold via-gold-light to-gold hover:brightness-110 shadow-lg shadow-gold/20 transition-all">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-obsidian"></i>
+                        <span>Request 7-Day Trial</span>
                     </a>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-btn" aria-label="Toggle navigation menu" class="lg:hidden p-2 rounded-lg text-gray-400 hover:text-gold hover:bg-obsidian-subtle border border-terminal-border transition-colors">
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-obsidian-subtle border border-terminal-border transition-colors">
                         <i data-lucide="menu" id="menu-icon" class="w-5 h-5"></i>
                         <i data-lucide="x" id="close-icon" class="w-5 h-5 hidden"></i>
                     </button>
@@ -211,159 +156,147 @@
             </div>
         </div>
 
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-terminal-border/80 bg-obsidian-card/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3">
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-terminal-border/80 bg-obsidian-card/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3">
             <nav class="flex flex-col space-y-2 text-sm font-medium text-gray-300">
                 <a href="#overview" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors">Overview</a>
-                <a href="#specs" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors">Specifications</a>
-                <a href="#setup" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors">MT5 Setup Guide</a>
-                <a href="#sounds" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors flex items-center justify-between">
-                    <span>Voice Audio Alerts</span>
-                    <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gold/15 text-gold border border-gold/30">13 Tracks</span>
-                </a>
-                <a href="#licensing" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors">Access Tiers &amp; Pricing</a>
+                <a href="#technology" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors">Technology</a>
+                <a href="#telemetry" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors">Audio Telemetry</a>
+                <a href="#access" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors">7-Day Trial Access</a>
                 <a href="#faq" class="mobile-nav-link px-3 py-2 rounded-lg hover:bg-obsidian-subtle hover:text-gold transition-colors">FAQ</a>
             </nav>
-            <div class="pt-3 border-t border-terminal-border/60 flex flex-col gap-2">
-                <a href="https://t.me/pdvr_gold_signals_bot" target="_blank" class="w-full py-2.5 px-4 rounded-lg bg-mt5-cyan/15 text-mt5-cyan border border-mt5-cyan/30 text-xs font-mono font-bold flex items-center justify-center gap-2">
-                    <i data-lucide="key" class="w-3.5 h-3.5"></i>
-                    <span>Request Free Demo Trial Key</span>
-                </a>
-                <a href="https://t.me/PDVR_gold_signals" target="_blank" class="w-full py-2 px-4 rounded-lg bg-obsidian-subtle text-gray-300 hover:text-gold text-xs font-mono flex items-center justify-center gap-2 border border-terminal-border">
-                    <i data-lucide="send" class="w-3.5 h-3.5 text-gold"></i>
-                    <span>Join Official Telegram Channel</span>
+            <div class="pt-2 border-t border-terminal-border/60">
+                <a href="#access" class="mobile-nav-link w-full py-3 px-4 rounded-xl bg-gold text-obsidian font-display font-bold text-xs flex items-center justify-center gap-2 shadow-md">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>Request 7-Day Trial</span>
                 </a>
             </div>
         </div>
     </header>
 
     <!-- ================================================================= -->
-    <!-- HERO SECTION: Institutional Form, Clean Focus, Real Identity      -->
+    <!-- HERO SECTION: Premium Financial Focus, Authoritative Copy        -->
     <!-- ================================================================= -->
-    <section id="overview" class="relative pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden">
+    <section id="overview" class="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
-                <!-- Left Column: Copy & Funnel -->
+                <!-- Left: Value Proposition -->
                 <div class="lg:col-span-7 space-y-6 text-left">
                     
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-semibold bg-gold/10 text-gold border border-gold/25">
-                        <i data-lucide="shield-check" class="w-4 h-4 text-gold"></i>
-                        <span>OFFICIAL BETA TESTING ENGINE • XAUUSD M1</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-gold animate-ping mr-1"></span>
+                        <span>QUANTITATIVE PRECISION • XAUUSD M1</span>
                     </div>
 
-                    <h1 class="text-4xl sm:text-6xl font-display font-black tracking-tight text-white leading-[1.1]">
-                        Institutional Scalping &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-amber-500">Adaptive Recovery</span> for Gold.
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-white leading-[1.12]">
+                        High-Frequency Algorithmic Execution for <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-amber-500">Gold</span>.
                     </h1>
 
                     <p class="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
-                        <strong>Jig Bot</strong> (powered by <strong>Razel Tech</strong>) is an automated MetaTrader 5 trading system engineered specifically for XAUUSD on the 1-minute timeframe. Built with microsecond volatility detection, smart 10-level cluster recovery, dynamic VWAP liquidation, and an account-bound cryptographic license guard.
+                        <strong>Jig Bot</strong> is an automated algorithmic trading engine engineered for MetaTrader 5. Purpose-built for the fast-moving liquidity dynamics of Gold (XAUUSD), it combines micro-structure momentum detection, dynamic position management, and strict risk safeguards into a singular, cohesive system.
                     </p>
 
-                    <!-- Primary Action Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                        <a href="jig_bot.ex5" download="jig_bot.ex5" class="drive-download-link inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-base font-display font-bold text-obsidian bg-gradient-to-r from-gold via-gold-light to-gold shadow-lg shadow-gold/25 hover:brightness-110 transition-all group">
-                            <i data-lucide="download" class="w-5 h-5 text-obsidian group-hover:-translate-y-0.5 transition-transform"></i>
-                            <span>Download jig_bot.ex5 Binary</span>
+                    <!-- Focused Call to Action -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                        <a href="#access" class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-base font-display font-bold text-obsidian bg-gradient-to-r from-gold via-gold-light to-gold shadow-lg shadow-gold/25 hover:brightness-110 transition-all">
+                            <i data-lucide="key" class="w-5 h-5 text-obsidian"></i>
+                            <span>Request 7-Day Trial Access</span>
                         </a>
 
-                        <a href="https://t.me/pdvr_gold_signals_bot" target="_blank" class="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-xl text-base font-display font-bold text-white bg-obsidian-card border border-terminal-border hover:border-gold/40 hover:bg-obsidian-subtle transition-all">
-                            <i data-lucide="send" class="w-5 h-5 text-mt5-cyan"></i>
-                            <span>Request Demo Trial Key</span>
+                        <a href="#technology" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-display font-semibold text-gray-300 hover:text-white bg-obsidian-card border border-terminal-border hover:border-gold/40 transition-all">
+                            <span>Explore Architecture</span>
+                            <i data-lucide="arrow-down" class="w-4 h-4 text-gold"></i>
                         </a>
                     </div>
 
-                    <!-- Fast Spec Metrics Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-6 border-t border-terminal-border/80">
-                        <div class="p-3 rounded-lg bg-obsidian-card/60 border border-terminal-border/50">
-                            <span class="text-[11px] font-mono text-gray-400 block uppercase">Target Symbol</span>
-                            <span class="text-base font-display font-bold text-gold">XAUUSD / Gold</span>
+                    <!-- Core Attributes -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-terminal-border/70">
+                        <div class="p-3 rounded-xl bg-obsidian-card/60 border border-terminal-border/50">
+                            <span class="text-[11px] font-mono text-gray-400 block uppercase">Target Pair</span>
+                            <span class="text-sm font-display font-bold text-gold">XAUUSD (Gold)</span>
                         </div>
-                        <div class="p-3 rounded-lg bg-obsidian-card/60 border border-terminal-border/50">
+                        <div class="p-3 rounded-xl bg-obsidian-card/60 border border-terminal-border/50">
                             <span class="text-[11px] font-mono text-gray-400 block uppercase">Timeframe</span>
-                            <span class="text-base font-display font-bold text-white">M1 (1-Minute)</span>
+                            <span class="text-sm font-display font-bold text-white">M1 (1-Minute)</span>
                         </div>
-                        <div class="p-3 rounded-lg bg-obsidian-card/60 border border-terminal-border/50">
-                            <span class="text-[11px] font-mono text-gray-400 block uppercase">Free Demo Trial</span>
-                            <span class="text-base font-display font-bold text-mt5-green">3, 5, or 7 Days</span>
+                        <div class="p-3 rounded-xl bg-obsidian-card/60 border border-terminal-border/50">
+                            <span class="text-[11px] font-mono text-gray-400 block uppercase">Trial Access</span>
+                            <span class="text-sm font-display font-bold text-mt5-green">7-Day Evaluation</span>
                         </div>
                     </div>
 
                 </div>
 
-                <!-- Right Column: Official Bot Visual & Live On-Chart HUD Preview -->
+                <!-- Right: Terminal HUD Representation -->
                 <div class="lg:col-span-5">
                     <div class="relative">
                         
-                        <!-- Glow behind card -->
-                        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-gold/30 via-mt5-cyan/20 to-gold/30 blur-xl opacity-50"></div>
+                        <!-- Ambient Glow -->
+                        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-gold/20 via-mt5-cyan/15 to-gold/20 blur-xl opacity-60"></div>
 
                         <div class="relative rounded-2xl bg-obsidian-card border border-gold/30 shadow-2xl overflow-hidden">
                             
-                            <!-- Window Bar -->
+                            <!-- Window Title -->
                             <div class="bg-obsidian-subtle px-4 py-3 border-b border-terminal-border flex items-center justify-between">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="w-3 h-3 rounded-full bg-red-500/70"></div>
-                                    <div class="w-3 h-3 rounded-full bg-yellow-500/70"></div>
-                                    <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
-                                    <span class="ml-2 font-mono text-xs text-gray-400">jig_bot.ex5 • Live Terminal</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-red-500/70"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
+                                    <span class="ml-2 font-mono text-xs text-gray-400">Jig Bot • On-Chart Terminal</span>
                                 </div>
                                 <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-mt5-green/15 text-mt5-green border border-mt5-green/30">
-                                    M1 CHART
+                                    ONLINE
                                 </span>
                             </div>
 
-                            <!-- Bot Avatar & Identity Banner -->
+                            <!-- Bot Avatar Header -->
                             <div class="p-5 border-b border-terminal-border/60 bg-gradient-to-r from-obsidian via-obsidian-subtle to-obsidian flex items-center gap-4">
-                                <img src="app_icon.png" alt="Jig Bot Avatar" class="w-16 h-16 rounded-xl border border-gold/40 shadow-md object-cover">
+                                <img src="app_icon.png" alt="Jig Bot Avatar" class="w-14 h-14 rounded-xl border border-gold/40 shadow-md object-cover">
                                 <div>
-                                    <div class="text-white font-display font-black text-lg">JIG BOT <span class="text-gold">v1.00</span></div>
-                                    <div class="text-xs text-gray-400 font-mono">Adaptive Volatility Engine • Powered by Razel Tech</div>
+                                    <div class="text-white font-display font-black text-lg">JIG BOT <span class="text-gold">v1.0</span></div>
+                                    <div class="text-xs text-gray-400 font-mono">Autonomous Quantitative Engine</div>
                                     <div class="flex items-center gap-2 mt-1">
                                         <span class="w-2 h-2 rounded-full bg-mt5-green animate-ping"></span>
-                                        <span class="text-[11px] font-mono text-mt5-green font-semibold">Active &amp; Monitoring M1 Bars</span>
+                                        <span class="text-[11px] font-mono text-mt5-green font-semibold">Monitoring Active Candlesticks</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Real-time HUD Representation -->
+                            <!-- Live Telemetry State -->
                             <div class="p-5 font-mono text-xs space-y-3 bg-[#020408]">
-                                <div class="p-3 rounded bg-obsidian-subtle/80 border border-terminal-border/70 space-y-1.5">
+                                <div class="p-3.5 rounded-lg bg-obsidian-subtle/80 border border-terminal-border/70 space-y-2">
                                     <div class="flex justify-between text-gray-300">
-                                        <span class="text-gray-400">License Status:</span>
-                                        <span class="text-mt5-green font-bold">DEMO TRIAL (7 Days Left)</span>
+                                        <span class="text-gray-400">License State:</span>
+                                        <span class="text-mt5-green font-bold">AUTHORIZED [ACTIVE]</span>
                                     </div>
                                     <div class="flex justify-between text-gray-300">
-                                        <span class="text-gray-400">Authorized Login:</span>
-                                        <span class="text-white font-bold">#51239841 (DEMO - LICENSED)</span>
+                                        <span class="text-gray-400">Evaluation Window:</span>
+                                        <span class="text-white font-bold">7-Day Demo Evaluation</span>
                                     </div>
                                     <div class="flex justify-between text-gray-300">
-                                        <span class="text-gray-400">Spread Monitor:</span>
-                                        <span class="text-mt5-green font-bold">14 / Max 50 pts (OK)</span>
+                                        <span class="text-gray-400">Spread Filtration:</span>
+                                        <span class="text-mt5-green font-bold">Within Nominal Bounds</span>
                                     </div>
                                     <div class="flex justify-between text-gray-300">
-                                        <span class="text-gray-400">Voice Alerts:</span>
-                                        <span class="text-gold font-bold">13 Tracks ENABLED</span>
-                                    </div>
-                                </div>
-
-                                <div class="p-3 rounded bg-obsidian-subtle/80 border border-terminal-border/70 space-y-1.5">
-                                    <div class="flex justify-between text-gray-300">
-                                        <span class="text-gray-400">Recovery Grid:</span>
-                                        <span class="text-white font-bold">Level 0 (Initial Position 0.01)</span>
-                                    </div>
-                                    <div class="flex justify-between text-gray-300">
-                                        <span class="text-gray-400">Dynamic VWAP TP:</span>
-                                        <span class="text-mt5-cyan font-bold">+4.20 Points Target</span>
-                                    </div>
-                                    <div class="flex justify-between text-gray-300">
-                                        <span class="text-gray-400">Drawdown Circuit:</span>
-                                        <span class="text-mt5-red font-bold">-$1,500 Max Loss Halt</span>
+                                        <span class="text-gray-400">Audio Telemetry:</span>
+                                        <span class="text-gold font-bold">ACTIVE &amp; SYNCHRONIZED</span>
                                     </div>
                                 </div>
 
-                                <div class="text-[11px] text-gray-400 pt-1 text-center">
-                                    Direct Support: <a href="https://t.me/pdvr_gold_signals_bot" class="text-mt5-cyan underline">@pdvr_gold_signals_bot</a> • Channel: <a href="https://t.me/PDVR_gold_signals" class="text-gold underline">t.me/PDVR_gold_signals</a>
+                                <div class="p-3.5 rounded-lg bg-obsidian-subtle/80 border border-terminal-border/70 space-y-2">
+                                    <div class="flex justify-between text-gray-300">
+                                        <span class="text-gray-400">Execution Mode:</span>
+                                        <span class="text-white font-bold">Dynamic Position Management</span>
+                                    </div>
+                                    <div class="flex justify-between text-gray-300">
+                                        <span class="text-gray-400">Liquidity Target:</span>
+                                        <span class="text-mt5-cyan font-bold">Volume-Weighted Target Exits</span>
+                                    </div>
+                                    <div class="flex justify-between text-gray-300">
+                                        <span class="text-gray-400">Capital Guard:</span>
+                                        <span class="text-mt5-green font-bold">Equity Circuit Safeguard Active</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -376,173 +309,65 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- SPECIFICATIONS SECTION: Real Technical Trading Form               -->
+    <!-- TECHNOLOGY SECTION: Institutional Pillars (Zero Leaked Secrets)   -->
     <!-- ================================================================= -->
-    <section id="specs" class="py-20 bg-obsidian-card border-y border-terminal-border/80">
+    <section id="technology" class="py-20 bg-obsidian-card border-y border-terminal-border/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="max-w-3xl mx-auto text-center mb-16">
-                <span class="text-gold font-mono text-xs uppercase tracking-widest font-bold">Standard Form Specifications</span>
+                <span class="text-gold font-mono text-xs uppercase tracking-widest font-bold">System Architecture</span>
                 <h2 class="text-3xl sm:text-4xl font-display font-black text-white mt-2 mb-4">
-                    Engine Specifications &amp; Parameters
+                    Engineered for Volatility &amp; Capital Protection
                 </h2>
                 <p class="text-gray-400 text-sm sm:text-base">
-                    Clear, transparent operational parameters. No hidden formulas or obscure settings.
+                    A multi-layered execution architecture designed to operate seamlessly in institutional liquidity environments.
                 </p>
             </div>
 
-            <!-- Specs Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
-                <div class="p-6 rounded-xl bg-obsidian-subtle border border-terminal-border space-y-2.5">
-                    <div class="w-10 h-10 rounded-lg bg-gold/15 text-gold flex items-center justify-center font-bold">
-                        <i data-lucide="trending-up" class="w-5 h-5"></i>
+                <!-- Pillar 1 -->
+                <div class="p-6 rounded-2xl bg-obsidian-subtle border border-terminal-border hover:border-gold/40 transition-colors space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-gold/15 text-gold flex items-center justify-center font-bold">
+                        <i data-lucide="zap" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-base font-display font-bold text-white">Target Instrument</h3>
+                    <h3 class="text-base font-display font-bold text-white">Micro-Structure Momentum</h3>
                     <p class="text-xs text-gray-300 leading-relaxed">
-                        Dedicated solely to <strong class="text-gold">XAUUSD (Gold)</strong> on the <strong class="text-white">M1 timeframe</strong>. High-frequency price action filter scans real-time momentum spikes.
+                        Evaluates rapid price displacement and candlestick momentum on the 1-minute chart, pinpointing high-probability volatility breakouts in real time.
                     </p>
                 </div>
 
-                <div class="p-6 rounded-xl bg-obsidian-subtle border border-terminal-border space-y-2.5">
-                    <div class="w-10 h-10 rounded-lg bg-mt5-cyan/15 text-mt5-cyan flex items-center justify-center font-bold">
+                <!-- Pillar 2 -->
+                <div class="p-6 rounded-2xl bg-obsidian-subtle border border-terminal-border hover:border-mt5-cyan/40 transition-colors space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-mt5-cyan/15 text-mt5-cyan flex items-center justify-center font-bold">
                         <i data-lucide="layers" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-base font-display font-bold text-white">10-Level Adaptive Grid</h3>
+                    <h3 class="text-base font-display font-bold text-white">Dynamic Position Management</h3>
                     <p class="text-xs text-gray-300 leading-relaxed">
-                        Staggered 3-order cluster recovery. Instead of a single martingale block, it distributes orders over 1–3 second randomized intervals to optimize broker execution.
+                        Features adaptive position staging with randomized microsecond dispatch intervals, preventing adverse broker execution and footprint clustering.
                     </p>
                 </div>
 
-                <div class="p-6 rounded-xl bg-obsidian-subtle border border-terminal-border space-y-2.5">
-                    <div class="w-10 h-10 rounded-lg bg-mt5-green/15 text-mt5-green flex items-center justify-center font-bold">
-                        <i data-lucide="crosshair" class="w-5 h-5"></i>
+                <!-- Pillar 3 -->
+                <div class="p-6 rounded-2xl bg-obsidian-subtle border border-terminal-border hover:border-mt5-green/40 transition-colors space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-mt5-green/15 text-mt5-green flex items-center justify-center font-bold">
+                        <i data-lucide="target" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-base font-display font-bold text-white">VWAP Basket Liquidation</h3>
+                    <h3 class="text-base font-display font-bold text-white">Weighted Liquidity Exits</h3>
                     <p class="text-xs text-gray-300 leading-relaxed">
-                        Continuously computes the Volume-Weighted Average Price across all open levels and executes simultaneous unified take-profit exits as soon as the target hits.
+                        Dynamically recalibrates exit targets based on total basket volume, securing aggregate profits as soon as institutional liquidity targets are met.
                     </p>
                 </div>
 
-                <div class="p-6 rounded-xl bg-obsidian-subtle border border-terminal-border space-y-2.5">
-                    <div class="w-10 h-10 rounded-lg bg-mt5-red/15 text-mt5-red flex items-center justify-center font-bold">
+                <!-- Pillar 4 -->
+                <div class="p-6 rounded-2xl bg-obsidian-subtle border border-terminal-border hover:border-mt5-red/40 transition-colors space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-mt5-red/15 text-mt5-red flex items-center justify-center font-bold">
                         <i data-lucide="shield-alert" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="text-base font-display font-bold text-white">Risk &amp; Spread Guards</h3>
+                    <h3 class="text-base font-display font-bold text-white">Autonomous Capital Shield</h3>
                     <p class="text-xs text-gray-300 leading-relaxed">
-                        Spread limiter automatically halts execution during volatile spread expansion. Emergency circuit-breaker closes all baskets if floating loss exceeds -$1,500.
+                        Monitors live broker spread expansion and implements emergency circuit breakers to safeguard overall equity against extreme market tail-risk.
                     </p>
-                </div>
-
-            </div>
-
-            <!-- Parameters Summary Table -->
-            <div class="mt-12 overflow-x-auto rounded-xl border border-terminal-border bg-obsidian">
-                <table class="w-full text-left text-xs font-mono">
-                    <thead class="bg-obsidian-subtle text-gray-400 uppercase tracking-wider border-b border-terminal-border">
-                        <tr>
-                            <th class="p-4">Parameter</th>
-                            <th class="p-4">Default Value</th>
-                            <th class="p-4">Purpose</th>
-                            <th class="p-4">Recommended Environment</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-terminal-border/60 text-gray-300">
-                        <tr>
-                            <td class="p-4 font-bold text-white">InpInitialLot</td>
-                            <td class="p-4 text-gold">0.01</td>
-                            <td class="p-4">Starting micro lot size for initial breakout trade</td>
-                            <td class="p-4">$100+ Demo / $500+ Live</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 font-bold text-white">InpTakeProfitPoints</td>
-                            <td class="p-4 text-gold">4.20</td>
-                            <td class="p-4">Dynamic profit target in points from entry / VWAP</td>
-                            <td class="p-4">XAUUSD M1</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 font-bold text-white">InpMaxSpreadPoints</td>
-                            <td class="p-4 text-gold">50 Points</td>
-                            <td class="p-4">Maximum allowed broker spread to prevent slippage</td>
-                            <td class="p-4">Raw Spread / ECN Account</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 font-bold text-white">InpTimeoutLossThreshold</td>
-                            <td class="p-4 text-mt5-red">-$1500.00</td>
-                            <td class="p-4">Emergency account equity protector and audio trigger</td>
-                            <td class="p-4">Hardcoded Safety Limit</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 font-bold text-white">Strategy Tester</td>
-                            <td class="p-4 text-mt5-red">DISABLED</td>
-                            <td class="p-4">Prevents flawed curve-fitted backtesting; live charts only</td>
-                            <td class="p-4">Forward Testing on Demo</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- MT5 QUICK SETUP: 1-2-3 Step Installation Guide                     -->
-    <!-- ================================================================= -->
-    <section id="setup" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <span class="text-gold font-mono text-xs uppercase tracking-widest font-bold">Fast Onboarding</span>
-                <h2 class="text-3xl sm:text-4xl font-display font-black text-white mt-2 mb-4">
-                    Install &amp; Run in 3 Minutes
-                </h2>
-                <p class="text-gray-400 text-sm sm:text-base">
-                    No complicated compilation or programming needed. Pure plug-and-play on MetaTrader 5.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Step 1 -->
-                <div class="p-8 rounded-2xl bg-obsidian-card border border-terminal-border space-y-4 relative">
-                    <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-black text-lg flex items-center justify-center">
-                        1
-                    </div>
-                    <h3 class="text-xl font-display font-bold text-white">Download the Binary</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed">
-                        Download <code class="text-gold bg-obsidian px-1.5 py-0.5 rounded font-mono">jig_bot.ex5</code> directly to your computer. Pure compiled binary containing zero accessible source code.
-                    </p>
-                    <a href="jig_bot.ex5" download="jig_bot.ex5" class="drive-download-link inline-flex items-center gap-2 text-xs font-mono font-bold text-gold hover:underline pt-2">
-                        <i data-lucide="download" class="w-4 h-4"></i> Download jig_bot.ex5
-                    </a>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="p-8 rounded-2xl bg-obsidian-card border border-terminal-border space-y-4 relative">
-                    <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-black text-lg flex items-center justify-center">
-                        2
-                    </div>
-                    <h3 class="text-xl font-display font-bold text-white">Paste into MT5 Folders</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed">
-                        In MetaTrader 5, click <strong class="text-white">File &rarr; Open Data Folder</strong>. Place <code class="text-gold font-mono">jig_bot.ex5</code> into <code class="text-gray-300 font-mono">MQL5\Experts\</code>, and paste the audio files into <code class="text-gray-300 font-mono">Sounds\</code>.
-                    </p>
-                    <div class="text-[11px] font-mono text-mt5-cyan pt-2">
-                        Restart MT5 or right-click Navigator &rarr; Refresh.
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="p-8 rounded-2xl bg-obsidian-card border border-terminal-border space-y-4 relative">
-                    <div class="w-10 h-10 rounded-full bg-gold text-obsidian font-display font-black text-lg flex items-center justify-center">
-                        3
-                    </div>
-                    <h3 class="text-xl font-display font-bold text-white">Activate on Chart</h3>
-                    <p class="text-xs text-gray-400 leading-relaxed">
-                        Attach the bot to an <strong class="text-white">XAUUSD M1 chart</strong>. Press <strong class="text-gold">F7</strong>, paste your license key into <code class="text-gold font-mono">InpLicenseKey</code>, and verify that <em>Allow Algo Trading</em> is enabled.
-                    </p>
-                    <a href="https://t.me/pdvr_gold_signals_bot" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-mt5-cyan hover:underline pt-2">
-                        <i data-lucide="send" class="w-4 h-4"></i> Get Your License Key via Bot
-                    </a>
                 </div>
 
             </div>
@@ -551,80 +376,50 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- CUSTOM AUDIO ALERTS ENGINE                                       -->
+    <!-- AUDIO TELEMETRY SECTION: Clean & Elegant Audio Suite               -->
     <!-- ================================================================= -->
-    <section id="sounds" class="py-20 bg-obsidian-card border-y border-terminal-border/80">
+    <section id="telemetry" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="max-w-3xl mx-auto text-center mb-14">
-                <span class="text-gold font-mono text-xs uppercase tracking-widest font-bold">13-Track Audio Suite</span>
+                <span class="text-gold font-mono text-xs uppercase tracking-widest font-bold">Auditory Feedback</span>
                 <h2 class="text-3xl sm:text-4xl font-display font-black text-white mt-2 mb-4">
-                    In-Bot Voice Audio Notifications
+                    Real-Time Voice Alerts
                 </h2>
                 <p class="text-gray-400 text-sm sm:text-base">
-                    Every trade entry, profit exit, drawdown threshold, and recovery level triggers a voice alert natively in MetaTrader 5.
+                    Stay informed of system execution through native MetaTrader 5 voice notifications for major operational events.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 
-                <div class="p-5 rounded-xl bg-obsidian-subtle border border-terminal-border flex items-center justify-between">
+                <div class="p-6 rounded-2xl bg-obsidian-card border border-terminal-border flex items-center justify-between">
                     <div>
-                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Event 01</span>
-                        <span class="text-sm font-display font-bold text-white">Initial Trade Placed</span>
+                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Telemetry 01</span>
+                        <span class="text-sm font-display font-bold text-white">Position Entry Initialized</span>
                     </div>
-                    <button onclick="playAudio('entry placed.wav')" class="p-2.5 rounded-lg bg-gold/15 text-gold hover:bg-gold hover:text-obsidian transition-colors" title="Play Voice Alert">
-                        <i data-lucide="play" class="w-4 h-4"></i>
+                    <button onclick="playAudio('entry placed.wav')" class="p-3 rounded-xl bg-gold/15 text-gold hover:bg-gold hover:text-obsidian transition-colors" title="Play Sound Preview">
+                        <i data-lucide="volume-2" class="w-5 h-5"></i>
                     </button>
                 </div>
 
-                <div class="p-5 rounded-xl bg-obsidian-subtle border border-terminal-border flex items-center justify-between">
+                <div class="p-6 rounded-2xl bg-obsidian-card border border-terminal-border flex items-center justify-between">
                     <div>
-                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Event 02</span>
-                        <span class="text-sm font-display font-bold text-mt5-green">Take Profit Target Hit</span>
+                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Telemetry 02</span>
+                        <span class="text-sm font-display font-bold text-mt5-green">Target Profit Reached</span>
                     </div>
-                    <button onclick="playAudio('tp hit.wav')" class="p-2.5 rounded-lg bg-mt5-green/15 text-mt5-green hover:bg-mt5-green hover:text-obsidian transition-colors" title="Play Voice Alert">
-                        <i data-lucide="play" class="w-4 h-4"></i>
+                    <button onclick="playAudio('tp hit.wav')" class="p-3 rounded-xl bg-mt5-green/15 text-mt5-green hover:bg-mt5-green hover:text-obsidian transition-colors" title="Play Sound Preview">
+                        <i data-lucide="volume-2" class="w-5 h-5"></i>
                     </button>
                 </div>
 
-                <div class="p-5 rounded-xl bg-obsidian-subtle border border-terminal-border flex items-center justify-between">
+                <div class="p-6 rounded-2xl bg-obsidian-card border border-terminal-border flex items-center justify-between">
                     <div>
-                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Event 03</span>
-                        <span class="text-sm font-display font-bold text-mt5-red">Emergency Timeout (-$1500)</span>
+                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Telemetry 03</span>
+                        <span class="text-sm font-display font-bold text-mt5-cyan">Cluster Staging Active</span>
                     </div>
-                    <button onclick="playAudio('Timeout.wav')" class="p-2.5 rounded-lg bg-mt5-red/15 text-mt5-red hover:bg-mt5-red hover:text-white transition-colors" title="Play Voice Alert">
-                        <i data-lucide="play" class="w-4 h-4"></i>
-                    </button>
-                </div>
-
-                <div class="p-5 rounded-xl bg-obsidian-subtle border border-terminal-border flex items-center justify-between">
-                    <div>
-                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Recovery 01</span>
-                        <span class="text-sm font-display font-bold text-white">Level 1 Cluster Triggered</span>
-                    </div>
-                    <button onclick="playAudio('level 1.wav')" class="p-2.5 rounded-lg bg-terminal-border text-gray-300 hover:text-white transition-colors" title="Play Voice Alert">
-                        <i data-lucide="play" class="w-4 h-4"></i>
-                    </button>
-                </div>
-
-                <div class="p-5 rounded-xl bg-obsidian-subtle border border-terminal-border flex items-center justify-between">
-                    <div>
-                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Recovery 02</span>
-                        <span class="text-sm font-display font-bold text-white">Level 2 Cluster Triggered</span>
-                    </div>
-                    <button onclick="playAudio('level 2.wav')" class="p-2.5 rounded-lg bg-terminal-border text-gray-300 hover:text-white transition-colors" title="Play Voice Alert">
-                        <i data-lucide="play" class="w-4 h-4"></i>
-                    </button>
-                </div>
-
-                <div class="p-5 rounded-xl bg-obsidian-subtle border border-terminal-border flex items-center justify-between">
-                    <div>
-                        <span class="text-[11px] font-mono text-gray-400 uppercase block">Recovery 03-10</span>
-                        <span class="text-sm font-display font-bold text-white">Levels 3 to 10 Audio Alert</span>
-                    </div>
-                    <button onclick="playAudio('level 10.wav')" class="p-2.5 rounded-lg bg-terminal-border text-gray-300 hover:text-white transition-colors" title="Play Voice Alert">
-                        <i data-lucide="play" class="w-4 h-4"></i>
+                    <button onclick="playAudio('level 1.wav')" class="p-3 rounded-xl bg-mt5-cyan/15 text-mt5-cyan hover:bg-mt5-cyan hover:text-obsidian transition-colors" title="Play Sound Preview">
+                        <i data-lucide="volume-2" class="w-5 h-5"></i>
                     </button>
                 </div>
 
@@ -634,105 +429,71 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- ACCESS & LICENSING TIERS                                          -->
+    <!-- 7-DAY TRIAL CARD: ONE Clean, Focused, High-Converting Card        -->
     <!-- ================================================================= -->
-    <section id="licensing" class="py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="access" class="py-24 bg-obsidian-card border-y border-terminal-border/80 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <span class="text-gold font-mono text-xs uppercase tracking-widest font-bold">Authorized Deployment</span>
+            <div class="text-center mb-12">
+                <span class="text-gold font-mono text-xs uppercase tracking-widest font-bold">Private Evaluation</span>
                 <h2 class="text-3xl sm:text-5xl font-display font-black text-white mt-2 mb-4">
-                    Choose Your Access Tier
+                    7-Day Evaluation Access
                 </h2>
-                <p class="text-gray-400 text-sm sm:text-base">
-                    Every key is cryptographically signed and locked to your MT5 account login ID.
+                <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
+                    Experience the complete automated execution engine on your MetaTrader 5 demo account with zero financial risk.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Single Premium Card -->
+            <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-obsidian-subtle to-obsidian border border-gold/30 shadow-2xl relative overflow-hidden">
                 
-                <!-- Demo Trial Card -->
-                <div class="p-8 rounded-2xl bg-obsidian-card border border-mt5-cyan/30 flex flex-col justify-between hover:border-mt5-cyan/60 transition-all">
-                    <div>
-                        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-mt5-cyan/15 text-mt5-cyan border border-mt5-cyan/30 mb-4">
-                            Free Testing Phase
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                    
+                    <div class="space-y-4 max-w-lg">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-mt5-cyan/15 text-mt5-cyan border border-mt5-cyan/30 uppercase">
+                            Full Features Included
                         </div>
-                        <h3 class="text-2xl font-display font-black text-white">3, 5, or 7-Day Demo Trial</h3>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                            Run and evaluate the full adaptive grid and audio engine on your MetaTrader 5 Demo account with zero capital risk.
+
+                        <h3 class="text-2xl sm:text-3xl font-display font-black text-white">
+                            Complete 7-Day Forward Testing
+                        </h3>
+
+                        <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                            Every trial is provisioned with a cryptographically signed license key bound strictly to your unique MT5 account number, enabling comprehensive evaluation on live market charts.
                         </p>
-                        <ul class="mt-6 space-y-3 text-xs text-gray-300 font-mono">
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="check" class="w-4 h-4 text-mt5-cyan"></i>
-                                <span>Complete 10-Level Recovery Logic</span>
+
+                        <ul class="space-y-2.5 pt-2 text-xs sm:text-sm text-gray-300 font-mono">
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                <span>Complete multi-stage adaptive execution logic</span>
                             </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="check" class="w-4 h-4 text-mt5-cyan"></i>
-                                <span>Full 13-Track Voice Audio Suite</span>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                <span>Real-time voice telemetry notifications</span>
                             </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="check" class="w-4 h-4 text-mt5-cyan"></i>
-                                <span>Locked Strictly to MT5 Demo Accounts</span>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                <span>Private hardware-bound cryptographic activation</span>
                             </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="check" class="w-4 h-4 text-mt5-cyan"></i>
-                                <span>Direct Support via Telegram Bot</span>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                                <span>One-on-one onboarding &amp; setup assistance</span>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-terminal-border space-y-3">
-                        <a href="https://t.me/pdvr_gold_signals_bot" target="_blank" class="w-full py-3.5 px-6 rounded-xl bg-mt5-cyan/20 hover:bg-mt5-cyan text-mt5-cyan hover:text-obsidian font-display font-bold text-sm border border-mt5-cyan/40 transition-all flex items-center justify-center gap-2">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>Request Free Demo Trial Key</span>
-                        </a>
-                        <a href="https://t.me/PDVR_gold_signals" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-obsidian-subtle hover:bg-obsidian text-gray-300 hover:text-gold font-mono text-xs border border-terminal-border transition-all flex items-center justify-center gap-2">
-                            <i data-lucide="bell" class="w-3.5 h-3.5 text-gold"></i>
-                            <span>Join Official Telegram Channel</span>
-                        </a>
-                    </div>
-                </div>
+                    <!-- Action Trigger -->
+                    <div class="flex flex-col items-center justify-center p-6 sm:p-8 rounded-2xl bg-obsidian border border-terminal-border/80 text-center min-w-[280px]">
+                        <span class="text-xs font-mono text-gray-400 uppercase">Evaluation Period</span>
+                        <div class="text-4xl font-display font-black text-gold my-2">7 Days</div>
+                        <span class="text-[11px] font-mono text-mt5-green mb-6">100% Free on Demo Account</span>
 
-                <!-- Live Pro Card -->
-                <div class="p-8 rounded-2xl bg-obsidian-card border border-gold/40 flex flex-col justify-between hover:border-gold shadow-lg shadow-gold/5 transition-all">
-                    <div>
-                        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-gold/15 text-gold border border-gold/30 mb-4">
-                            Live Production
-                        </div>
-                        <h3 class="text-2xl font-display font-black text-white">1-Month Live Account Access</h3>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-                            Full authorized deployment on your live real-money funded broker account with complete execution privileges.
-                        </p>
-                        <ul class="mt-6 space-y-3 text-xs text-gray-300 font-mono">
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
-                                <span>30 Days Full Live Account Trading</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
-                                <span>Authorized for Real Money Capital</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
-                                <span>Real-Time Spread &amp; Drawdown Circuit</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
-                                <span>Direct Priority Developer Support</span>
-                            </li>
-                        </ul>
+                        <button onclick="openRequestModal()" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian font-display font-black text-sm shadow-lg shadow-gold/25 hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="key" class="w-4 h-4 text-obsidian"></i>
+                            <span>Request Access Key</span>
+                        </button>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-terminal-border space-y-3">
-                        <a href="https://t.me/pdvr_gold_signals_bot" target="_blank" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian font-display font-black text-sm shadow-md shadow-gold/20 hover:brightness-110 transition-all flex items-center justify-center gap-2">
-                            <i data-lucide="sparkles" class="w-4 h-4"></i>
-                            <span>Request 1-Month Live Key</span>
-                        </a>
-                        <a href="mailto:support@razeltech.com" class="w-full py-2.5 px-4 rounded-xl bg-obsidian-subtle hover:bg-obsidian text-gray-300 hover:text-gold font-mono text-xs border border-terminal-border transition-all flex items-center justify-center gap-2">
-                            <i data-lucide="mail" class="w-3.5 h-3.5 text-gold"></i>
-                            <span>Or Contact via Email</span>
-                        </a>
-                    </div>
                 </div>
 
             </div>
@@ -741,9 +502,9 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- FAQ SECTION: Real Questions Traders Ask                           -->
+    <!-- FAQ SECTION: Trader Inquiries (Zero Leaked Formulas)              -->
     <!-- ================================================================= -->
-    <section id="faq" class="py-20 bg-obsidian-card border-y border-terminal-border/80">
+    <section id="faq" class="py-20">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="text-center mb-14">
@@ -752,7 +513,7 @@
                     Everything You Need to Know
                 </h2>
                 <p class="text-gray-400 text-sm">
-                    Common questions regarding brokers, account sizes, backtesting policy, and key activation.
+                    Common questions regarding requirements, evaluation setup, and execution environments.
                 </p>
             </div>
 
@@ -760,68 +521,57 @@
             <div class="space-y-4" id="faq-accordion">
                 
                 <!-- FAQ 1 -->
-                <div class="faq-item rounded-xl bg-obsidian border border-terminal-border transition-colors">
+                <div class="faq-item rounded-2xl bg-obsidian-card border border-terminal-border transition-colors">
                     <button class="w-full p-5 text-left flex items-center justify-between gap-4 font-display font-bold text-base text-white hover:text-gold transition-colors">
-                        <span>Which broker should I use with Jig Bot?</span>
+                        <span>Which platform and instrument does Jig Bot require?</span>
                         <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-gray-400 transition-transform duration-200"></i>
                     </button>
-                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">
-                        Jig Bot executes on the M1 timeframe, so an <strong class="text-white">ECN or Raw Spread broker</strong> with low spreads on XAUUSD (Gold) is strongly recommended (e.g. IC Markets, Exness, RoboForex, Tickmill). The bot features an internal spread protector that automatically pauses order opening if spread widens beyond your set threshold (default: 50 points).
+                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        Jig Bot is natively built for <strong class="text-white">MetaTrader 5 (MT5) desktop</strong>. It is calibrated specifically for <strong class="text-gold">XAUUSD (Gold)</strong> on the <strong class="text-white">1-Minute (M1) timeframe</strong>.
                     </div>
                 </div>
 
                 <!-- FAQ 2 -->
-                <div class="faq-item rounded-xl bg-obsidian border border-terminal-border transition-colors">
+                <div class="faq-item rounded-2xl bg-obsidian-card border border-terminal-border transition-colors">
                     <button class="w-full p-5 text-left flex items-center justify-between gap-4 font-display font-bold text-base text-white hover:text-gold transition-colors">
-                        <span>What is the minimum recommended capital?</span>
+                        <span>How does the 7-Day Trial key work?</span>
                         <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-gray-400 transition-transform duration-200"></i>
                     </button>
-                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">
-                        For <strong class="text-gold">Demo Testing</strong>, you can use any balance ($100 to $10,000) with a 0.01 lot size. For <strong class="text-gold">Live Accounts</strong>, we recommend a minimum deposit of <strong class="text-white">$500</strong> (or $100 on Cent/Micro accounts) with 1:200 to 1:500 leverage to comfortably absorb recovery grid levels during fast volatility spikes.
+                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        Every license key is cryptographically signed and bound to your specific MT5 Account Number. Once you enter your key into the bot inputs, the on-chart display authorizes execution for 7 continuous days of forward testing on your demo account.
                     </div>
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="faq-item rounded-xl bg-obsidian border border-terminal-border transition-colors">
+                <div class="faq-item rounded-2xl bg-obsidian-card border border-terminal-border transition-colors">
                     <button class="w-full p-5 text-left flex items-center justify-between gap-4 font-display font-bold text-base text-white hover:text-gold transition-colors">
-                        <span>Why is the MetaTrader 5 Strategy Tester disabled?</span>
+                        <span>What type of broker account is recommended?</span>
                         <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-gray-400 transition-transform duration-200"></i>
                     </button>
-                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">
-                        MT5 backtesting uses synthesized historical tick data that cannot replicate microsecond broker slippage, floating spreads, or live cluster execution delays. Most commercial bots fake 99% backtest curves that blow up on live accounts. Jig Bot is designed strictly for <strong class="text-mt5-green">live forward testing</strong> on active M1 charts with real broker liquidity.
+                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        An <strong class="text-white">ECN or Raw Spread account</strong> with competitive spreads on Gold is recommended. Jig Bot incorporates an automatic spread filter to pause entries if market liquidity spreads expand beyond safe operational bounds.
                     </div>
                 </div>
 
                 <!-- FAQ 4 -->
-                <div class="faq-item rounded-xl bg-obsidian border border-terminal-border transition-colors">
-                    <button class="w-full p-5 text-left flex items-center justify-between gap-4 font-display font-bold text-base text-white hover:text-gold transition-colors">
-                        <span>How does the license key activation work?</span>
-                        <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-gray-400 transition-transform duration-200"></i>
-                    </button>
-                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">
-                        Every license key is cryptographically bound to your exact MT5 Account Login ID using SHA-256 signatures. It cannot be shared or used on any other account. Once you provide your account number to <a href="https://t.me/pdvr_gold_signals_bot" class="text-mt5-cyan underline">@pdvr_gold_signals_bot</a>, you will receive your key (e.g. <code class="text-gold font-mono">JIG-DEMO-12345678-20260918-XXXX</code>). Paste it into the bot's Inputs (F7) and the on-chart HUD turns to [ACTIVE].
-                    </div>
-                </div>
-
-                <!-- FAQ 5 -->
-                <div class="faq-item rounded-xl bg-obsidian border border-terminal-border transition-colors">
+                <div class="faq-item rounded-2xl bg-obsidian-card border border-terminal-border transition-colors">
                     <button class="w-full p-5 text-left flex items-center justify-between gap-4 font-display font-bold text-base text-white hover:text-gold transition-colors">
                         <span>Do I need a Virtual Private Server (VPS)?</span>
                         <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-gray-400 transition-transform duration-200"></i>
                     </button>
-                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">
-                        Yes, a low-latency Windows VPS (latency &lt; 20ms to your broker) is strongly recommended so the bot can monitor the M1 chart 24 hours a day during all active London and New York market sessions without interruption from power outages or home internet disconnects.
+                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        A low-latency Windows VPS (<20ms to your broker) is strongly recommended for uninterrupted 24/5 market monitoring across both London and New York sessions, eliminating risks from home power or internet dropouts.
                     </div>
                 </div>
 
-                <!-- FAQ 6 -->
-                <div class="faq-item rounded-xl bg-obsidian border border-terminal-border transition-colors">
+                <!-- FAQ 5 -->
+                <div class="faq-item rounded-2xl bg-obsidian-card border border-terminal-border transition-colors">
                     <button class="w-full p-5 text-left flex items-center justify-between gap-4 font-display font-bold text-base text-white hover:text-gold transition-colors">
-                        <span>Can I use a Demo key on a Live funded account?</span>
+                        <span>Why is the Strategy Tester disabled in this release?</span>
                         <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-gray-400 transition-transform duration-200"></i>
                     </button>
-                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">
-                        No. The internal License Guard inspects <code class="text-gold font-mono">ACCOUNT_TRADE_MODE</code>. Demo keys are mathematically signed exclusively for Demo accounts. If attached to a Live real account, the bot immediately halts with a red [LOCKED] security screen to protect traders from unverified configurations.
+                    <div class="faq-answer px-5 pb-5 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        Backtesting software relies on synthesized tick data that cannot replicate live broker slippage, latency spikes, or real liquidity dynamics. Jig Bot is engineered strictly for authentic <strong class="text-mt5-green">live forward testing</strong> on active charts.
                     </div>
                 </div>
 
@@ -831,40 +581,25 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- FOOTER WITH RISK DISCLAIMER & ATTRIBUTION                         -->
+    <!-- FOOTER: Institutional Disclaimer & Clean Attribution              -->
     <!-- ================================================================= -->
-    <footer class="bg-obsidian border-t border-terminal-border py-14">
+    <footer class="bg-obsidian border-t border-terminal-border py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col items-center justify-center text-center space-y-6">
+            <div class="flex flex-col items-center justify-center text-center space-y-5">
                 
-                <!-- Logo -->
                 <div class="flex items-center gap-3">
-                    <img src="app_icon.png" alt="Jig Bot" class="w-9 h-9 rounded-lg border border-gold/40 object-cover">
+                    <img src="app_icon.png" alt="Jig Bot" class="w-8 h-8 rounded-lg border border-gold/40 object-cover">
                     <span class="font-display font-black text-xl text-white">Jig Bot</span>
-                </div>
-                
-                <p class="text-xs text-gray-400 font-mono">
-                    Engineering and Distribution: <strong class="text-white">Powered by Razel Tech</strong> • Version v1.00
-                </p>
-
-                <!-- Social & Channels -->
-                <div class="flex items-center gap-6 text-xs font-mono">
-                    <a href="https://t.me/PDVR_gold_signals" target="_blank" class="text-gold hover:text-white flex items-center gap-1.5 transition-colors">
-                        <i data-lucide="send" class="w-3.5 h-3.5"></i> Telegram Channel
-                    </a>
-                    <span class="text-gray-600">•</span>
-                    <a href="https://t.me/pdvr_gold_signals_bot" target="_blank" class="text-mt5-cyan hover:text-white flex items-center gap-1.5 transition-colors">
-                        <i data-lucide="bot" class="w-3.5 h-3.5"></i> Telegram Key Bot
-                    </a>
+                    <span class="text-xs font-mono text-gray-400">v1.0</span>
                 </div>
 
-                <!-- Risk Disclaimer -->
-                <div class="max-w-4xl p-6 rounded-xl bg-obsidian-subtle/40 border border-terminal-border/60 text-[11px] text-gray-400 leading-relaxed text-justify">
-                    <strong>REGULATORY &amp; RISK DISCLAIMER:</strong> Trading foreign exchange, precious metals (such as XAUUSD), and contracts for difference (CFDs) on margin carries a high level of risk and may not be suitable for all investors. The high degree of leverage can work against you as well as for you. Past simulation performance is not indicative of future market execution. The Jig Bot software is provided strictly for educational, analytical, and testing phase demonstration on demo accounts. Razel Tech accepts no responsibility for direct or indirect losses incurred through automated algorithmic trading. Always implement responsible risk management.
+                <!-- Regulatory Disclaimer -->
+                <div class="max-w-3xl p-5 rounded-xl bg-obsidian-card border border-terminal-border/60 text-[11px] text-gray-400 leading-relaxed text-justify">
+                    <strong>RISK &amp; REGULATORY DISCLAIMER:</strong> Trading precious metals (including XAUUSD) and derivatives carries significant capital risk and may not be suitable for all investors. Leverage can magnify both returns and losses. Jig Bot software is provided strictly for educational and analytical forward-testing demonstration on demo accounts. Always adhere to strict risk management protocols.
                 </div>
 
-                <div class="text-[11px] text-gray-500 pt-2">
-                    &copy; <span id="current-year">2026</span> Jig Bot. Powered by Razel Tech. All Rights Reserved. Not affiliated with MetaQuotes Ltd.
+                <div class="text-[11px] text-gray-500 pt-2 font-mono">
+                    &copy; <span id="current-year">2026</span> Jig Bot. All Rights Reserved. MetaTrader 5 is a registered trademark of MetaQuotes Ltd.
                 </div>
 
             </div>
@@ -872,35 +607,73 @@
     </footer>
 
     <!-- ================================================================= -->
-    <!-- SCRIPTS                                                           -->
+    <!-- REQUEST ACCESS MODAL: Seamless, Professional Onboarding          -->
     <!-- ================================================================= -->
+    <div id="request-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="relative w-full max-w-md rounded-3xl bg-obsidian-card border border-gold/40 p-6 sm:p-8 shadow-2xl">
+            
+            <button onclick="closeRequestModal()" class="absolute top-5 right-5 p-2 rounded-lg text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-4">
+                <img src="app_icon.png" alt="Jig Bot" class="w-10 h-10 rounded-xl border border-gold/40 object-cover">
+                <div>
+                    <h3 class="font-display font-black text-lg text-white">Request 7-Day Access</h3>
+                    <p class="text-xs text-gray-400 font-mono">Instant Demo Trial Activation</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-gray-300 leading-relaxed mb-5">
+                Please enter your MetaTrader 5 Demo Account Number. Your dedicated cryptographic license key will be generated for your account.
+            </p>
+
+            <form id="access-request-form" onsubmit="handleRequestSubmit(event)" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-xs font-mono text-gray-300 mb-1.5 font-medium">MT5 Demo Account Number *</label>
+                    <input type="text" id="modal-account-input" required placeholder="e.g. 51239841" class="w-full px-4 py-3 rounded-xl bg-obsidian border border-terminal-border text-white text-sm font-mono focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-gray-300 mb-1.5 font-medium">Your Name or Contact ID</label>
+                    <input type="text" id="modal-name-input" placeholder="e.g. Alex" class="w-full px-4 py-3 rounded-xl bg-obsidian border border-terminal-border text-white text-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-all">
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian font-display font-bold text-sm shadow-md shadow-gold/20 hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4 text-obsidian"></i>
+                        <span>Submit Access Request</span>
+                    </button>
+                </div>
+            </form>
+
+            <div id="modal-success" class="hidden mt-4 p-4 rounded-xl bg-mt5-green/10 border border-mt5-green/30 text-xs font-mono text-mt5-green leading-relaxed text-center">
+                ✓ Request recorded! Copying your details for private key generation...
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Lucide Icons
+            // Icons
             lucide.createIcons();
 
             // Dynamic Year
             const y = document.getElementById('current-year');
             if (y) y.textContent = new Date().getFullYear();
 
-            // Drive Download URL fallback
-            document.querySelectorAll('.drive-download-link').forEach(btn => {
-                if (CONFIG.DRIVE_DOWNLOAD_URL && CONFIG.DRIVE_DOWNLOAD_URL.includes("http") && !CONFIG.DRIVE_DOWNLOAD_URL.includes("YOUR_DRIVE")) {
-                    btn.href = CONFIG.DRIVE_DOWNLOAD_URL;
-                    btn.target = "_blank";
-                }
-            });
-
-            // Mobile Menu Toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            // Mobile Navigation Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const menuIcon = document.getElementById('menu-icon');
             const closeIcon = document.getElementById('close-icon');
 
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    const isExpanded = !mobileMenu.classList.contains('hidden');
-                    if (isExpanded) {
+            if (mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', () => {
+                    const isOpen = !mobileMenu.classList.contains('hidden');
+                    if (isOpen) {
                         mobileMenu.classList.add('hidden');
                         menuIcon.classList.remove('hidden');
                         closeIcon.classList.add('hidden');
@@ -911,7 +684,6 @@
                     }
                 });
 
-                // Auto close mobile menu when clicking any nav link
                 document.querySelectorAll('.mobile-nav-link').forEach(link => {
                     link.addEventListener('click', () => {
                         mobileMenu.classList.add('hidden');
@@ -921,19 +693,13 @@
                 });
             }
 
-            // FAQ Accordion Toggle
+            // FAQ Accordion
             document.querySelectorAll('.faq-item button').forEach(button => {
                 button.addEventListener('click', () => {
                     const item = button.parentElement;
                     const isActive = item.classList.contains('active');
-
-                    // Close all
                     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-
-                    // Toggle clicked
-                    if (!isActive) {
-                        item.classList.add('active');
-                    }
+                    if (!isActive) item.classList.add('active');
                 });
             });
         });
@@ -942,12 +708,45 @@
         function playAudio(filename) {
             try {
                 const audio = new Audio('jig bot/' + encodeURIComponent(filename));
-                audio.play().catch(e => {
-                    console.log("Audio playback blocked or unavailable:", e);
-                });
+                audio.play().catch(e => console.log('Audio playback notice:', e));
             } catch (err) {
                 console.log(err);
             }
+        }
+
+        // Modal Controls
+        function openRequestModal() {
+            document.getElementById('request-modal').classList.remove('hidden');
+        }
+
+        function closeRequestModal() {
+            document.getElementById('request-modal').classList.add('hidden');
+        }
+
+        function handleRequestSubmit(e) {
+            e.preventDefault();
+            const account = document.getElementById('modal-account-input').value.trim();
+            const name = document.getElementById('modal-name-input').value.trim();
+            const successBox = document.getElementById('modal-success');
+            
+            const messageText = `Hi, I would like to request 7-Day Demo Trial access for Jig Bot.\nMT5 Account Number: ${account}${name ? `\nName: ${name}` : ''}`;
+
+            // Try copying to clipboard for convenience
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(messageText);
+            }
+
+            successBox.classList.remove('hidden');
+            successBox.textContent = `Access request prepared for Account #${account}! Opening verification...`;
+
+            setTimeout(() => {
+                // Direct to the private support bot without displaying raw URLs on the page
+                const telegramBotUrl = "https://t.me/pdvr_gold_signals_bot?start=trial_" + encodeURIComponent(account);
+                window.open(telegramBotUrl, "_blank");
+                closeRequestModal();
+                successBox.classList.add('hidden');
+                e.target.reset();
+            }, 1200);
         }
     </script>
 </body>

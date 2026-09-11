@@ -1,6 +1,6 @@
 # Jig Bot
-### Powered by Razel Tech | Version v1
-**High-Frequency XAUUSD M1 Adaptive Recovery Engine & Website Ecosystem**
+### Quantitative Gold Trading Engine | Version v1.0
+**High-Frequency XAUUSD M1 Execution & Website Ecosystem**
 
 ---
 

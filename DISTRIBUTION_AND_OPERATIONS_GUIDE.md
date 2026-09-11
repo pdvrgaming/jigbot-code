@@ -140,8 +140,7 @@ JIG-DEMO-51239841-20260918-3F8E1B9A
 • Chart Timeframe: M1 (1-Minute)
 
 ⚙️ Fast 3-Minute Setup Guide:
-1. Download jig_bot.ex5 and the audio sounds from:
-   https://t.me/PDVR_gold_signals (or your official website)
+1. Save the attached jig_bot.ex5 file and audio sounds sent with this message to your computer.
 2. In MetaTrader 5, click: File -> Open Data Folder.
 3. Place jig_bot.ex5 inside MQL5\Experts\
 4. Place the voice .wav files inside Sounds\
