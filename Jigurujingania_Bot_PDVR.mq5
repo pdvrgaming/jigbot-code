@@ -73,6 +73,7 @@ bool               m_had_positions_previous_tick = false;
 datetime           m_first_run_time              = 0;
 bool               m_trial_expired               = false;
 datetime           m_last_timeout_audio_time     = 0;
+datetime           m_last_tphit_audio_time       = 0;
 const string       TRIAL_GV_KEY                  = "JJ_BOT_FIRST_RUN";
 
 //+------------------------------------------------------------------+
@@ -472,8 +473,13 @@ void CloseAllBasketPositions()
       }
    }
    
-   // Play TP HIT sound
-   PlayCustomAudio("tp hit.wav");
+   // Play TP HIT sound with cooldown
+   datetime now = TimeCurrent();
+   if(now - m_last_tphit_audio_time >= 3)
+   {
+      m_last_tphit_audio_time = now;
+      PlayCustomAudio("tp hit.wav");
+   }
 
    m_current_grid_level = 0;
    m_initial_price = 0.0;
@@ -888,6 +894,44 @@ void OnTick()
 
       // 2. Check basket exit
       CheckBasketExit(basket_type, vwap, open_count);
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Trade transaction callback for real-time TP hit sound alerts     |
+//+------------------------------------------------------------------+
+void OnTradeTransaction(const MqlTradeTransaction& trans,
+                         const MqlTradeRequest& request,
+                         const MqlTradeResult& result)
+{
+   if(!InpEnableSounds)
+      return;
+
+   if(trans.type == TRADE_TRANSACTION_DEAL_ADD)
+   {
+      if(HistoryDealSelect(trans.deal))
+      {
+         long magic = HistoryDealGetInteger(trans.deal, DEAL_MAGIC);
+         if(magic == InpMagicNumber && HistoryDealGetString(trans.deal, DEAL_SYMBOL) == _Symbol)
+         {
+            ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(trans.deal, DEAL_ENTRY);
+            if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT)
+            {
+               ENUM_DEAL_REASON reason = (ENUM_DEAL_REASON)HistoryDealGetInteger(trans.deal, DEAL_REASON);
+               double profit = HistoryDealGetDouble(trans.deal, DEAL_PROFIT);
+               if(reason == DEAL_REASON_TP || profit > 0.0)
+               {
+                  datetime now = TimeCurrent();
+                  if(now - m_last_tphit_audio_time >= 3)
+                  {
+                     m_last_tphit_audio_time = now;
+                     PrintFormat(">> Deal #%I64u closed at TP (Profit: $%.2f). Playing TP hit sound!", trans.deal, profit);
+                     PlayCustomAudio("tp hit.wav");
+                  }
+               }
+            }
+         }
+      }
    }
 }
 //+------------------------------------------------------------------+
