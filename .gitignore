@@ -7,5 +7,5 @@ Desktop.ini
 .vscode/
 .idea/
 
-# Never allow MQ5 source files in public release builds
-*.mq5.bak
+# Public GitHub Pages Repository is tracked in its own repository inside public_pages/
+public_pages/
