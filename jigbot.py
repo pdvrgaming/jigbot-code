@@ -244,6 +244,7 @@ def generate_key(account_id, tier="DEMO", days=7):
     print("1. Attach jig_bot to your XAUUSD M1 chart.")
     print("2. Press F7 (Properties) -> Inputs.")
     print("3. Paste the key into InpLicenseKey and click OK.")
+    print("\nNeed assistance? Contact @pdvr_gold_signals_bot or join t.me/PDVR_gold_signals")
     print("-" * 70 + "\n")
     return 0
 

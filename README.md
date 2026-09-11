@@ -107,23 +107,19 @@ You can also generate keys directly from your terminal:
 
 ## 6. Telegram Bot & Channel Integration
 
-### A. What to configure in `index.html`:
-In [`index.html`](file:///d:/webapps/jiguruginganiabot_website/index.html) at line 125, update the `CONFIG` block:
-```javascript
-const CONFIG = {
-    BOT_NAME: "Jig Bot",
-    POWERED_BY: "Razel Tech",
-    VERSION: "v1",
-    DRIVE_DOWNLOAD_URL: "https://drive.google.com/drive/folders/YOUR_DRIVE_FOLDER_ID_HERE",
-    DIRECT_EX5_FILENAME: "jig_bot.ex5",
-    TELEGRAM_CHANNEL_URL: "https://t.me/YourChannelName",
-    TELEGRAM_SUPPORT_URL: "https://t.me/YourTelegramSupport",
-    CONTACT_EMAIL: "support@razeltech.com",
-    TRIAL_DAYS: "3, 5, or 7 Days Free Testing Trial",
-    RECOMMENDED_SYMBOL: "XAUUSD (Gold)",
-    RECOMMENDED_TIMEFRAME: "M1 (1-Minute)"
-};
-```
+- **Telegram Channel**: [`https://t.me/PDVR_gold_signals`](https://t.me/PDVR_gold_signals)
+- **Telegram Bot / Support**: [`@pdvr_gold_signals_bot`](https://t.me/pdvr_gold_signals_bot)
+
+### Connected Across the Ecosystem:
+1. **Website Header & CTAs** ([`index.html`](file:///d:/webapps/jiguruginganiabot_website/index.html)): Traders can click **Telegram Channel** in the top header and **Join Official Telegram Channel** or **Request Free Demo Trial Key** directly from the access cards.
+2. **On-Chart MT5 HUD** ([`jig_bot.mq5`](file:///d:/webapps/jiguruginganiabot_website/jig_bot.mq5)): When an unactivated EA is attached to an MT5 chart, the on-chart HUD prompts the trader:
+   ```
+   2. Request your Activation Key:
+      - Telegram Bot: @pdvr_gold_signals_bot
+      - Channel: t.me/PDVR_gold_signals
+      - Support: Powered by Razel Tech
+   ```
+3. **Trader Message Templates**: All activation message generators (browser tool and CLI) include direct support contact links to `@pdvr_gold_signals_bot`.
 
 ---
 

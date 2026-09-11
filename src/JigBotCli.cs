@@ -425,6 +425,7 @@ namespace JigBot
             Console.WriteLine("1. Attach jig_bot to your XAUUSD M1 chart.");
             Console.WriteLine("2. Press F7 (Properties) -> Inputs.");
             Console.WriteLine("3. Paste the key into InpLicenseKey and click OK.");
+            Console.WriteLine("\nNeed assistance? Contact @pdvr_gold_signals_bot or join t.me/PDVR_gold_signals");
             Console.WriteLine("----------------------------------------------------------------------\n");
 
             return 0;

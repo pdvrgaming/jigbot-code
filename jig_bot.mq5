@@ -348,10 +348,10 @@ void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_PO
          "-----------------------------------------------------\n"
          "  ACTIVATION INSTRUCTIONS:\n"
          "  1. Copy your MT5 Account ID: %I64d\n"
-         "  2. Request your Activation Key from Razel Tech:\n"
-         "     - Demo Trial: 3, 5, or 7-Day Access\n"
-         "     - Live Account: 1-Month Pro Access\n"
-         "     - Contact: support@Jig Bot.bot\n"
+         "  2. Request your Activation Key:\n"
+         "     - Telegram Bot: @pdvr_gold_signals_bot\n"
+         "     - Channel: t.me/PDVR_gold_signals\n"
+         "     - Support: Powered by Razel Tech\n"
          "  3. Open Bot Inputs (F7) -> Paste into InpLicenseKey\n"
          "=====================================================",
          m_license_status_msg,
