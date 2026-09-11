@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jigurujingania Bot - Private License Key Generator | Razel Tech</title>
+  <title>Jig Bot - Private License Key Generator & Database | Razel Tech</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
 
     .container {
       width: 100%;
-      max-width: 820px;
+      max-width: 960px;
     }
 
     /* Header */
@@ -72,7 +72,7 @@
     }
 
     .title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: #fff;
       letter-spacing: -0.02em;
@@ -99,17 +99,30 @@
     }
 
     .section-title {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--gold-light);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .form-group {
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     label {
@@ -131,7 +144,7 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 10px;
       padding: 14px 16px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: #fff;
       font-family: var(--font-mono);
       transition: all 0.2s;
@@ -249,177 +262,52 @@
       border-color: var(--gold-primary);
     }
 
-    /* Action Button */
+    /* Generate Button */
     .generate-btn {
       width: 100%;
-      background: linear-gradient(135deg, #F5D061, #E5B842);
-      color: #05070D;
+      background: linear-gradient(135deg, #F59E0B 0%, #E5B842 50%, #D97706 100%);
+      color: #000;
       border: none;
       border-radius: 12px;
       padding: 16px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       cursor: pointer;
+      transition: all 0.25s;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 8px 25px rgba(229, 184, 66, 0.3);
+      gap: 8px;
+      box-shadow: 0 8px 25px rgba(229, 184, 66, 0.25);
       margin-top: 10px;
     }
 
     .generate-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 30px rgba(229, 184, 66, 0.4);
+      filter: brightness(1.08);
     }
 
     .generate-btn:active {
       transform: translateY(0);
     }
 
-    /* Result Box */
-    .result-card {
-      background: #0D1424;
-      border: 2px solid var(--gold-primary);
-      border-radius: 16px;
-      padding: 28px;
-      margin-top: 28px;
-      display: none;
-    }
-
-    .result-card.show {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .result-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .result-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gold-light);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .key-display {
-      background: #05070D;
-      border: 1px solid rgba(229, 184, 66, 0.4);
-      border-radius: 10px;
-      padding: 16px;
-      font-family: var(--font-mono);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #00E676;
-      word-break: break-all;
-      text-align: center;
-      margin-bottom: 18px;
-      user-select: all;
-    }
-
-    .action-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .btn-copy {
-      background: var(--bg-input);
-      border: 1px solid var(--gold-primary);
-      color: var(--gold-light);
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-
-    .btn-copy:hover {
-      background: var(--gold-primary);
-      color: #000;
-    }
-
-    .btn-copy.copied {
-      background: var(--green-accent);
-      color: #000;
-      border-color: var(--green-accent);
-    }
-
-    /* Key breakdown details */
-    .breakdown-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 14px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-
-    .breakdown-item {
-      text-align: center;
-    }
-
-    .breakdown-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .breakdown-value {
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    /* Terminal HUD Preview */
-    .hud-preview {
-      background: #020408;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      padding: 16px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: #A3E635;
-      white-space: pre-wrap;
-      line-height: 1.4;
-      overflow-x: auto;
-    }
-
-    /* Salt Details Collapsible */
+    /* Secret Salt Drawer */
     .collapsible {
-      margin-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 16px;
+      margin-top: 20px;
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.25);
     }
 
     .collapsible-header {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: space-between;
       user-select: none;
     }
 
@@ -429,75 +317,484 @@
 
     .collapsible-content {
       display: none;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .collapsible-content.open {
       display: block;
     }
 
+    /* Result Card */
+    .result-card {
+      background: linear-gradient(180deg, #0E1626 0%, #080D18 100%);
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 25px 50px -12px rgba(229, 184, 66, 0.2);
+      margin-bottom: 28px;
+      display: none;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    .result-card.show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .result-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .key-display {
+      background: var(--bg-base);
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 12px;
+      padding: 18px;
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      word-break: break-all;
+      text-align: center;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+      user-select: all;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .action-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn-copy {
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-copy:hover {
+      background: var(--bg-hover);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+
+    .btn-copy.copied {
+      background: rgba(0, 230, 118, 0.15);
+      border-color: var(--green-accent);
+      color: var(--green-accent);
+    }
+
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 700px) {
+      .breakdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .breakdown-item {
+      background: var(--bg-base);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .breakdown-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .breakdown-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      font-family: var(--font-mono);
+    }
+
+    .hud-preview {
+      background: #020408;
+      border: 1px solid rgba(0, 230, 118, 0.3);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #A7F3D0;
+      white-space: pre-wrap;
+      line-height: 1.4;
+      overflow-x: auto;
+    }
+
+    /* Database / History Section */
+    .db-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      margin-bottom: 28px;
+    }
+
+    .db-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 680px) {
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .stat-box {
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-mono);
+    }
+
+    .stat-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .db-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      color: #fff;
+      font-family: var(--font-sans);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .tab-btn.active {
+      background: rgba(229, 184, 66, 0.15);
+      color: var(--gold-primary);
+      border-color: var(--gold-primary);
+    }
+
+    .db-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-db {
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-db:hover {
+      background: var(--bg-hover);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+
+    .btn-db-export {
+      background: rgba(0, 230, 118, 0.12);
+      border-color: rgba(0, 230, 118, 0.4);
+      color: #00E676;
+    }
+
+    .btn-db-export:hover {
+      background: rgba(0, 230, 118, 0.25);
+      color: #fff;
+    }
+
+    /* Table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: rgba(16, 23, 42, 0.8);
+      padding: 12px 14px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-status.active {
+      background: rgba(0, 230, 118, 0.15);
+      color: #00E676;
+      border: 1px solid rgba(0, 230, 118, 0.3);
+    }
+
+    .badge-status.expired {
+      background: rgba(255, 56, 92, 0.15);
+      color: #FF385C;
+      border: 1px solid rgba(255, 56, 92, 0.3);
+    }
+
+    .badge-tier-demo {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .badge-tier-live {
+      background: rgba(229, 184, 66, 0.15);
+      color: #E5B842;
+      border: 1px solid rgba(229, 184, 66, 0.3);
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-row-action {
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-row-action:hover {
+      color: #fff;
+      border-color: var(--gold-primary);
+    }
+
+    .btn-row-delete:hover {
+      border-color: var(--red-accent);
+      color: var(--red-accent);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
     /* Footer */
     .footer {
       text-align: center;
       color: var(--text-muted);
-      font-size: 0.85rem;
-      margin-top: 40px;
+      font-size: 0.8rem;
+      margin-top: 10px;
     }
 
-    @media (max-width: 640px) {
-      .tier-selector { grid-template-columns: 1fr; }
-      .action-row { grid-template-columns: 1fr; }
-      .breakdown-grid { grid-template-columns: 1fr 1fr; }
+    .footer strong {
+      color: var(--gold-primary);
     }
   </style>
 </head>
 <body>
 
   <div class="container">
+    <!-- Header -->
     <header class="header">
-      <div class="badge-owner">🔒 Private Developer Tool • Offline Only</div>
-      <h1 class="title">Jigurujingania <span>Key Generator</span></h1>
-      <p class="subtitle">Cryptographically sign account-bound trial & live activation keys for Jigurujingania Bot (Powered by Razel Tech)</p>
+      <div class="badge-owner">
+        <span>⚡</span> Private Owner & Support Tool • Powered by Razel Tech
+      </div>
+      <h1 class="title">Jig Bot <span>License Engine</span></h1>
+      <p class="subtitle">Cryptographic SHA-256 Account-Bound Key Generator & Offline Client Database</p>
     </header>
 
+    <!-- Generator Card -->
     <div class="card">
       <div class="section-title">
-        <span>1.</span> Trader's MT5 Account Information
+        <span>🔑</span> Generate New Activation Key
       </div>
 
+      <!-- Tier Selector -->
       <div class="form-group">
-        <label for="accountId">MetaTrader 5 Account Number (Login ID)</label>
-        <input type="text" id="accountId" placeholder="e.g. 12345678" maxlength="15" autocomplete="off">
-        <div class="help-text">Ask the trader to check their MT5 chart HUD or Navigator panel for their login ID.</div>
-      </div>
+        <label>Select License Tier</label>
+        <div class="tier-selector">
+          <div class="tier-btn active tier-demo" id="tierDemoBtn" onclick="selectTier('DEMO')">
+            <span class="tier-badge">Demo Account</span>
+            <span class="tier-name">Free Testing Trial</span>
+            <span class="tier-desc">Runs exclusively on MT5 Demo accounts. Backtesting blocked.</span>
+          </div>
 
-      <div class="section-title" style="margin-top: 28px;">
-        <span>2.</span> License Tier & Permissions
-      </div>
-
-      <div class="tier-selector">
-        <div class="tier-btn active tier-demo" id="tierDemoBtn" onclick="selectTier('DEMO')">
-          <span class="tier-badge">Demo Only</span>
-          <span class="tier-name">Demo Trial Key</span>
-          <span class="tier-desc">Restricted to Demo accounts. Automatically blocked if pasted on Live accounts.</span>
-        </div>
-        <div class="tier-btn tier-live" id="tierLiveBtn" onclick="selectTier('LIVE')">
-          <span class="tier-badge">Live Pro</span>
-          <span class="tier-name">Live Account Key</span>
-          <span class="tier-desc">Authorized for full Real/Live account trading on MT5.</span>
+          <div class="tier-btn tier-live" id="tierLiveBtn" onclick="selectTier('LIVE')">
+            <span class="tier-badge">Live Real Account</span>
+            <span class="tier-name">Production Access</span>
+            <span class="tier-desc">Runs exclusively on MT5 Live real funded accounts.</span>
+          </div>
         </div>
       </div>
 
-      <div class="section-title" style="margin-top: 28px;">
-        <span>3.</span> Duration & Expiry Date
+      <!-- Account Number and Trader Note -->
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="accountId">MT5 Account Number (Required)</label>
+          <div class="input-wrapper">
+            <input type="text" id="accountId" placeholder="e.g. 51239841" maxlength="15" autocomplete="off">
+          </div>
+          <div class="help-text">Ask the trader for their exact MT5 account login number.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="traderName">Trader Name / Telegram Handle (Optional)</label>
+          <div class="input-wrapper">
+            <input type="text" id="traderName" placeholder="e.g. @trader_alex or VIP Gold Member" maxlength="50" autocomplete="off">
+          </div>
+          <div class="help-text">Saved locally so you know who owns this license key.</div>
+        </div>
       </div>
 
-      <div class="preset-grid" id="presetButtons">
-        <!-- Injected dynamically based on selected tier -->
-      </div>
-
+      <!-- Presets -->
       <div class="form-group">
-        <label for="expiryDate">Expiry Date (Midnight UTC)</label>
+        <label>Duration Preset</label>
+        <div class="preset-grid" id="presetButtons">
+          <!-- Dynamic preset buttons injected here -->
+        </div>
+      </div>
+
+      <!-- Expiry Date -->
+      <div class="form-group">
+        <label for="expiryDate">Expiry Date (Midnight Broker Time)</label>
         <input type="date" id="expiryDate">
         <div class="help-text">The bot checks broker server time. It will stop trading at 23:59:59 on this date.</div>
       </div>
@@ -506,15 +803,17 @@
         ⚡ Generate Cryptographic License Key
       </button>
 
+      <!-- Advanced Salt Collapsible -->
       <div class="collapsible">
         <div class="collapsible-header" onclick="toggleSecretSalt()">
-          ⚙️ Advanced: Developer Secret Salt (Click to view)
+          <span>⚙️ Advanced: Cryptographic Secret Salt (Click to inspect)</span>
+          <span id="saltToggleIcon">▼</span>
         </div>
         <div class="collapsible-content" id="saltContent">
-          <div class="form-group" style="margin-top: 8px;">
-            <label for="secretSalt">Secret Salt (Must match MQL5 code exactly)</label>
-            <input type="text" id="secretSalt" value="RAZEL_JJ_BOT_SEC_2026_x9K!" readonly>
-            <div class="help-text">Baked into Jigurujingania_Bot_PDVR.mq5. Changing this invalidates all previously generated keys.</div>
+          <div class="form-group" style="margin-top: 10px;">
+            <label for="secretSalt">Secret Developer Salt</label>
+            <input type="text" id="secretSalt" value="RAZEL_JIG_BOT_SEC_2026_x9K!" readonly>
+            <div class="help-text">Hard-coded into <code>jig_bot.mq5</code>. Changing this invalidates all previously generated keys.</div>
           </div>
         </div>
       </div>
@@ -524,7 +823,7 @@
     <div class="result-card" id="resultCard">
       <div class="result-header">
         <div class="result-title">
-          <span>✅</span> Key Generated Successfully
+          <span>✅</span> Key Generated & Saved to Database!
         </div>
         <span id="tierPill" class="tier-badge" style="background: rgba(0, 230, 118, 0.2); color: #00E676;"></span>
       </div>
@@ -559,18 +858,102 @@
         </div>
       </div>
 
-      <div class="help-text" style="margin-bottom: 8px; font-weight: 600;">Chart HUD Preview (What the trader sees on MT5):</div>
+      <div class="help-text" style="margin-bottom: 8px; font-weight: 600;">On-Chart Live HUD Preview (What the trader sees on MT5):</div>
       <div class="hud-preview" id="hudPreview"></div>
     </div>
 
+    <!-- Database / Client History Section -->
+    <div class="db-section" id="databaseSection">
+      <div class="db-header">
+        <div>
+          <h2 class="section-title" style="margin-bottom: 4px;">
+            <span>🗄️</span> Client License Database & History
+          </h2>
+          <p class="help-text" style="margin-top: 0;">
+            All generated keys are stored permanently in your browser's private local storage. Export to Excel/CSV anytime.
+          </p>
+        </div>
+        <div class="db-actions">
+          <button class="btn-db btn-db-export" onclick="exportToCSV()" title="Download as Excel CSV file">
+            📥 Export to CSV / Excel
+          </button>
+          <button class="btn-db" onclick="backupJSON()" title="Download complete JSON backup">
+            📤 Backup JSON
+          </button>
+          <button class="btn-db" onclick="document.getElementById('importFileInput').click()" title="Restore from JSON">
+            📥 Restore
+          </button>
+          <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importJSON(event)">
+          <button class="btn-db" onclick="clearAllLicenses()" style="color: var(--red-accent);" title="Clear entire database">
+            🗑️ Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Statistics -->
+      <div class="stats-bar">
+        <div class="stat-box">
+          <div class="stat-num" id="statTotal">0</div>
+          <div class="stat-title">Total Issued</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statDemo" style="color: var(--blue-accent);">0</div>
+          <div class="stat-title">Demo Trials</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statLive" style="color: var(--gold-primary);">0</div>
+          <div class="stat-title">Live Accounts</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statActive" style="color: var(--green-accent);">0</div>
+          <div class="stat-title">Currently Active</div>
+        </div>
+      </div>
+
+      <!-- Search and Filter Toolbar -->
+      <div class="db-toolbar">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search by Account #, Trader Name, or Key..." oninput="renderTable()">
+        <div class="filter-tabs">
+          <button class="tab-btn active" onclick="setFilter('ALL', this)">All</button>
+          <button class="tab-btn" onclick="setFilter('DEMO', this)">Demo Trials</button>
+          <button class="tab-btn" onclick="setFilter('LIVE', this)">Live Pro</button>
+          <button class="tab-btn" onclick="setFilter('ACTIVE', this)">Active Now</button>
+          <button class="tab-btn" onclick="setFilter('EXPIRED', this)">Expired</button>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Account #</th>
+              <th>Trader / Telegram</th>
+              <th>Tier</th>
+              <th>Status</th>
+              <th>Expiry Date</th>
+              <th>License Key</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="licenseTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <footer class="footer">
-      Jigurujingania Bot &copy; 2026 • Powered by Razel Tech • Proprietary & Confidential
+      <strong>Jig Bot</strong> &copy; 2026 • Powered by <strong>Razel Tech</strong> • Proprietary Client Management System
     </footer>
   </div>
 
   <script>
+    const STORAGE_KEY = 'jig_bot_license_records_v1';
     let currentTier = 'DEMO';
     let currentDays = 7;
+    let activeFilter = 'ALL';
+    let lastGeneratedKey = null;
 
     const demoPresets = [
       { label: '3 Days Trial', days: 3 },
@@ -585,9 +968,29 @@
       { label: 'Lifetime (2099)', days: 26700, isLifetime: true }
     ];
 
+    // Local Storage Helpers
+    function getStoredLicenses() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error('Failed to read localStorage:', e);
+        return [];
+      }
+    }
+
+    function saveLicenses(list) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      } catch (e) {
+        alert('Could not save to local storage: ' + e.message);
+      }
+    }
+
     function init() {
       renderPresets();
       setExpiryByDays(currentDays);
+      renderTable();
 
       // Account input auto-clean
       document.getElementById('accountId').addEventListener('input', (e) => {
@@ -640,6 +1043,8 @@
     function toggleSecretSalt() {
       const el = document.getElementById('saltContent');
       el.classList.toggle('open');
+      const icon = document.getElementById('saltToggleIcon');
+      icon.innerText = el.classList.contains('open') ? '▲' : '▼';
     }
 
     // Cryptographic SHA-256 Signature Function
@@ -662,6 +1067,7 @@
         return;
       }
 
+      const traderNameInput = document.getElementById('traderName').value.trim() || 'Anonymous';
       const expiryInput = document.getElementById('expiryDate').value;
       if (!expiryInput) {
         alert('Please select an expiry date.');
@@ -672,13 +1078,37 @@
       const salt = document.getElementById('secretSalt').value.trim();
 
       const signature = await calculateSignature(currentTier, accountInput, expiryStr, salt);
-      const fullKey = `JJ-${currentTier}-${accountInput}-${expiryStr}-${signature}`;
+      const fullKey = `JIG-${currentTier}-${accountInput}-${expiryStr}-${signature}`;
 
       // Calculate days remaining
       const expiryObj = new Date(expiryInput + 'T23:59:59');
       const now = new Date();
       const diffTime = expiryObj - now;
       const daysLeft = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+
+      lastGeneratedKey = {
+        id: 'lic_' + Date.now(),
+        accountId: accountInput,
+        traderName: traderNameInput,
+        tier: currentTier,
+        duration: `${daysLeft} Days`,
+        expiryDate: expiryInput,
+        expiryStr: expiryStr,
+        createdDate: new Date().toISOString().split('T')[0],
+        key: fullKey
+      };
+
+      // Save into local database
+      const list = getStoredLicenses();
+      // Check if existing record for same account and tier
+      const existingIdx = list.findIndex(item => item.accountId === accountInput && item.tier === currentTier);
+      if (existingIdx >= 0) {
+        list[existingIdx] = lastGeneratedKey;
+      } else {
+        list.unshift(lastGeneratedKey);
+      }
+      saveLicenses(list);
+      renderTable();
 
       // Populate Result Card
       document.getElementById('keyDisplay').innerText = fullKey;
@@ -691,10 +1121,10 @@
       // Live HUD Preview
       const hudText = 
 `=====================================================
-  JIGURUJINGANIA BOT  v1  [ACTIVE]
+  JIG BOT  v1  [ACTIVE]
   Powered by Razel Tech
 =====================================================
-  License Tier:   ${currentTier} PRO (${daysLeft} Days Left)
+  License Tier:   ${currentTier} (${daysLeft} Days Left)
   Account:        #${accountInput} (${currentTier === 'DEMO' ? 'DEMO' : 'REAL'} - LICENSED)
   Spread Status:  14 / Max 50 pts (OK)
   Audio Alerts:   ENABLED
@@ -710,16 +1140,7 @@
 
     function copyKeyOnly() {
       const key = document.getElementById('keyDisplay').innerText;
-      navigator.clipboard.writeText(key).then(() => {
-        const btn = document.getElementById('btnCopyKey');
-        const orig = btn.innerHTML;
-        btn.classList.add('copied');
-        btn.innerHTML = '✅ Key Copied!';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          btn.innerHTML = orig;
-        }, 2000);
-      });
+      copyTextToClipboard(key, document.getElementById('btnCopyKey'), '✅ Key Copied!');
     }
 
     function copyTraderMessage() {
@@ -729,7 +1150,7 @@
       const days = document.getElementById('bDays').innerText;
 
       const msg = 
-`👋 Hello! Here is your official activation key for **Jigurujingania Bot v1**:
+`👋 Hello! Here is your official activation key for **Jig Bot v1**:
 
 🔑 **License Key**:
 \`${key}\`
@@ -740,7 +1161,148 @@
 • Access Duration: ${days}
 
 ⚙️ **How to Activate in MetaTrader 5**:
-1. Attach **Jigurujingania_Bot_PDVR** to your **XAUUSD M1** chart.
+1. Attach **jig_bot** to your **XAUUSD M1** chart.
+2. Press **F7** on your keyboard (or right-click chart > Expert List > Properties).
+3. Under **Inputs**, paste your key into **InpLicenseKey**.
+4. Click **OK**. Your on-chart dashboard will turn to [ACTIVE] and start trading!
+
+Need assistance? Contact Razel Tech support.`;
+
+      copyTextToClipboard(msg, document.getElementById('btnCopyMsg'), '✅ Message Copied!');
+    }
+
+    function copyTextToClipboard(text, btnElement, successLabel) {
+      navigator.clipboard.writeText(text).then(() => {
+        if (btnElement) {
+          const orig = btnElement.innerHTML;
+          btnElement.classList.add('copied');
+          btnElement.innerHTML = successLabel;
+          setTimeout(() => {
+            btnElement.classList.remove('copied');
+            btnElement.innerHTML = orig;
+          }, 2000);
+        }
+      });
+    }
+
+    // Database & Table Management
+    function setFilter(filter, btn) {
+      activeFilter = filter;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTable();
+    }
+
+    function isExpired(expiryDate) {
+      const expiryObj = new Date(expiryDate + 'T23:59:59');
+      return expiryObj < new Date();
+    }
+
+    function getDaysLeft(expiryDate) {
+      const expiryObj = new Date(expiryDate + 'T23:59:59');
+      const now = new Date();
+      const diffTime = expiryObj - now;
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    }
+
+    function renderTable() {
+      const list = getStoredLicenses();
+      const search = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+      const tbody = document.getElementById('licenseTableBody');
+
+      // Update KPIs
+      let demoCount = 0;
+      let liveCount = 0;
+      let activeCount = 0;
+
+      list.forEach(item => {
+        if (item.tier === 'DEMO') demoCount++;
+        if (item.tier === 'LIVE') liveCount++;
+        if (!isExpired(item.expiryDate)) activeCount++;
+      });
+
+      document.getElementById('statTotal').innerText = list.length;
+      document.getElementById('statDemo').innerText = demoCount;
+      document.getElementById('statLive').innerText = liveCount;
+      document.getElementById('statActive').innerText = activeCount;
+
+      // Filter list
+      let filtered = list.filter(item => {
+        const expired = isExpired(item.expiryDate);
+        if (activeFilter === 'DEMO' && item.tier !== 'DEMO') return false;
+        if (activeFilter === 'LIVE' && item.tier !== 'LIVE') return false;
+        if (activeFilter === 'ACTIVE' && expired) return false;
+        if (activeFilter === 'EXPIRED' && !expired) return false;
+
+        if (search) {
+          const matchAccount = (item.accountId || '').toLowerCase().includes(search);
+          const matchTrader = (item.traderName || '').toLowerCase().includes(search);
+          const matchKey = (item.key || '').toLowerCase().includes(search);
+          return matchAccount || matchTrader || matchKey;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="empty-state">No license records found matching your filters.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(item => {
+        const expired = isExpired(item.expiryDate);
+        const daysLeft = getDaysLeft(item.expiryDate);
+        const statusBadge = expired
+          ? `<span class="badge-status expired">Expired</span>`
+          : `<span class="badge-status active">Active (${daysLeft}d left)</span>`;
+
+        const tierBadge = item.tier === 'DEMO'
+          ? `<span class="badge-status badge-tier-demo">DEMO</span>`
+          : `<span class="badge-status badge-tier-live">LIVE</span>`;
+
+        return `
+          <tr>
+            <td style="font-family: var(--font-mono); font-weight: 700; color: #fff;">#${item.accountId}</td>
+            <td style="font-weight: 600;">${escapeHtml(item.traderName || 'Anonymous')}</td>
+            <td>${tierBadge}</td>
+            <td>${statusBadge}</td>
+            <td style="font-family: var(--font-mono); color: var(--text-muted);">${item.expiryDate}</td>
+            <td style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--gold-light);">${item.key}</td>
+            <td>
+              <div class="table-actions">
+                <button class="btn-row-action" title="Copy Key" onclick="copyRowKey('${item.key}')">📋 Copy</button>
+                <button class="btn-row-action" title="Copy Full Trader Activation Message" onclick="copyRowMessage('${item.accountId}', '${item.tier}', '${item.expiryDate}', '${item.key}', ${daysLeft})">💬 Message</button>
+                <button class="btn-row-action btn-row-delete" title="Delete record" onclick="deleteLicense('${item.id}')">🗑️</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function copyRowKey(key) {
+      navigator.clipboard.writeText(key).then(() => {
+        alert('Copied license key to clipboard:\n' + key);
+      });
+    }
+
+    function copyRowMessage(accountId, tier, expiryDate, key, daysLeft) {
+      const msg = 
+`👋 Hello! Here is your official activation key for **Jig Bot v1**:
+
+🔑 **License Key**:
+\`${key}\`
+
+📋 **License Details**:
+• Authorized Account: #${accountId}
+• License Tier: ${tier} (${tier === 'DEMO' ? 'Demo Trial' : 'Live Account'})
+• Access Duration: ${daysLeft > 0 ? daysLeft + ' Days Remaining' : 'Expired'} (Valid until ${expiryDate})
+
+⚙️ **How to Activate in MetaTrader 5**:
+1. Attach **jig_bot** to your **XAUUSD M1** chart.
 2. Press **F7** on your keyboard (or right-click chart > Expert List > Properties).
 3. Under **Inputs**, paste your key into **InpLicenseKey**.
 4. Click **OK**. Your on-chart dashboard will turn to [ACTIVE] and start trading!
@@ -748,15 +1310,97 @@
 Need assistance? Contact Razel Tech support.`;
 
       navigator.clipboard.writeText(msg).then(() => {
-        const btn = document.getElementById('btnCopyMsg');
-        const orig = btn.innerHTML;
-        btn.classList.add('copied');
-        btn.innerHTML = '✅ Message Copied!';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          btn.innerHTML = orig;
-        }, 2000);
+        alert('Copied trader activation message for #' + accountId + ' to clipboard!');
       });
+    }
+
+    function deleteLicense(id) {
+      if (!confirm('Are you sure you want to delete this license record from history?')) return;
+      let list = getStoredLicenses();
+      list = list.filter(item => item.id !== id);
+      saveLicenses(list);
+      renderTable();
+    }
+
+    function clearAllLicenses() {
+      if (!confirm('WARNING: Are you sure you want to clear ALL stored license records? This cannot be undone.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      renderTable();
+    }
+
+    // CSV Export for Excel / Sheets
+    function exportToCSV() {
+      const list = getStoredLicenses();
+      if (list.length === 0) {
+        alert('No license records to export.');
+        return;
+      }
+
+      const headers = ['Account Number', 'Trader Name / Note', 'Tier', 'Duration', 'Created Date', 'Expiry Date', 'Status', 'License Key'];
+      const rows = list.map(item => {
+        const expired = isExpired(item.expiryDate);
+        return [
+          `"${item.accountId}"`,
+          `"${(item.traderName || '').replace(/"/g, '""')}"`,
+          `"${item.tier}"`,
+          `"${item.duration || ''}"`,
+          `"${item.createdDate || ''}"`,
+          `"${item.expiryDate || ''}"`,
+          `"${expired ? 'EXPIRED' : 'ACTIVE'}"`,
+          `"${item.key}"`
+        ];
+      });
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      const today = new Date().toISOString().split('T')[0];
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `jig_bot_licenses_${today}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Backup & Restore JSON
+    function backupJSON() {
+      const list = getStoredLicenses();
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(list, null, 2));
+      const link = document.createElement('a');
+      const today = new Date().toISOString().split('T')[0];
+      link.setAttribute('href', dataStr);
+      link.setAttribute('download', `jig_bot_database_backup_${today}.json`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function importJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (!Array.isArray(imported)) throw new Error('Invalid JSON format: must be an array of records.');
+          
+          const current = getStoredLicenses();
+          // Merge by accountId + tier
+          const map = new Map();
+          current.forEach(item => map.set(`${item.accountId}_${item.tier}`, item));
+          imported.forEach(item => map.set(`${item.accountId}_${item.tier}`, item));
+          
+          const merged = Array.from(map.values());
+          saveLicenses(merged);
+          renderTable();
+          alert(`Successfully imported and merged ${imported.length} records! Total now: ${merged.length}.`);
+        } catch (err) {
+          alert('Failed to import JSON file: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = ''; // Reset input
     }
 
     // Initialize on load

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jigurujingania Bot | Powered by Razel Tech — XAUUSD M1 Adapter Engine</title>
-    <meta name="description" content="Official website for Jigurujingania Bot, powered by Razel Tech. High-frequency XAUUSD adaptive scalper and dynamic recovery grid engine for MetaTrader 5.">
+    <title>Jig Bot | Powered by Razel Tech — XAUUSD M1 Adaptive Engine</title>
+    <meta name="description" content="Official website for Jig Bot, powered by Razel Tech. High-frequency XAUUSD adaptive scalper and dynamic recovery grid engine for MetaTrader 5.">
 
     <!-- Fonts: Outfit (Fintech Display), Inter (Clean Body), JetBrains Mono (MT5 Terminal) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -123,15 +123,16 @@
     <!-- ================================================================= -->
     <script>
         const CONFIG = {
-            BOT_NAME: "Jigurujingania Bot",
+            BOT_NAME: "Jig Bot",
             POWERED_BY: "Razel Tech",
             VERSION: "v1",
-            // REPLACE THIS WITH YOUR EXACT GOOGLE DRIVE LINK TO Jigurujingania_Bot_PDVR.ex5:
+            // REPLACE THIS WITH YOUR EXACT GOOGLE DRIVE LINK TO jig_bot.ex5:
             DRIVE_DOWNLOAD_URL: "https://drive.google.com/drive/folders/YOUR_DRIVE_FOLDER_ID_HERE",
-            DIRECT_EX5_FILENAME: "Jigurujingania_Bot_PDVR.ex5",
+            DIRECT_EX5_FILENAME: "jig_bot.ex5",
+            TELEGRAM_CHANNEL_URL: "https://t.me/your_telegram_channel",
             TELEGRAM_SUPPORT_URL: "https://t.me/your_telegram_username",
             CONTACT_EMAIL: "support@razeltech.com",
-            TRIAL_DAYS: "7 Days Free Testing Trial",
+            TRIAL_DAYS: "3, 5, or 7 Days Free Testing Trial",
             RECOMMENDED_SYMBOL: "XAUUSD (Gold)",
             RECOMMENDED_TIMEFRAME: "M1 (1-Minute)"
         };
@@ -148,7 +149,12 @@
                 <span class="text-gray-300 font-medium hidden sm:inline">Public Beta Testing Phase Active • 7-Day Free Trial Available • Live Charts Only (Backtesting Disabled)</span>
             </div>
             <div class="flex items-center gap-4 text-gray-400 font-mono text-[11px]">
-                <span>Engine: <strong class="text-gold">v1 Adapter</strong></span>
+                <a href="https://t.me/your_telegram_channel" target="_blank" class="telegram-channel-link text-gold hover:text-white flex items-center gap-1.5 transition-colors">
+                    <i data-lucide="send" class="w-3 h-3 text-gold"></i>
+                    <span>Telegram Channel</span>
+                </a>
+                <span>•</span>
+                <span>Engine: <strong class="text-gold">v1 Adaptive</strong></span>
                 <span class="hidden md:inline">Powered by <strong class="text-white">Razel Tech</strong></span>
             </div>
         </div>
@@ -166,7 +172,7 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="font-display font-black text-xl tracking-tight text-white">Jigurujingania</span>
+                            <span class="font-display font-black text-xl tracking-tight text-white">Jig</span>
                             <span class="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-gold text-obsidian uppercase tracking-wider">Bot</span>
                         </div>
                         <div class="text-[11px] font-mono text-gray-400 flex items-center gap-1">
@@ -248,7 +254,7 @@
 
                     <!-- Subtitle -->
                     <p class="text-lg text-gray-300 mb-8 max-w-2xl leading-relaxed font-normal">
-                        <strong>Jigurujingania Bot by PDVR</strong> (powered by <strong>Razel Tech</strong>) is an institutional-grade adapter trading system engineered specifically for XAUUSD on the M1 timeframe. Featuring microsecond momentum detection, intelligent 10-level cluster recovery, and dynamic VWAP basket liquidation.
+                        <strong>Jig Bot</strong> (powered by <strong>Razel Tech</strong>) is an institutional-grade adaptive trading system engineered specifically for XAUUSD on the M1 timeframe. Featuring microsecond momentum detection, intelligent 10-level cluster recovery, and dynamic VWAP basket liquidation.
                     </p>
 
                     <!-- CTAs -->
@@ -290,7 +296,7 @@
                                 <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
                                 <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
                                 <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-                                <span class="ml-2 text-xs font-mono text-gray-400">Jigurujingania_Bot_HUD.ex5</span>
+                                <span class="ml-2 text-xs font-mono text-gray-400">jig_bot.ex5</span>
                             </div>
                             <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono text-mt5-green bg-mt5-greenDim border border-mt5-green/30">
                                 LIVE ON MT5
@@ -302,8 +308,8 @@
                             
                             <!-- Header Banner -->
                             <div class="p-3 rounded-lg bg-obsidian border border-terminal-border space-y-1">
-                                <div class="text-gold font-bold text-sm">JIGURUJINGANIA BOT by PDVR</div>
-                                <div class="text-gray-400 text-[11px]">Engine: Powered by Razel Tech | v3.10</div>
+                                <div class="text-gold font-bold text-sm">JIG BOT</div>
+                                <div class="text-gray-400 text-[11px]">Engine: Powered by Razel Tech | v1.00</div>
                             </div>
 
                             <!-- Real-time Stats Grid -->
@@ -361,7 +367,7 @@
                     The Adaptive Grid Advantage
                 </h2>
                 <p class="text-gray-400 text-base leading-relaxed">
-                    Most trading bots fail because they force rigid orders onto changing market volatility. Jigurujingania acts as an <strong>intelligent adapter</strong>, dynamically adjusting order spacing and volume weighting.
+                    Most trading bots fail because they force rigid orders onto changing market volatility. Jig Bot acts as an <strong>intelligent adapter</strong>, dynamically adjusting order spacing and volume weighting.
                 </p>
             </div>
 
@@ -428,7 +434,7 @@
                     Simulate The Basket Execution
                 </h2>
                 <p class="text-gray-400 text-sm sm:text-base">
-                    Test how Jigurujingania Bot dynamically recalculates the Volume-Weighted Average Price (VWAP) and closes out orders simultaneously.
+                    Test how Jig Bot dynamically recalculates the Volume-Weighted Average Price (VWAP) and closes out orders simultaneously.
                 </p>
             </div>
 
@@ -538,7 +544,7 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- SOUND ALERTS DEMO: Audio Engine in Jigurujingania Bot            -->
+    <!-- SOUND ALERTS DEMO: Audio Engine in Jig Bot                      -->
     <!-- ================================================================= -->
     <section id="sounds" class="py-24 bg-obsidian-light border-y border-terminal-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -549,7 +555,7 @@
                     In-Bot Sound Alert Notifications
                 </h2>
                 <p class="text-gray-400 text-base leading-relaxed">
-                    Never miss a critical market transition. Jigurujingania Bot features dedicated audio voice alerts from the <code class="text-gold">jig bot</code> sound suite for every trade event, profit exit, emergency drawdown, and all 10 recovery grid levels.
+                    Never miss a critical market transition. Jig Bot features dedicated audio voice alerts from the <code class="text-gold">jig bot</code> sound suite for every trade event, profit exit, emergency drawdown, and all 10 recovery grid levels.
                 </p>
             </div>
 
@@ -712,7 +718,7 @@
                         </div>
                         <h3 class="text-lg font-display font-bold text-white mb-2">Download Binary</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">
-                            Download <code class="text-gold text-[11px] bg-obsidian px-1.5 py-0.5 rounded">Jigurujingania_Bot_PDVR.ex5</code> via Google Drive. Pure compiled binary with zero code leaks.
+                            Download <code class="text-gold text-[11px] bg-obsidian px-1.5 py-0.5 rounded">jig_bot.ex5</code> via Google Drive. Pure compiled binary with zero code leaks.
                         </p>
                     </div>
                 </div>
@@ -792,7 +798,7 @@
             </h2>
 
             <p class="text-gray-300 text-base max-w-2xl mx-auto mb-12 leading-relaxed">
-                Jigurujingania Bot features cryptographic account-bound activation. Select between a free demo trial or full live production access:
+                Jig Bot features cryptographic account-bound activation. Select between a free demo trial or full live production access:
             </p>
 
             <!-- Dual Tier Cards -->
@@ -828,10 +834,14 @@
                         </ul>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-terminal-border">
-                        <a href="https://t.me/your_telegram_username" target="_blank" class="w-full py-3.5 px-6 rounded-xl bg-blue-500/20 hover:bg-blue-500 text-blue-300 hover:text-obsidian font-display font-bold text-sm border border-blue-400/40 transition-all flex items-center justify-center gap-2">
+                    <div class="mt-8 pt-6 border-t border-terminal-border space-y-3">
+                        <a href="https://t.me/your_telegram_username" target="_blank" class="telegram-support-link w-full py-3.5 px-6 rounded-xl bg-blue-500/20 hover:bg-blue-500 text-blue-300 hover:text-obsidian font-display font-bold text-sm border border-blue-400/40 transition-all flex items-center justify-center gap-2">
                             <i data-lucide="send" class="w-4 h-4"></i>
                             <span>Request Free Demo Trial Key</span>
+                        </a>
+                        <a href="https://t.me/your_telegram_channel" target="_blank" class="telegram-channel-link w-full py-2.5 px-4 rounded-xl bg-terminal-slate hover:bg-terminal-card text-gray-300 hover:text-gold font-mono text-xs border border-terminal-border transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="bell" class="w-3.5 h-3.5 text-gold"></i>
+                            <span>Join Official Telegram Channel</span>
                         </a>
                     </div>
                 </div>
@@ -866,10 +876,14 @@
                         </ul>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-terminal-border">
-                        <a href="mailto:support@razeltech.com" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian font-display font-black text-sm shadow-gold-glow hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                    <div class="mt-8 pt-6 border-t border-terminal-border space-y-3">
+                        <a href="https://t.me/your_telegram_username" target="_blank" class="telegram-support-link w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold text-obsidian font-display font-black text-sm shadow-gold-glow hover:brightness-110 transition-all flex items-center justify-center gap-2">
                             <i data-lucide="sparkles" class="w-4 h-4"></i>
                             <span>Request 1-Month Live Key</span>
+                        </a>
+                        <a href="mailto:support@razeltech.com" class="w-full py-2.5 px-4 rounded-xl bg-terminal-slate hover:bg-terminal-card text-gray-300 hover:text-gold font-mono text-xs border border-terminal-border transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="mail" class="w-3.5 h-3.5 text-gold"></i>
+                            <span>Or Contact via Email</span>
                         </a>
                     </div>
                 </div>
@@ -885,7 +899,7 @@
             </div>
 
             <p class="mt-6 text-xs text-gray-400 font-mono">
-                File: <strong class="text-white">Jigurujingania_Bot_PDVR.ex5</strong> • Pure compiled binary • Requires activation key for trading
+                File: <strong class="text-white">jig_bot.ex5</strong> • Pure compiled binary • Requires activation key for trading
             </p>
         </div>
     </section>
@@ -903,7 +917,7 @@
                     <div class="w-9 h-9 rounded-lg bg-gold/15 border border-gold/40 flex items-center justify-center">
                         <i data-lucide="cpu" class="w-5 h-5 text-gold"></i>
                     </div>
-                    <span class="font-display font-black text-xl text-white">Jigurujingania Bot</span>
+                    <span class="font-display font-black text-xl text-white">Jig Bot</span>
                 </div>
                 
                 <p class="text-xs text-gray-400 font-mono">
@@ -912,11 +926,11 @@
 
                 <!-- Disclaimer -->
                 <div class="max-w-4xl p-6 rounded-xl bg-terminal-slate/50 border border-terminal-border/60 text-[11px] text-gray-400 leading-relaxed text-justify">
-                    <strong>REGULATORY & RISK DISCLAIMER:</strong> Trading foreign exchange, precious metals (such as XAUUSD), and contracts for difference (CFDs) on margin carries a high level of risk and may not be suitable for all investors. The high degree of leverage can work against you as well as for you. Past backtest results and simulation performance are not indicative of future market execution. The Jigurujingania Bot software is provided strictly for educational, analytical, and testing phase demonstration on demo accounts. Razel Tech accepts no responsibility for direct or indirect losses incurred through automated algorithmic trading. Always implement responsible risk management.
+                    <strong>REGULATORY & RISK DISCLAIMER:</strong> Trading foreign exchange, precious metals (such as XAUUSD), and contracts for difference (CFDs) on margin carries a high level of risk and may not be suitable for all investors. The high degree of leverage can work against you as well as for you. Past backtest results and simulation performance are not indicative of future market execution. The Jig Bot software is provided strictly for educational, analytical, and testing phase demonstration on demo accounts. Razel Tech accepts no responsibility for direct or indirect losses incurred through automated algorithmic trading. Always implement responsible risk management.
                 </div>
 
                 <div class="text-[11px] text-gray-500 pt-4">
-                    &copy; <span id="current-year">2026</span> Jigurujingania Bot. Powered by Razel Tech. All Rights Reserved. Not affiliated with MetaQuotes Ltd.
+                    &copy; <span id="current-year">2026</span> Jig Bot. Powered by Razel Tech. All Rights Reserved. Not affiliated with MetaQuotes Ltd.
                 </div>
 
             </div>
@@ -935,11 +949,17 @@
             const yearEl = document.getElementById('current-year');
             if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-            // 3. Connect Drive Download Buttons
+            // 3. Connect Drive Download & Telegram Links
             document.querySelectorAll('.drive-download-trigger').forEach(btn => {
                 btn.href = CONFIG.DRIVE_DOWNLOAD_URL;
                 btn.target = "_blank";
                 btn.rel = "noopener noreferrer";
+            });
+            document.querySelectorAll('.telegram-channel-link').forEach(link => {
+                link.href = CONFIG.TELEGRAM_CHANNEL_URL;
+            });
+            document.querySelectorAll('.telegram-support-link').forEach(link => {
+                link.href = CONFIG.TELEGRAM_SUPPORT_URL;
             });
 
             // 4. Mobile Menu Toggle

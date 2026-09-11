@@ -1,26 +1,26 @@
 <#
 .SYNOPSIS
-    Automated dual-repo deployment script for Jigurujingania Bot by PDVR.
+    Automated dual-repo deployment script for Jig Bot.
     Pushes private source code (including .mq5) to your Private Repository,
     and publishes clean website/release assets (strictly without .mq5) to GitHub Pages.
 .EXAMPLE
-    .\deploy.ps1 "Updated bot trial period and website theme"
+    .\deploy.ps1 "Updated Jig Bot license system and website"
 #>
 
 param(
-    [string]$CommitMessage = "Update Jigurujingania Bot and Website $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+    [string]$CommitMessage = "Update Jig Bot and Website $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 )
 
 Write-Host "======================================================================" -ForegroundColor Cyan
-Write-Host "  JIGURUJINGANIA BOT - DUAL-REPO AUTOMATION & DEPLOYMENT" -ForegroundColor Cyan
+Write-Host "  JIG BOT - DUAL-REPO AUTOMATION & DEPLOYMENT" -ForegroundColor Cyan
 Write-Host "  Powered by Razel Tech" -ForegroundColor Cyan
 Write-Host "======================================================================" -ForegroundColor Cyan
 
 $WorkspaceRoot = $PSScriptRoot
 $PublicDir = Join-Path $WorkspaceRoot "public_pages"
 $MetaEditor = "C:\Program Files\MetaTrader 5\metaeditor64.exe"
-$BotMq5 = Join-Path $WorkspaceRoot "Jigurujingania_Bot_PDVR.mq5"
-$BotEx5 = Join-Path $WorkspaceRoot "Jigurujingania_Bot_PDVR.ex5"
+$BotMq5 = Join-Path $WorkspaceRoot "jig_bot.mq5"
+$BotEx5 = Join-Path $WorkspaceRoot "jig_bot.ex5"
 
 # 1. COMPILE BOT TO .EX5
 if (Test-Path $MetaEditor) {
@@ -43,10 +43,13 @@ if (!(Test-Path $PublicDir)) {
     New-Item -ItemType Directory -Path $PublicDir | Out-Null
 }
 
+# Clean up any obsolete ex5 binaries from public_pages
+Get-ChildItem -Path $PublicDir -Filter "*.ex5" -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne "jig_bot.ex5" } | Remove-Item -Force
+
 # Copy public files only
 Copy-Item (Join-Path $WorkspaceRoot "index.html") -Destination (Join-Path $PublicDir "index.html") -Force
 if (Test-Path $BotEx5) {
-    Copy-Item $BotEx5 -Destination (Join-Path $PublicDir "Jigurujingania_Bot_PDVR.ex5") -Force
+    Copy-Item $BotEx5 -Destination (Join-Path $PublicDir "jig_bot.ex5") -Force
 }
 $PublicJigBot = Join-Path $PublicDir "jig bot"
 if (Test-Path (Join-Path $WorkspaceRoot "jig bot")) {
@@ -93,7 +96,7 @@ if (Test-Path (Join-Path $WorkspaceRoot ".git")) {
     Write-Host "  Private repository not initialized. Initializing git..." -ForegroundColor Cyan
     git init
     git add -A
-    git commit -m "Initial commit: Jigurujingania Bot private source"
+    git commit -m "Initial commit: Jig Bot private source"
     Write-Host "  [OK] Private git initialized. Set remote with: git remote add origin <PRIVATE_REPO_URL>" -ForegroundColor Green
 }
 
@@ -121,7 +124,7 @@ if (Test-Path (Join-Path $PublicDir ".git")) {
     Write-Host "  Public pages git not initialized. Initializing git inside public_pages/..." -ForegroundColor Cyan
     git init -b main
     git add -A
-    git commit -m "Initial release: Jigurujingania Bot website and EX5"
+    git commit -m "Initial release: Jig Bot website and EX5"
     Write-Host "  [OK] Public pages git initialized. Set remote with:" -ForegroundColor Green
     Write-Host "       cd public_pages; git remote add origin <PUBLIC_GITHUB_PAGES_REPO_URL>" -ForegroundColor Gray
 }

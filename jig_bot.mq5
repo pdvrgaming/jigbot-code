@@ -1,13 +1,13 @@
 //+------------------------------------------------------------------+
-//|                                    Jigurujingania_Bot_PDVR.mq5   |
-//|                                      Jigurujingania Bot          |
+//|                                    jig_bot.mq5   |
+//|                                      JIG BOT          |
 //|                             Powered by Razel Tech                |
-//|                                      https://jugurujingania.bot  |
+//|                                      https://jigbot.bot  |
 //+------------------------------------------------------------------+
 #property copyright   "Powered by Razel Tech"
-#property link        "https://jugurujingania.bot"
+#property link        "https://jigbot.bot"
 #property version     "1.00"
-#property description "Jigurujingania Bot - XAUUSD M1 Adaptive Recovery Engine [Powered by Razel Tech]"
+#property description "JIG BOT - XAUUSD M1 Adaptive Recovery Engine [Powered by Razel Tech]"
 #property strict
 
 
@@ -18,7 +18,7 @@
 
 //--- Input Parameters ---
 input group "=== 0. LICENSE ACTIVATION ==="
-input string   InpLicenseKey            = "";                       // License Key (e.g. JJ-DEMO-12345678-20260918-XXXX or JJ-LIVE-...)
+input string   InpLicenseKey            = "";                       // License Key (e.g. JIG-DEMO-12345678-20260918-XXXX or JIG-LIVE-...)
 input bool     InpEnableLicenseGuard    = true;                     // Enable License Guard
 
 input group "=== 1. SOUND & AUDIO NOTIFICATIONS ==="
@@ -30,7 +30,7 @@ input double   InpInitialLot            = 0.01;                     // Initial L
 input double   InpTakeProfitPoints      = 4.20;                     // Initial TP in Points (42 pips in Gold)
 input double   InpStopLossPoints        = 0.00;                     // Initial SL in Points (0 = Disabled, relies on recovery grid)
 input ulong    InpMagicNumber           = 1223335;                  // Magic Number (Unique ID)
-input string   InpTradeComment          = "JJ Bot";                 // Order Comment
+input string   InpTradeComment          = "Jig Bot";                 // Order Comment
 
 input group "=== 3. 3-ORDER CLUSTER RECOVERY GRID ==="
 input bool     InpEnableRecovery        = true;                     // Enable Grid Recovery
@@ -68,7 +68,7 @@ datetime           m_next_order_time       = 0;
 bool               m_had_positions_previous_tick = false;
 
 //--- License Key & Protection Variables
-const string       DEVELOPER_SECRET_SALT         = "RAZEL_JJ_BOT_SEC_2026_x9K!";
+const string       DEVELOPER_SECRET_SALT         = "RAZEL_JIG_BOT_SEC_2026_x9K!";
 bool               m_license_active              = false;
 string             m_license_tier                = "NONE";      // "DEMO" or "LIVE"
 int                m_license_days_left           = 0;
@@ -149,10 +149,10 @@ void CheckLossTimeoutAlert()
       if(now - m_last_timeout_audio_time >= 30)
       {
          m_last_timeout_audio_time = now;
-         PrintFormat(">> Jigurujingania Bot ALERT: Floating loss -$%.2f exceeds -$%.2f threshold! Playing Timeout audio...",
+         PrintFormat(">> JIG BOT ALERT: Floating loss -$%.2f exceeds -$%.2f threshold! Playing Timeout audio...",
                      MathAbs(floating_profit), InpTimeoutLossThreshold);
          PlayCustomAudio("Timeout.wav");
-         Alert(StringFormat("Jigurujingania Bot Warning: Floating loss -$%.2f exceeds -$%.2f!", 
+         Alert(StringFormat("JIG BOT Warning: Floating loss -$%.2f exceeds -$%.2f!", 
                             MathAbs(floating_profit), InpTimeoutLossThreshold));
       }
    }
@@ -221,15 +221,15 @@ bool ValidateLicenseKey(const string key_str)
       m_license_tier = "INVALID";
       m_license_days_left = 0;
       m_license_status_msg = "INVALID KEY FORMAT";
-      m_license_error_details = "Key must be: JJ-TIER-ACCOUNT-YYYYMMDD-XXXXXXXX";
+      m_license_error_details = "Key must be: JIG-TIER-ACCOUNT-YYYYMMDD-XXXXXXXX";
       return false;
    }
 
-   if(parts[0] != "JJ")
+   if((parts[0] != "JIG" && parts[0] != "JJ"))
    {
       m_license_active = false;
       m_license_status_msg = "INVALID KEY PREFIX";
-      m_license_error_details = "Key must start with 'JJ-'.";
+      m_license_error_details = "Key must start with 'JIG-' or 'JJ-'.";
       return false;
    }
 
@@ -339,7 +339,7 @@ void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_PO
    {
       string locked_hud = StringFormat(
          "=====================================================\n"
-         "  JIGURUJINGANIA BOT  v1  [LOCKED]\n"
+         "  JIG BOT  v1  [LOCKED]\n"
          "  Powered by Razel Tech\n"
          "=====================================================\n"
          "  License Status: %s\n"
@@ -351,7 +351,7 @@ void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_PO
          "  2. Request your Activation Key from Razel Tech:\n"
          "     - Demo Trial: 3, 5, or 7-Day Access\n"
          "     - Live Account: 1-Month Pro Access\n"
-         "     - Contact: support@jigurujingania.bot\n"
+         "     - Contact: support@Jig Bot.bot\n"
          "  3. Open Bot Inputs (F7) -> Paste into InpLicenseKey\n"
          "=====================================================",
          m_license_status_msg,
@@ -395,7 +395,7 @@ void UpdateChartDashboard(int open_count, double total_vol, double vwap, ENUM_PO
 
    string hud = StringFormat(
       "=====================================================\n"
-      "  JIGURUJINGANIA BOT  v1  [ACTIVE]\n"
+      "  JIG BOT  v1  [ACTIVE]\n"
       "  Powered by Razel Tech\n"
       "=====================================================\n"
       "  License Tier:   %s PRO (%d Days Left)\n"
@@ -424,7 +424,7 @@ int OnInit()
    // 1. STRICT BACKTESTING RESTRICTION (Disabled in Strategy Tester)
    if(MQLInfoInteger(MQL_TESTER) || MQLInfoInteger(MQL_OPTIMIZATION) || MQLInfoInteger(MQL_VISUAL_MODE))
    {
-      string block_msg = "Jigurujingania Bot: Backtesting is strictly disabled in Strategy Tester for this version! Run on Live Chart only.";
+      string block_msg = "JIG BOT: Backtesting is strictly disabled in Strategy Tester for this version! Run on Live Chart only.";
       Print(block_msg);
       Alert(block_msg);
       return(INIT_FAILED);
@@ -440,7 +440,7 @@ int OnInit()
    // 3. Perform cryptographic license validation
    if(!ValidateLicenseKey(InpLicenseKey))
    {
-      PrintFormat(">> Jigurujingania Bot License Check: %s. %s", m_license_status_msg, m_license_error_details);
+      PrintFormat(">> JIG BOT License Check: %s. %s", m_license_status_msg, m_license_error_details);
       PlayCustomAudio("Timeout.wav");
       UpdateChartDashboard(0, 0, 0, POSITION_TYPE_BUY);
       // Return INIT_SUCCEEDED so HUD remains on chart to display Account ID and activation instructions.
@@ -448,7 +448,7 @@ int OnInit()
       return(INIT_SUCCEEDED);
    }
 
-   PrintFormat("Jigurujingania Bot v1 [Powered by Razel Tech] ACTIVATED for %s Account #%I64d (%d Days Remaining).",
+   PrintFormat("JIG BOT v1 [Powered by Razel Tech] ACTIVATED for %s Account #%I64d (%d Days Remaining).",
                m_license_tier, AccountInfoInteger(ACCOUNT_LOGIN), m_license_days_left);
    
    UpdateChartDashboard(0, 0, 0, POSITION_TYPE_BUY);
@@ -461,7 +461,7 @@ int OnInit()
 void OnDeinit(const int reason)
 {
    Comment(""); // Clear on-chart HUD
-   PrintFormat("Jigurujingania Bot v1 deinitialized. Reason: %d", reason);
+   PrintFormat("JIG BOT v1 deinitialized. Reason: %d", reason);
 }
 
 //+------------------------------------------------------------------+
